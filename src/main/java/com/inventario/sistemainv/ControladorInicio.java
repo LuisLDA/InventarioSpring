@@ -14,6 +14,7 @@ public class ControladorInicio {
     @GetMapping("/")
     public String inicio(Model model) {
         //log.info("inicio index");
-        return "home";
+        //return "home";
+        return "index";
     }
 }
