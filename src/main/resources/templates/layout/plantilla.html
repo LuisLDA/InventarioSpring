@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" xmlns ="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<header th:fragment="header">
+    <header id="header">
+        <div class="logo pull-left"> Sistema de Inventario </div>
+        <div class="header-content">
+            <div class="pull-right clearfix">
+                <ul class="info-menu list-inline list-unstyled">
+                    <li class="profile">
+                        <a href="" data-toggle="dropdown" class="toggle" aria-expanded="false">
+                            <img src="https://cdn0.iconfinder.com/data/icons/set-ui-app-android/32/8-512.png" height="15px"  alt="user-image" class="img-circle img-inline">
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <i class="glyphicon glyphicon-user"></i>
+                                Perfil
+                            </li>
+                            <li>
+                                <a href="" title="edit account">
+                                    <i class="glyphicon glyphicon-cog"></i>
+                                    Configuración
+                                </a>
+                            </li>
+                            <li class="last">
+                                <a href="">
+                                    <i class="glyphicon glyphicon-off"></i>
+                                    Salir
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+</header>
+<div th:fragment="div_sidebar">
+    <div class="sidebar">
+        <ul>
+            <li>
+                <a href="">
+                    <i class="glyphicon glyphicon-home"></i>
+                    <span>Panel de control</span>
+                </a>
+            </li>
+            <li>
+                <a  class="submenu-toggle">
+                    <i class="glyphicon glyphicon-user"></i>
+                    <span>Accesos</span>
+                </a>
+                <ul class="nav submenu">
+                    <li><a href="">Administrar grupos</a> </li>
+                    <li><a href="">Administrar usuarios</a> </li>
+                </ul>
+            </li>
+            <li>
+                <a href="" >
+                    <i class="glyphicon glyphicon-indent-left"></i>
+                    <span>Categorías</span>
+                </a>
+            </li>
+            <li>
+                <a href="" class="submenu-toggle">
+                    <i class="glyphicon glyphicon-th-large"></i>
+                    <span>Productos</span>
+                </a>
+                <ul class="nav submenu">
+                    <li><a href="">Administrar productos</a> </li>
+                    <li><a href="">Agregar productos</a> </li>
+                </ul>
+            </li>
+            <li>
+                <a href="" >
+                    <i class="glyphicon glyphicon-picture"></i>
+                    <span>Media</span>
+                </a>
+            </li>
+            <li>
+                <a href="" class="submenu-toggle">
+                    <i class="glyphicon glyphicon-th-list"></i>
+                    <span>Ventas</span>
+                </a>
+                <ul class="nav submenu">
+                    <li><a href="">Administrar ventas</a> </li>
+                    <li><a href="">Agregar venta</a> </li>
+                </ul>
+            </li>
+            <li>
+                <a href="" class="submenu-toggle">
+                    <i class="glyphicon glyphicon-signal"></i>
+                    <span>Reporte de ventas</span>
+                </a>
+                <ul class="nav submenu">
+                    <li><a href="">Ventas por fecha </a></li>
+                    <li><a href="">Ventas mensuales</a></li>
+                    <li><a href="">Ventas diarias</a> </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+
+</body>
+</html>
