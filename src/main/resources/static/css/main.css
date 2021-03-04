@@ -203,11 +203,12 @@ body{
             text-align: center;
         }ul.submenu{
              display: none;
-             position: relative;
+             position: unset;
          }ul.submenu li a:hover{
               background-color:#35404d;
           }ul.submenu li a {
                padding-left: 45px;
+               padding-block: 5px;
            }ul.submenu li:before{
                 content: "";
                 display: block;
