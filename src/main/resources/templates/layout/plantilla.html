@@ -4,10 +4,7 @@
 <head th:fragment="head">
     <meta charset="UTF-8">
     <title>Title</title>
-    <!--
-    <link rel="stylesheet"
-    href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"/>
-    -->
+
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/3.3.4/css/bootstrap.min.css}">
     <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
     <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
@@ -54,13 +51,13 @@
 <div class="sidebar" th:fragment="div_sidebar">
     <ul>
         <li>
-            <a href="">
+            <a href="" th:href="@{/}">
                 <i class="glyphicon glyphicon-home"></i>
                 <span>Panel de control</span>
             </a>
         </li>
         <li>
-            <a class="submenu-toggle">
+            <a class="submenu-toggle" th:href="@{/accesos}" >
                 <i class="glyphicon glyphicon-user"></i>
                 <span>Accesos</span>
             </a>
@@ -70,13 +67,13 @@
             </ul>
         </li>
         <li>
-            <a href="">
+            <a href="" th:href="@{/categorias}">
                 <i class="glyphicon glyphicon-indent-left"></i>
                 <span>Categorías</span>
             </a>
         </li>
         <li>
-            <a href="" class="submenu-toggle">
+            <a href="" class="submenu-toggle" th:href="@{/productos}">
                 <i class="glyphicon glyphicon-th-large"></i>
                 <span>Productos</span>
             </a>
@@ -86,7 +83,7 @@
             </ul>
         </li>
         <li>
-            <a href="">
+            <a th:href="@{/media}">
                 <i class="glyphicon glyphicon-picture"></i>
                 <span>Media</span>
             </a>

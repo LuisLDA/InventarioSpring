@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/plantilla.html :: head">
+    <title>Title</title>
+</head>
+<body>
+<header th:replace="layout/plantilla.html :: header"></header>
+<div th:replace="layout/plantilla.html :: div_sidebar"></div>
+<div class="page">
+    <div th:replace="layout/componentes.html :: list_media"></div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+</body>
+</html>

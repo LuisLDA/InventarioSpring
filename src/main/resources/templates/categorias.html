@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/plantilla.html :: head">
+    <title>Title</title>
+</head>
+<body>
+<header th:replace="layout/plantilla.html :: header"></header>
+<div th:replace="layout/plantilla.html :: div_sidebar"></div>
+<div class="page">
+    <div th:replace="layout/componentes.html :: add_prod_categ"></div>
+</div>
+</body>
+</html>
