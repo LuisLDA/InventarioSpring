@@ -20,8 +20,16 @@
                 <h3 th:text="${user.getUsername()}"></h3>
             </span>
         </div>
+    </div>
+
+    <div th:if="${categorie !=null and !categorie.empty}">
+        <span th:each="categorie : ${categorie}">
+            <h2 th:text="${categorie.getId()}"></h2>
+            <h2 th:text="${categorie.getName()}"></h2>
+        </span>
 
     </div>
+    <!--
     <div th:replace="layout/componentes.html :: add_grupo"></div>
     <div th:replace="layout/componentes.html :: add_product"></div>
     <div th:replace="layout/componentes.html :: add_prod_categ"></div>
@@ -38,6 +46,7 @@
     <div th:replace="layout/componentes.html :: profile"></div>
     <div th:replace="layout/componentes.html :: list_user"></div>
     <div th:replace="layout/componentes.html :: list_ventas"></div>
+    -->
 </div>
 
 
