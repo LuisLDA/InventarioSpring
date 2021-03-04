@@ -1,12 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-
-    <link rel="stylesheet" href="../static/css/main.css" th:href="@{css/main.css}"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"/>
+<head th:replace="layout/plantilla.html :: head">
+    <title>Inicio</title>
 </head>
 <body>
 <header th:replace="layout/plantilla.html :: header"></header>
@@ -18,10 +14,10 @@
 
         <div th:if="${users !=null and !users.empty}">
             <span th:each="user : ${users} ">
-                <h3 th:text="${user.getName()}"/>
-                <h3 th:text="${user.getLast_login()}"/>
-                <h3 th:text="${user.getPassword()}"/>
-                <h3 th:text="${user.getUsername()}"/>
+                <h1 th:text="${user.getUsername()}"></h1>
+                <h3 th:text="${user.getLast_login()}"></h3>
+                <h3 th:text="${user.getPassword()}"></h3>
+                <h3 th:text="${user.getUsername()}"></h3>
             </span>
         </div>
 

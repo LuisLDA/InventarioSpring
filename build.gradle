@@ -21,8 +21,8 @@ dependencies {
     compile 'org.projectlombok:lombok:1.18.18'
     annotationProcessor 'org.projectlombok:lombok'
     compile 'mysql:mysql-connector-java:8.0.23'
-
     compile 'org.springframework.boot:spring-boot-starter-data-jpa:2.4.3'
+    compile 'org.webjars.npm:bootstrap:3.3.4'
 }
 
 test {
