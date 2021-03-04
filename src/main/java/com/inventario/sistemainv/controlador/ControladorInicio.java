@@ -20,25 +20,22 @@ public class ControladorInicio {
     @Autowired
     private CategoriesService categoriesService;
 
-    @GetMapping("/")
+    /*@GetMapping("/")
     public String inicio(Model model) {
         log.info("INICIANDO EL CONTROLADOR...");
         var usuarios = userService.listUser();
         model.addAttribute("users",usuarios);
-        var categoria = categoriesService.listCategories();
-        model.addAttribute("categorie", categoria);
-        return "home";
+        //var categoria = categoriesService.listCategories();
+        //model.addAttribute("categorie", categoria);
+        return "Home";
     }
-
-    /*
-    @Autowired
-    private CategoriesService categoriesService;
-
+    */
     @GetMapping("/")
     public String categorie(Model model) {
         log.info("INICIANDO CONTROLADOR...");
         var categoria = categoriesService.listCategories();
         model.addAttribute("categorie", categoria);
-        return "home";
-    }*/
+        return "Categorie";
+    }
+
 }

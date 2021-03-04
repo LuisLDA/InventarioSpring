@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/plantilla.html :: head">
+    <title>Categoria</title>
+</head>
+<body>
+<header th:replace="layout/plantilla.html :: header"></header>
+<div th:replace="layout/plantilla.html :: div_sidebar"></div>
+<div class="page">
+
+    <!--
+    <div th:if="${categorie !=null and !categorie.empty}">
+        <span th:each="categorie : ${categorie}">
+            <h2 th:text="${categorie.getId()}"></h2>
+            <h2 th:text="${categorie.getName()}"></h2>
+        </span>
+
+    </div>
+    -->
+
+    <div th:replace="layout/componentes.html :: add_prod_categ"></div>
+
+
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+
+</body>
+</html>
