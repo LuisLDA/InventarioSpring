@@ -20,20 +20,20 @@
                 <h3 th:text="${user.getUsername()}"></h3>
             </span>
         </div>
-        PRUEBA: VALORES DE LOS PRODUCTOS
-        <!--EJEMPLO PARA MOSTRAR VALORES EN PANTALLA-->
-        <div th:if="${products !=null and !products.empty}">
-            <span th:each="product : ${products} ">
-                <h1 th:text="${product.getId()}"></h1>
-                <h3 th:text="${product.getName()}"></h3>
-                <h3 th:text="${product.getQuantity()}"></h3>
-                <h3 th:text="${product.getBuy_price()}"></h3>
-                <h3 th:text="${product.getSale_price()}"></h3>
-                <h3 th:text="${product.getCategorie_id()}"></h3>
-                <h3 th:text="${product.getMedia_id()}"></h3>
-                <h3 th:text="${product.getDate()}"></h3>
-            </span>
-        </div>
+
+        <!--EJEMPLO PARA MOSTRAR VALORES EN PANTALLA
+            <div th:if="${products !=null and !products.empty}">
+                <span th:each="product : ${products} ">
+                    <b th:text="${product.getId()}"></b>
+                    <b th:text="${product.getName()}"></b>
+                    <b th:text="${product.getQuantity()}"></b>
+                    <b th:text="${product.getBuy_price()}"></b>
+                    <b th:text="${product.getSale_price()}"></b>
+                    <b th:text="${product.getCategorie_id()}"></b>
+                    <b th:text="${product.getMedia_id()}"></b>
+                    <b th:text="${product.getDate()}"></b>
+                </span>
+            </div>-->
 
 
     </div>
