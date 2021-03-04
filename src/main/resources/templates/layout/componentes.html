@@ -81,79 +81,79 @@
 
 <!-- Componente añadir y lista categoria producto -->
 <div th:fragment="add_prod_categ">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <!-- Zona de mensaje aqui -->
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <!-- Componente de agregar -->
-                                                <div class="col-md-5">
-                                                    <div class="panel panel-default">
-                                                        <div class="panel-heading">
-                                                            <strong>
-                                                                <span class="glyphicon glyphicon-th"></span>
-                                                                <span>Agregar categoría</span>
-                                                            </strong>
-                                                        </div>
-                                                        <div class="panel-body">
-                                                            <!-- action hace referencia al archivo categoria -->
-                                                            <form method="post" action="">
-                                                                <div class="form-group">
-                                                                    <input type="text" class="form-control" name="categorie-name" placeholder="Nombre de la categoría" required>
-                                                                </div>
-                                                                <button type="submit" name="add_cat" class="btn btn-primary">Agregar categoría</button>
-                                                            </form>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- Componente de listar categoria -->
-                                                <div class="col-md-7">
-                                                    <div class="panel panel-default">
-                                                        <div class="panel-heading">
-                                                            <strong>
-                                                                <span class="glyphicon glyphicon-th"></span>
-                                                                <span>Lista de categorías</span>
-                                                            </strong>
-                                                        </div>
-                                                        <div class="panel-body">
-                                                            <table class="table table-bordered table-striped table-hover">
-                                                                <thead>
-                                                                <tr>
-                                                                    <th class="text-center" style="width: 50px;">#</th>
-                                                                    <th>Categorías</th>
-                                                                    <th class="text-center" style="width: 100px;">Acciones</th>
-                                                                </tr>
-                                                                </thead>
-                                                                <tbody th:if="${categorie != null and !categorie.empty}">
-                                                                <!-- Carga todas la categorias -->
-                                                                <tr th:each="categorie : ${categorie}">
-                                                                    <td class="text-center" th:text="${categorie.getId()}">
-                                                                        <!-- Cuenta el ID de la tabla -->
-                                                                    </td>
-                                                                    <td th:text="${categorie.getName()}">
-                                                                        <!-- Se muestra los datos en tabla -->
-                                                                    </td>
-                                                                    <td class="text-center">
-                                                                        <div class="btn-group">
-                                                                            <!-- href hace referencia al archivo editar categoria -->
-                                                                            <a href=""  class="btn btn-xs btn-warning" data-toggle="tooltip" title="Editar">
-                                                                                <span class="glyphicon glyphicon-edit"></span>
-                                                                            </a>
-                                                                            <!-- href hace referencia al archivo eliminar categoria -->
-                                                                            <a href=""  class="btn btn-xs btn-danger" data-toggle="tooltip" title="Eliminar">
-                                                                                <span class="glyphicon glyphicon-trash"></span>
-                                                                            </a>
-                                                                        </div>
-                                                                    </td>
-                                                                </tr>
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+    <div class="row">
+        <div class="col-md-12">
+            <!-- Zona de mensaje aqui -->
+        </div>
+    </div>
+    <div class="row">
+        <!-- Componente de agregar -->
+        <div class="col-md-5">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <strong>
+                        <span class="glyphicon glyphicon-th"></span>
+                        <span>Agregar categoría</span>
+                    </strong>
+                </div>
+                <div class="panel-body">
+                    <!-- action hace referencia al archivo categoria -->
+                    <form method="post" action="">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="categorie-name" placeholder="Nombre de la categoría" required>
+                        </div>
+                        <button type="submit" name="add_cat" class="btn btn-primary">Agregar categoría</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- Componente de listar categoria -->
+        <div class="col-md-7">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <strong>
+                        <span class="glyphicon glyphicon-th"></span>
+                        <span>Lista de categorías</span>
+                    </strong>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-bordered table-striped table-hover">
+                        <thead>
+                        <tr>
+                            <th class="text-center" style="width: 50px;">#</th>
+                            <th>Categorías</th>
+                            <th class="text-center" style="width: 100px;">Acciones</th>
+                        </tr>
+                        </thead>
+                        <tbody th:if="${categorie != null and !categorie.empty}">
+                        <!-- Carga todas la categorias -->
+                        <tr th:each="categorie : ${categorie}">
+                            <td class="text-center" th:text="${categorie.getId()}">
+                                <!-- Cuenta el ID de la tabla -->
+                            </td>
+                            <td th:text="${categorie.getName()}">
+                                <!-- Se muestra los datos en tabla -->
+                            </td>
+                            <td class="text-center">
+                                <div class="btn-group">
+                                    <!-- href hace referencia al archivo editar categoria -->
+                                    <a href=""  class="btn btn-xs btn-warning" data-toggle="tooltip" title="Editar">
+                                        <span class="glyphicon glyphicon-edit"></span>
+                                    </a>
+                                    <!-- href hace referencia al archivo eliminar categoria -->
+                                    <a href=""  class="btn btn-xs btn-danger" data-toggle="tooltip" title="Eliminar">
+                                        <span class="glyphicon glyphicon-trash"></span>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- Componente añadir producto -->
 <div th:fragment="add_product">
