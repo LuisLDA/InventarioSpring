@@ -20,6 +20,21 @@
                 <h3 th:text="${user.getUsername()}"></h3>
             </span>
         </div>
+        PRUEBA: VALORES DE LOS PRODUCTOS
+        <!--EJEMPLO PARA MOSTRAR VALORES EN PANTALLA-->
+        <div th:if="${products !=null and !products.empty}">
+            <span th:each="product : ${products} ">
+                <h1 th:text="${product.getId()}"></h1>
+                <h3 th:text="${product.getName()}"></h3>
+                <h3 th:text="${product.getQuantity()}"></h3>
+                <h3 th:text="${product.getBuy_price()}"></h3>
+                <h3 th:text="${product.getSale_price()}"></h3>
+                <h3 th:text="${product.getCategorie_id()}"></h3>
+                <h3 th:text="${product.getMedia_id()}"></h3>
+                <h3 th:text="${product.getDate()}"></h3>
+            </span>
+        </div>
+
 
     </div>
     <div th:replace="layout/componentes.html :: add_grupo"></div>
