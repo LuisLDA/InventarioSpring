@@ -13,9 +13,24 @@
 <div th:replace="layout/plantilla.html :: div_sidebar"></div>
 <div class="page">
     <div class="container-fluid">
+
         BIENVENIDO AL SISTEMA DE INVENTARIO DE SUPERMAXI
+
+        <div th:if="${users !=null and !users.empty}">
+            <span th:each="user : ${users} ">
+                <h3 th:text="${user.getName()}"/>
+                <h3 th:text="${user.getLast_login()}"/>
+                <h3 th:text="${user.getPassword()}"/>
+                <h3 th:text="${user.getUsername()}"/>
+            </span>
+        </div>
+
     </div>
 </div>
+
+
+
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 
