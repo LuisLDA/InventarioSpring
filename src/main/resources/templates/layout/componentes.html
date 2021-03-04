@@ -6,7 +6,7 @@
     <title>Title</title>
 </head>
 <body>
-                                        <!-- SECCION AÑADIR -->
+<!-- SECCION AÑADIR -->
 <!-- Componente añadir grupo -->
 <div th:fragment="add_grupo">
     <div class="login-page">
@@ -16,15 +16,15 @@
         <!-- Zona de mensaje aqui -->
         <form method="post" action="" class="clearfix">
             <div class="form-group">
-                <label  class="control-label">Nombre del grupo</label>
+                <label class="control-label">Nombre del grupo</label>
                 <input type="name" class="form-control" name="group-name" required>
             </div>
             <div class="form-group">
-                <label  class="control-label">Nivel del grupo</label>
+                <label class="control-label">Nivel del grupo</label>
                 <input type="number" class="form-control" name="group-level">
             </div>
             <div class="form-group">
-                <label >Estado</label>
+                <label>Estado</label>
                 <select class="form-control" name="status">
                     <option value="1">Activo</option>
                     <option value="0">Inactivo</option>
@@ -53,7 +53,8 @@
                     <form method="post" action="">
                         <div class="form-group">
                             <label>Nombre</label>
-                            <input type="text" class="form-control" name="full-name" placeholder="Nombre completo" required>
+                            <input type="text" class="form-control" name="full-name" placeholder="Nombre completo"
+                                   required>
                         </div>
                         <div class="form-group">
                             <label>Usuario</label>
@@ -61,7 +62,7 @@
                         </div>
                         <div class="form-group">
                             <label>Contraseña</label>
-                            <input type="password" class="form-control" name ="password"  placeholder="Contraseña">
+                            <input type="password" class="form-control" name="password" placeholder="Contraseña">
                         </div>
                         <div class="form-group">
                             <label>Rol de usuario</label>
@@ -100,7 +101,8 @@
                     <!-- action hace referencia al archivo categoria -->
                     <form method="post" action="">
                         <div class="form-group">
-                            <input type="text" class="form-control" name="categorie-name" placeholder="Nombre de la categoría" required>
+                            <input type="text" class="form-control" name="categorie-name"
+                                   placeholder="Nombre de la categoría" required>
                         </div>
                         <button type="submit" name="add_cat" class="btn btn-primary">Agregar categoría</button>
                     </form>
@@ -119,14 +121,14 @@
                 <div class="panel-body">
                     <table class="table table-bordered table-striped table-hover">
                         <thead>
-                            <tr>
-                                <th class="text-center" style="width: 50px;">#</th>
-                                <th>Categorías</th>
-                                <th class="text-center" style="width: 100px;">Acciones</th>
-                            </tr>
+                        <tr>
+                            <th class="text-center" style="width: 50px;">#</th>
+                            <th>Categorías</th>
+                            <th class="text-center" style="width: 100px;">Acciones</th>
+                        </tr>
                         </thead>
                         <tbody>
-                            <!-- Carga todas la categorias -->
+                        <!-- Carga todas la categorias -->
                         <tr>
                             <td class="text-center">
                                 <!-- Cuenta el ID de la tabla -->
@@ -137,11 +139,11 @@
                             <td class="text-center">
                                 <div class="btn-group">
                                     <!-- href hace referencia al archivo editar categoria -->
-                                    <a href=""  class="btn btn-xs btn-warning" data-toggle="tooltip" title="Editar">
+                                    <a href="" class="btn btn-xs btn-warning" data-toggle="tooltip" title="Editar">
                                         <span class="glyphicon glyphicon-edit"></span>
                                     </a>
                                     <!-- href hace referencia al archivo eliminar categoria -->
-                                    <a href=""  class="btn btn-xs btn-danger" data-toggle="tooltip" title="Eliminar">
+                                    <a href="" class="btn btn-xs btn-danger" data-toggle="tooltip" title="Eliminar">
                                         <span class="glyphicon glyphicon-trash"></span>
                                     </a>
                                 </div>
@@ -180,7 +182,8 @@
                                     <span class="input-group-addon">
                                         <i class="glyphicon glyphicon-th-large"></i>
                                     </span>
-                                    <input type="text" class="form-control" name="product-title" placeholder="Descripción">
+                                    <input type="text" class="form-control" name="product-title"
+                                           placeholder="Descripción">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -206,7 +209,8 @@
                                             <span class="input-group-addon">
                                             <i class="glyphicon glyphicon-shopping-cart"></i>
                                             </span>
-                                            <input type="number" class="form-control" name="product-quantity" placeholder="Cantidad">
+                                            <input type="number" class="form-control" name="product-quantity"
+                                                   placeholder="Cantidad">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -214,7 +218,8 @@
                                             <span class="input-group-addon">
                                                 <i class="glyphicon glyphicon-usd"></i>
                                             </span>
-                                            <input type="number" class="form-control" name="buying-price" placeholder="Precio de compra">
+                                            <input type="number" class="form-control" name="buying-price"
+                                                   placeholder="Precio de compra">
                                             <span class="input-group-addon">.00</span>
                                         </div>
                                     </div>
@@ -223,7 +228,8 @@
                                             <span class="input-group-addon">
                                                 <i class="glyphicon glyphicon-usd"></i>
                                             </span>
-                                            <input type="number" class="form-control" name="saleing-price" placeholder="Precio de venta">
+                                            <input type="number" class="form-control" name="saleing-price"
+                                                   placeholder="Precio de venta">
                                             <span class="input-group-addon">.00</span>
                                         </div>
                                     </div>
@@ -238,7 +244,7 @@
     </div>
 </div>
 
-                                        <!-- SECCION EDIT -->
+<!-- SECCION EDIT -->
 <!-- Componente editar cuenta -->
 <div th:fragment="edit_count">
     <div class="row">
@@ -263,7 +269,8 @@
                             <!-- action llamar al metodo para editar la cuenta -->
                             <form class="form" action="" method="POST" enctype="multipart/form-data">
                                 <div class="form-group">
-                                    <input type="file" name="file_upload" multiple="multiple" class="btn btn-default btn-file"/>
+                                    <input type="file" name="file_upload" multiple="multiple"
+                                           class="btn btn-default btn-file"/>
                                 </div>
                                 <div class="form-group">
                                     <!-- value el id del usuario -->
@@ -530,7 +537,8 @@
                     <form action="" method="post" class="clearfix">
                         <div class="form-group">
                             <label class="control-label">Contraseña</label>
-                            <input type="password" class="form-control" name="password" placeholder="Ingresa la nueva contraseña" required>
+                            <input type="password" class="form-control" name="password"
+                                   placeholder="Ingresa la nueva contraseña" required>
                         </div>
                         <div class="form-group clearfix">
                             <button type="submit" name="update-pass" class="btn btn-danger pull-right">Cambiar</button>
@@ -542,7 +550,7 @@
     </div>
 </div>
 
-                                        <!-- SECCION SISTEMA -->
+<!-- SECCION SISTEMA -->
 <!-- Componente cambiar contraseña -->
 <div th:fragment="change_passw">
     <div class="login-page">
@@ -590,21 +598,21 @@
 
 <!-- Componente home -->
 <div th:fragment="home">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <!-- mensaje de advertencia aqui -->
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <div class="panel">
-                                                        <div class="jumbotron text-center">
-                                                            <h1>El placer de comprar</h1>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+    <div class="row">
+        <div class="col-md-12">
+            <!-- mensaje de advertencia aqui -->
+        </div>
+        <div class="col-md-12">
+            <div class="panel">
+                <div class="jumbotron text-center">
+                    <h1>El placer de comprar</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-                                        <!-- SECCION LISTAR -->
+<!-- SECCION LISTAR -->
 <!-- Componente de los grupos -->
 <div th:fragment="list_group">
     <div class="row">
@@ -626,47 +634,47 @@
                 <div class="panel-body">
                     <table class="table table-bordered">
                         <thead>
-                            <tr>
-                                <th class="text-center" style="width: 50px;">#</th>
-                                <th>Nombre del grupo</th>
-                                <th class="text-center" style="width: 20%;">Nivel del grupo</th>
-                                <th class="text-center" style="width: 15%;">Estado</th>
-                                <th class="text-center" style="width: 100px;">Acciones</th>
-                            </tr>
+                        <tr>
+                            <th class="text-center" style="width: 50px;">#</th>
+                            <th>Nombre del grupo</th>
+                            <th class="text-center" style="width: 20%;">Nivel del grupo</th>
+                            <th class="text-center" style="width: 15%;">Estado</th>
+                            <th class="text-center" style="width: 100px;">Acciones</th>
+                        </tr>
                         </thead>
                         <tbody>
-                            <!-- listar todos los grupos existentes -->
-                            <tr>
-                                <td class="text-center">
-                                    <!-- listar el ID de los grupos existentes -->
-                                </td>
-                                <td>
-                                    <!-- listar los grupos por el nombre -->
-                                </td>
-                                <td class="text-center">
-                                    <!-- listar el nivel del grupo existente -->
-                                </td>
-                                <td class="text-center">
+                        <!-- listar todos los grupos existentes -->
+                        <tr>
+                            <td class="text-center">
+                                <!-- listar el ID de los grupos existentes -->
+                            </td>
+                            <td>
+                                <!-- listar los grupos por el nombre -->
+                            </td>
+                            <td class="text-center">
+                                <!-- listar el nivel del grupo existente -->
+                            </td>
+                            <td class="text-center">
                                     <span class="label label-success">
                                         <!-- en caso de que este activo -->
                                     </span>
-                                    <span class="label label-danger">
+                                <span class="label label-danger">
                                         <!-- en caso de que este inactivo -->
                                     </span>
-                                </td>
-                                <td class="text-center">
-                                    <div class="btn-group">
-                                        <!-- href referencia al archivo de editar grupo por (ID) -->
-                                        <a href="" class="btn btn-xs btn-warning" data-toggle="tooltip" title="Editar">
-                                            <i class="glyphicon glyphicon-pencil"></i>
-                                        </a>
-                                        <!-- href referencia al archivo de borrar grupo por (ID) -->
-                                        <a href="" class="btn btn-xs btn-danger" data-toggle="tooltip" title="Eliminar">
-                                            <i class="glyphicon glyphicon-remove"></i>
-                                        </a>
-                                    </div>
-                                </td>
-                            </tr>
+                            </td>
+                            <td class="text-center">
+                                <div class="btn-group">
+                                    <!-- href referencia al archivo de editar grupo por (ID) -->
+                                    <a href="" class="btn btn-xs btn-warning" data-toggle="tooltip" title="Editar">
+                                        <i class="glyphicon glyphicon-pencil"></i>
+                                    </a>
+                                    <!-- href referencia al archivo de borrar grupo por (ID) -->
+                                    <a href="" class="btn btn-xs btn-danger" data-toggle="tooltip" title="Eliminar">
+                                        <i class="glyphicon glyphicon-remove"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
                         </tbody>
                     </table>
                 </div>
@@ -693,7 +701,8 @@
                             <div class="form-group">
                                 <div class="input-group">
                                     <span class="input-group-btn">
-                                        <input type="file" name="file_upload" multiple="multiple" class="btn btn-primary btn-file"/>
+                                        <input type="file" name="file_upload" multiple="multiple"
+                                               class="btn btn-primary btn-file"/>
                                     </span>
                                     <button type="submit" name="submit" class="btn btn-default">Subir</button>
                                 </div>
@@ -704,37 +713,37 @@
                 <div class="panel-body">
                     <table class="table">
                         <thead>
-                            <tr>
-                                <th class="text-center" style="width: 50px;">#</th>
-                                <th class="text-center">Imagen</th>
-                                <th class="text-center">Descripción</th>
-                                <th class="text-center" style="width: 20%;">Tipo</th>
-                                <th class="text-center" style="width: 50px;">Acciones</th>
-                            </tr>
+                        <tr>
+                            <th class="text-center" style="width: 50px;">#</th>
+                            <th class="text-center">Imagen</th>
+                            <th class="text-center">Descripción</th>
+                            <th class="text-center" style="width: 20%;">Tipo</th>
+                            <th class="text-center" style="width: 50px;">Acciones</th>
+                        </tr>
                         </thead>
                         <tbody>
-                            <!-- listar las imagenes que se tenga -->
-                            <tr class="list-inline">
-                                <td class="text-center">
-                                    <!-- listar el ID de las imagenes -->
-                                </td>
-                                <td class="text-center">
-                                    <!-- src recupera todas las fotos almacenadas -->
-                                    <img src="" class="img-thumbnail" alt=""/>
-                                </td>
-                                <td class="text-center">
-                                    <!-- recupera el nombre de la imagen -->
-                                </td>
-                                <td class="text-center">
-                                    <!-- recupera el tipo de imagen -->
-                                </td>
-                                <td class="text-center">
-                                    <!-- href referencia al archivo de eliminar imagenes -->
-                                    <a href="" class="btn btn-danger btn-xs"  title="Eliminar">
-                                        <span class="glyphicon glyphicon-trash"></span>
-                                    </a>
-                                </td>
-                            </tr>
+                        <!-- listar las imagenes que se tenga -->
+                        <tr class="list-inline">
+                            <td class="text-center">
+                                <!-- listar el ID de las imagenes -->
+                            </td>
+                            <td class="text-center">
+                                <!-- src recupera todas las fotos almacenadas -->
+                                <img src="" class="img-thumbnail" alt=""/>
+                            </td>
+                            <td class="text-center">
+                                <!-- recupera el nombre de la imagen -->
+                            </td>
+                            <td class="text-center">
+                                <!-- recupera el tipo de imagen -->
+                            </td>
+                            <td class="text-center">
+                                <!-- href referencia al archivo de eliminar imagenes -->
+                                <a href="" class="btn btn-danger btn-xs" title="Eliminar">
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                </a>
+                            </td>
+                        </tr>
                         </tbody>
                     </table>
                 </div>
@@ -760,61 +769,61 @@
                 <div class="panel-body">
                     <table class="table table-bordered">
                         <thead>
-                            <tr>
-                                <th class="text-center" style="width: 50px;">#</th>
-                                <th> Imagen</th>
-                                <th> Descripción </th>
-                                <th class="text-center" style="width: 10%;"> Categoría </th>
-                                <th class="text-center" style="width: 10%;"> Stock </th>
-                                <th class="text-center" style="width: 10%;"> Precio de compra </th>
-                                <th class="text-center" style="width: 10%;"> Precio de venta </th>
-                                <th class="text-center" style="width: 10%;"> Agregado </th>
-                                <th class="text-center" style="width: 100px;"> Acciones </th>
-                            </tr>
+                        <tr>
+                            <th class="text-center" style="width: 50px;">#</th>
+                            <th> Imagen</th>
+                            <th> Descripción</th>
+                            <th class="text-center" style="width: 10%;"> Categoría</th>
+                            <th class="text-center" style="width: 10%;"> Stock</th>
+                            <th class="text-center" style="width: 10%;"> Precio de compra</th>
+                            <th class="text-center" style="width: 10%;"> Precio de venta</th>
+                            <th class="text-center" style="width: 10%;"> Agregado</th>
+                            <th class="text-center" style="width: 100px;"> Acciones</th>
+                        </tr>
                         </thead>
                         <tbody>
-                            <!-- se lista todas los productos existentes -->
-                            <tr>
-                                <td class="text-center">
-                                    <!-- recupera el id del producto -->
-                                </td>
-                                <td>
-                                    <!-- src referencia que no hay imagen -->
-                                    <img class="img-avatar img-circle" src="" alt="">
-                                    <!-- src recupera la imagen del producto -->
-                                    <img class="img-avatar img-circle" src="" alt="">
-                                </td>
-                                <td>
-                                    <!-- recupera el nombre del producto -->
-                                </td>
-                                <td class="text-center">
-                                    <!-- recupera el la descripcion del producto -->
-                                </td>
-                                <td class="text-center">
-                                    <!-- recupera la cantidad del producto -->
-                                </td>
-                                <td class="text-center">
-                                    <!-- recupera el precio de compra -->
-                                </td>
-                                <td class="text-center">
-                                    <!-- recupera el precio de venta -->
-                                </td>
-                                <td class="text-center">
-                                    <!-- recupera la fecha del producto -->
-                                </td>
-                                <td class="text-center">
-                                    <div class="btn-group">
-                                        <!-- href referencia al archivo de edicion de producto -->
-                                        <a href="" class="btn btn-info btn-xs"  title="Editar" data-toggle="tooltip">
-                                            <span class="glyphicon glyphicon-edit"></span>
-                                        </a>
-                                        <!-- href referencia al archivo de eliminar producto -->
-                                        <a href="" class="btn btn-danger btn-xs"  title="Eliminar" data-toggle="tooltip">
-                                            <span class="glyphicon glyphicon-trash"></span>
-                                        </a>
-                                    </div>
-                                </td>
-                            </tr>
+                        <!-- se lista todas los productos existentes -->
+                        <tr>
+                            <td class="text-center">
+                                <!-- recupera el id del producto -->
+                            </td>
+                            <td>
+                                <!-- src referencia que no hay imagen -->
+                                <img class="img-avatar img-circle" src="" alt="">
+                                <!-- src recupera la imagen del producto -->
+                                <img class="img-avatar img-circle" src="" alt="">
+                            </td>
+                            <td>
+                                <!-- recupera el nombre del producto -->
+                            </td>
+                            <td class="text-center">
+                                <!-- recupera el la descripcion del producto -->
+                            </td>
+                            <td class="text-center">
+                                <!-- recupera la cantidad del producto -->
+                            </td>
+                            <td class="text-center">
+                                <!-- recupera el precio de compra -->
+                            </td>
+                            <td class="text-center">
+                                <!-- recupera el precio de venta -->
+                            </td>
+                            <td class="text-center">
+                                <!-- recupera la fecha del producto -->
+                            </td>
+                            <td class="text-center">
+                                <div class="btn-group">
+                                    <!-- href referencia al archivo de edicion de producto -->
+                                    <a href="" class="btn btn-info btn-xs" title="Editar" data-toggle="tooltip">
+                                        <span class="glyphicon glyphicon-edit"></span>
+                                    </a>
+                                    <!-- href referencia al archivo de eliminar producto -->
+                                    <a href="" class="btn btn-danger btn-xs" title="Eliminar" data-toggle="tooltip">
+                                        <span class="glyphicon glyphicon-trash"></span>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
                         </tbody>
                     </table>
                 </div>
@@ -844,55 +853,55 @@
                 <div class="panel-body">
                     <table class="table table-bordered table-striped">
                         <thead>
-                            <tr>
-                                <th class="text-center" style="width: 50px;">#</th>
-                                <th>Nombre </th>
-                                <th>Usuario</th>
-                                <th class="text-center" style="width: 15%;">Rol de usuario</th>
-                                <th class="text-center" style="width: 10%;">Estado</th>
-                                <th style="width: 20%;">Último login</th>
-                                <th class="text-center" style="width: 100px;">Acciones</th>
-                            </tr>
+                        <tr>
+                            <th class="text-center" style="width: 50px;">#</th>
+                            <th>Nombre</th>
+                            <th>Usuario</th>
+                            <th class="text-center" style="width: 15%;">Rol de usuario</th>
+                            <th class="text-center" style="width: 10%;">Estado</th>
+                            <th style="width: 20%;">Último login</th>
+                            <th class="text-center" style="width: 100px;">Acciones</th>
+                        </tr>
                         </thead>
                         <tbody>
-                            <!-- lista todos los usuarios registrados -->
-                            <tr>
-                                <td class="text-center">
-                                    <!-- lista el ID del producto -->
-                                </td>
-                                <td>
-                                    <!-- lista el nombre del usuario -->
-                                </td>
-                                <td>
-                                    <!-- lista el nickname del usuario -->
-                                </td>
-                                <td class="text-center">
-                                    <!-- lista el nombre del grupo que pertenece -->
-                                </td>
-                                <td class="text-center">
+                        <!-- lista todos los usuarios registrados -->
+                        <tr>
+                            <td class="text-center">
+                                <!-- lista el ID del producto -->
+                            </td>
+                            <td>
+                                <!-- lista el nombre del usuario -->
+                            </td>
+                            <td>
+                                <!-- lista el nickname del usuario -->
+                            </td>
+                            <td class="text-center">
+                                <!-- lista el nombre del grupo que pertenece -->
+                            </td>
+                            <td class="text-center">
                                     <span class="label label-success">
                                         <!-- en caso de que este activo -->
                                     </span>
-                                    <span class="label label-danger">
+                                <span class="label label-danger">
                                         <!-- en caso de que este inactivo -->
                                     </span>
-                                </td>
-                                <td>
-                                    <!-- lista el ultimo login del usuario -->
-                                </td>
-                                <td class="text-center">
-                                    <div class="btn-group">
-                                        <!-- href referencia al archivo de editar usuario -->
-                                        <a href="" class="btn btn-xs btn-warning" data-toggle="tooltip" title="Editar">
-                                            <i class="glyphicon glyphicon-pencil"></i>
-                                        </a>
-                                        <!-- href referencia al archivo borrar usuario -->
-                                        <a href="" class="btn btn-xs btn-danger" data-toggle="tooltip" title="Eliminar">
-                                            <i class="glyphicon glyphicon-remove"></i>
-                                        </a>
-                                    </div>
-                                </td>
-                            </tr>
+                            </td>
+                            <td>
+                                <!-- lista el ultimo login del usuario -->
+                            </td>
+                            <td class="text-center">
+                                <div class="btn-group">
+                                    <!-- href referencia al archivo de editar usuario -->
+                                    <a href="" class="btn btn-xs btn-warning" data-toggle="tooltip" title="Editar">
+                                        <i class="glyphicon glyphicon-pencil"></i>
+                                    </a>
+                                    <!-- href referencia al archivo borrar usuario -->
+                                    <a href="" class="btn btn-xs btn-danger" data-toggle="tooltip" title="Eliminar">
+                                        <i class="glyphicon glyphicon-remove"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
                         </tbody>
                     </table>
                 </div>
@@ -901,7 +910,7 @@
     </div>
 </div>
 
-                                        <!-- SECCION VENTAS -->
+<!-- SECCION VENTAS -->
 <!-- Componente de ventas -->
 <div th:fragment="list_ventas">
     <div class="row">
@@ -925,46 +934,46 @@
                 <div class="panel-body">
                     <table class="table table-bordered table-striped">
                         <thead>
-                            <tr>
-                                <th class="text-center" style="width: 50px;">#</th>
-                                <th> Nombre del producto </th>
-                                <th class="text-center" style="width: 15%;"> Cantidad</th>
-                                <th class="text-center" style="width: 15%;"> Total </th>
-                                <th class="text-center" style="width: 15%;"> Fecha </th>
-                                <th class="text-center" style="width: 100px;"> Acciones </th>
-                            </tr>
+                        <tr>
+                            <th class="text-center" style="width: 50px;">#</th>
+                            <th> Nombre del producto</th>
+                            <th class="text-center" style="width: 15%;"> Cantidad</th>
+                            <th class="text-center" style="width: 15%;"> Total</th>
+                            <th class="text-center" style="width: 15%;"> Fecha</th>
+                            <th class="text-center" style="width: 100px;"> Acciones</th>
+                        </tr>
                         </thead>
                         <tbody>
-                            <!-- recupera todas las ventas -->
-                            <tr>
-                                <td class="text-center">
-                                    <!-- recupera el ID del prodcuto -->
-                                </td>
-                                <td>
-                                    <!-- recupera el nombre de la venta -->
-                                </td>
-                                <td class="text-center">
-                                    <!-- recupera la cantidad de la venta -->
-                                </td>
-                                <td class="text-center">
-                                    <!-- recupera el precio de la venta -->
-                                </td>
-                                <td class="text-center">
-                                    <!-- recupera la fecha de la venta -->
-                                </td>
-                                <td class="text-center">
-                                    <div class="btn-group">
-                                        <!-- href referencia al archivo de editar venta -->
-                                        <a href="" class="btn btn-warning btn-xs"  title="Edit" data-toggle="tooltip">
-                                            <span class="glyphicon glyphicon-edit"></span>
-                                        </a>
-                                        <!-- href referencia al archivo de borrar venta -->
-                                        <a href="" class="btn btn-danger btn-xs"  title="Delete" data-toggle="tooltip">
-                                            <span class="glyphicon glyphicon-trash"></span>
-                                        </a>
-                                    </div>
-                                </td>
-                            </tr>
+                        <!-- recupera todas las ventas -->
+                        <tr>
+                            <td class="text-center">
+                                <!-- recupera el ID del prodcuto -->
+                            </td>
+                            <td>
+                                <!-- recupera el nombre de la venta -->
+                            </td>
+                            <td class="text-center">
+                                <!-- recupera la cantidad de la venta -->
+                            </td>
+                            <td class="text-center">
+                                <!-- recupera el precio de la venta -->
+                            </td>
+                            <td class="text-center">
+                                <!-- recupera la fecha de la venta -->
+                            </td>
+                            <td class="text-center">
+                                <div class="btn-group">
+                                    <!-- href referencia al archivo de editar venta -->
+                                    <a href="" class="btn btn-warning btn-xs" title="Edit" data-toggle="tooltip">
+                                        <span class="glyphicon glyphicon-edit"></span>
+                                    </a>
+                                    <!-- href referencia al archivo de borrar venta -->
+                                    <a href="" class="btn btn-danger btn-xs" title="Delete" data-toggle="tooltip">
+                                        <span class="glyphicon glyphicon-trash"></span>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
                         </tbody>
                     </table>
                 </div>
