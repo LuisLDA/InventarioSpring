@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/plantilla.html :: head">
+    <title>Title</title>
+</head>
+<body>
+<header th:replace="layout/plantilla.html :: header"></header>
+<div th:replace="layout/plantilla.html :: div_sidebar"></div>
+<div class="page">
+    <div>
+        <div class="row">
+            <div class="col-md-12">
+                <!-- Zona de mensaje aqui -->
+            </div>
+        </div>
+        <div class="row">
+            <!-- Componente de agregar -->
+            <div class="col-md-5">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <strong>
+                            <span class="glyphicon glyphicon-th"></span>
+                            <span>Agregar categoría</span>
+                        </strong>
+                    </div>
+                    <div class="panel-body">
+                        <!-- action hace referencia al archivo categoria -->
+                        <form method="post" action="">
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="categorie-name"
+                                       placeholder="Nombre de la categoría" required>
+                            </div>
+                            <button type="submit" name="add_cat" class="btn btn-primary">Agregar categoría</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- Componente de listar categoria -->
+            <div class="col-md-7">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <strong>
+                            <span class="glyphicon glyphicon-th"></span>
+                            <span>Lista de categorías</span>
+                        </strong>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table table-bordered table-striped table-hover"
+                               th:if="${categorias !=null and !categorias.isEmpty()}">
+                            <thead>
+                            <tr>
+                                <th class="text-center" style="width: 50px;">#</th>
+                                <th>Categorías</th>
+                                <th class="text-center" style="width: 100px;">Acciones</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <!-- Carga todas la categorias -->
+                            <tr th:each="categoria : ${categorias} ">
+                                <td class="text-center">
+                                    <!-- Cuenta el ID de la tabla -->
+                                    <span th:text="${categoria.getId()}" />
+                                </td>
+                                <td >
+                                    <!-- Se muestra los datos en tabla -->
+                                    <span th:text="${categoria.getName()}" />
+                                </td>
+                                <td class="text-center">
+                                    <div class="btn-group">
+                                        <!-- href hace referencia al archivo editar categoria -->
+                                        <a href="" class="btn btn-xs btn-warning" data-toggle="tooltip" title="Editar">
+                                            <span class="glyphicon glyphicon-edit"></span>
+                                        </a>
+                                        <!-- href hace referencia al archivo eliminar categoria -->
+                                        <a href="" class="btn btn-xs btn-danger" data-toggle="tooltip" title="Eliminar">
+                                            <span class="glyphicon glyphicon-trash"></span>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
