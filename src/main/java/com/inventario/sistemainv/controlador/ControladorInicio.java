@@ -1,7 +1,6 @@
 package com.inventario.sistemainv.controlador;
 
 import com.inventario.sistemainv.service.CategoriesService;
-import com.inventario.sistemainv.service.ProductService;
 import com.inventario.sistemainv.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import lombok.var;
@@ -37,9 +36,9 @@ public class ControladorInicio {
         return "media";
     }
 
-    @GetMapping("/accesos")
+    @GetMapping("/accesos_usuarios")
     public String controlAcceso(User user) {
-        return "accesos";
+        return "accesos_grupos";
     }
 
     @GetMapping("/productos")

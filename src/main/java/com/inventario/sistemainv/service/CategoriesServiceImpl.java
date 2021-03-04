@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -18,7 +19,17 @@ public class CategoriesServiceImpl implements CategoriesService{
     @Override
     @Transactional(readOnly = true)
     public List<Categories> listCategories() {
-        return (List<Categories>) categoriesDao.findAll();
+        List<Categories> categoriasOrden = (List<Categories>) categoriesDao.findAll();
+        categoriasOrden.sort(new Comparator<Categories>() {
+            @Override
+            public int compare(Categories o1, Categories o2) {
+                if(o1.getId()> o2.getId()){
+                    return 1;
+                }
+                return 0;
+            }
+        });
+        return categoriasOrden;
     }
 
     @Override
