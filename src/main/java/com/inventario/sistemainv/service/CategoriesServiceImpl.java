@@ -20,24 +20,17 @@ public class CategoriesServiceImpl implements CategoriesService{
     @Transactional(readOnly = true)
     public List<Categories> listCategories() {
         List<Categories> categoriasOrden = (List<Categories>) categoriesDao.findAll();
-        categoriasOrden.sort(new Comparator<Categories>() {
-            @Override
-            public int compare(Categories o1, Categories o2) {
-                if(o1.getId()> o2.getId()){
-                    return 1;
-                }
-                return 0;
-            }
-        });
         return categoriasOrden;
     }
 
     @Override
+    @Transactional
     public void saveCategories(Categories categories) {
         categoriesDao.save(categories);
     }
 
     @Override
+    @Transactional
     public void deleteCategories(Categories categories) {
         categoriesDao.delete(categories);
     }

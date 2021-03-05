@@ -26,10 +26,12 @@
                     </div>
                     <div class="panel-body">
                         <!-- action hace referencia al archivo categoria -->
-                        <form method="post" action="">
+                        <form action="#" th:action="@{/add_categoria}"  method="post">
+
                             <div class="form-group">
-                                <input type="text" class="form-control" name="categorie-name"
-                                       placeholder="Nombre de la categoría" required>
+                                <input type="text"
+                                        class="form-control" name="name"
+                                        placeholder="Nombre de la categoría" required>
                             </div>
                             <button type="submit" name="add_cat" class="btn btn-primary">Agregar categoría</button>
                         </form>
@@ -57,14 +59,14 @@
                             </thead>
                             <tbody>
                             <!-- Carga todas la categorias -->
-                            <tr th:each="categoria : ${categorias} ">
+                            <tr th:each="categoria,contador : ${categorias} ">
                                 <td class="text-center">
                                     <!-- Cuenta el ID de la tabla -->
-                                    <span th:text="${categoria.getId()}" />
+                                    <span th:text="${contador.count}"/>
                                 </td>
-                                <td >
+                                <td>
                                     <!-- Se muestra los datos en tabla -->
-                                    <span th:text="${categoria.getName()}" />
+                                    <span th:text="${categoria.getName()}"/>
                                 </td>
                                 <td class="text-center">
                                     <div class="btn-group">
@@ -73,7 +75,8 @@
                                             <span class="glyphicon glyphicon-edit"></span>
                                         </a>
                                         <!-- href hace referencia al archivo eliminar categoria -->
-                                        <a href="" class="btn btn-xs btn-danger" data-toggle="tooltip" title="Eliminar">
+                                        <a th:href="@{/eliminar_categoria/} + ${categoria.getId()}"
+                                           class="btn btn-xs btn-danger" data-toggle="tooltip" title="Eliminar">
                                             <span class="glyphicon glyphicon-trash"></span>
                                         </a>
                                     </div>

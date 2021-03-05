@@ -1,5 +1,6 @@
 package com.inventario.sistemainv.controlador;
 
+import com.inventario.sistemainv.domain.Categories;
 import com.inventario.sistemainv.service.CategoriesService;
 import com.inventario.sistemainv.service.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -8,7 +9,12 @@ import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @Controller
@@ -25,9 +31,6 @@ public class ControladorInicio {
         log.info("INICIANDO EL CONTROLADOR...");
         var usuarios = userService.listUser();
         model.addAttribute("users", usuarios);
-        //EJEMPLO PARA TRAER LOS VALORES DEL ARRAY
-        //var productos = productService.listProduct();
-        //model.addAttribute("products",productos);
         return "home";
     }
 
@@ -57,4 +60,18 @@ public class ControladorInicio {
     public String inicioLogin(Model model) {
         return "index";
     }
+
+    @GetMapping("/eliminar_categoria/{id}")
+    public String eliminarCategoria(Categories categories){
+        categoriesService.deleteCategories(categories);
+        return "redirect:/categorias";
+    }
+
+    @PostMapping("/add_categoria")
+    public String agregarCategoria(Categories categoria_new){
+        log.info("Información del producto"+categoria_new);
+        categoriesService.saveCategories(categoria_new);
+        return "redirect:/categorias";
+    }
+
 }
