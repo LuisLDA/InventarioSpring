@@ -772,61 +772,57 @@
                                 <th class="text-center" style="width: 100px;"> Acciones </th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody th:if="${products !=null and !products.empty}">
                             <!-- se lista todas los productos existentes -->
-                            <div th:if="${products !=null and !products.empty}">
-                                <span th:each="product : ${products} ">
-                                    <tr>
-                                        <td class="text-center">
-                                            <!-- recupera el id del producto -->
-                                            <b th:text="${product.getId()}"></b>
-                                        </td>
-                                        <td>
-                                            <!-- src referencia que no hay imagen -->
-                                            <img class="img-avatar img-circle" src="" alt="">
-                                            <!-- src recupera la imagen del producto -->
-                                            <img class="img-avatar img-circle" src="" alt="">
-                                            <!--<h3 th:text="${product.getMedia_id()}"></h3>-->
-                                        </td>
-                                        <td>
-                                            <!-- recupera el nombre del producto -->
-                                            <b th:text="${product.getName()}"></b>
-                                        </td>
-                                        <td class="text-center">
-                                            <!-- recupera el la descripcion del producto -->
+                            <tr th:each="product : ${products} ">
+                                <td class="text-center">
+                                    <!-- recupera el id del producto -->
+                                    <b th:text="${product.getId()}"></b>
+                                </td>
+                                <td>
+                                    <!-- src referencia que no hay imagen -->
+                                    <img class="img-avatar img-circle" src="" alt="">
+                                    <!-- src recupera la imagen del producto -->
+                                    <img class="img-avatar img-circle" src="" alt="">
+                                    <!--<h3 th:text="${product.getMedia_id()}"></h3>-->
+                                </td>
+                                <td>
+                                    <!-- recupera el nombre del producto -->
+                                    <b th:text="${product.getName()}"></b>
+                                </td>
+                                <td class="text-center">
+                                    <!-- recupera el la descripcion del producto -->
 
-                                        </td>
-                                        <td class="text-center">
-                                            <!-- recupera la cantidad del producto -->
-                                            <b th:text="${product.getQuantity()}"></b>
-                                        </td>
-                                        <td class="text-center">
-                                            <!-- recupera el precio de compra -->
-                                            <b th:text="${product.getBuy_price()}"></b>
-                                        </td>
-                                        <td class="text-center">
-                                            <!-- recupera el precio de venta -->
-                                            <b th:text="${product.getSale_price()}"></b>
-                                        </td>
-                                        <td class="text-center">
-                                            <!-- recupera la fecha del producto -->
-                                            <b th:text="${product.getDate()}"></b>
-                                        </td>
-                                        <td class="text-center">
-                                            <div class="btn-group">
-                                                <!-- href referencia al archivo de edicion de producto -->
-                                                <a href="" class="btn btn-info btn-xs"  title="Editar" data-toggle="tooltip">
-                                                    <span class="glyphicon glyphicon-edit"></span>
-                                                </a>
-                                                <!-- href referencia al archivo de eliminar producto -->
-                                                <a href="" class="btn btn-danger btn-xs"  title="Eliminar" data-toggle="tooltip">
-                                                    <span class="glyphicon glyphicon-trash"></span>
-                                                </a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </span>
-                            </div>
+                                </td>
+                                <td class="text-center">
+                                    <!-- recupera la cantidad del producto -->
+                                    <b th:text="${product.getQuantity()}"></b>
+                                </td>
+                                <td class="text-center">
+                                    <!-- recupera el precio de compra -->
+                                    <b th:text="${product.getBuy_price()}"></b>
+                                </td>
+                                <td class="text-center">
+                                    <!-- recupera el precio de venta -->
+                                    <b th:text="${product.getSale_price()}"></b>
+                                </td>
+                                <td class="text-center">
+                                    <!-- recupera la fecha del producto -->
+                                    <b th:text="${product.getDate()}"></b>
+                                </td>
+                                <td class="text-center">
+                                    <div class="btn-group">
+                                        <!-- href referencia al archivo de edicion de producto -->
+                                        <a href="" class="btn btn-info btn-xs"  title="Editar" data-toggle="tooltip">
+                                            <span class="glyphicon glyphicon-edit"></span>
+                                        </a>
+                                        <!-- href referencia al archivo de eliminar producto -->
+                                        <a href="" class="btn btn-danger btn-xs"  title="Eliminar" data-toggle="tooltip">
+                                            <span class="glyphicon glyphicon-trash"></span>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>

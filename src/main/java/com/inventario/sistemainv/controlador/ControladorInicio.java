@@ -1,6 +1,7 @@
 package com.inventario.sistemainv.controlador;
 
 import com.inventario.sistemainv.service.CategoriesService;
+import com.inventario.sistemainv.service.ProductService;
 import com.inventario.sistemainv.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import lombok.var;
@@ -19,15 +20,14 @@ public class ControladorInicio {
     private UserService userService;
     @Autowired
     private CategoriesService categoriesService;
+    @Autowired
+    private ProductService productService;
 
     @GetMapping("/")
     public String inicio(Model model) {
         log.info("INICIANDO EL CONTROLADOR...");
         var usuarios = userService.listUser();
         model.addAttribute("users", usuarios);
-        //EJEMPLO PARA TRAER LOS VALORES DEL ARRAY
-        //var productos = productService.listProduct();
-        //model.addAttribute("products",productos);
         return "home";
     }
 
@@ -43,6 +43,8 @@ public class ControladorInicio {
 
     @GetMapping("/productos")
     public String mostrarProductos(Model model) {
+        var productos = productService.listProduct();
+        model.addAttribute("products",productos);
         return "productos";
     }
 
