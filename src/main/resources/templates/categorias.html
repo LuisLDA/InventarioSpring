@@ -71,7 +71,7 @@
                                 <td class="text-center">
                                     <div class="btn-group">
                                         <!-- href hace referencia al archivo editar categoria -->
-                                        <a href="" class="btn btn-xs btn-warning" data-toggle="tooltip" title="Editar">
+                                        <a th:href="@{/editar_categoria/} + ${categoria.getId()}" class="btn btn-xs btn-warning" data-toggle="tooltip" title="Editar">
                                             <span class="glyphicon glyphicon-edit"></span>
                                         </a>
                                         <!-- href hace referencia al archivo eliminar categoria -->

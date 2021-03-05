@@ -63,13 +63,29 @@ public class ControladorInicio {
 
     @GetMapping("/eliminar_categoria/{id}")
     public String eliminarCategoria(Categories categories){
+        log.info("Se eliminino el producto: "+categories);
         categoriesService.deleteCategories(categories);
         return "redirect:/categorias";
     }
 
+    @GetMapping("/editar_categoria/{id}")
+    public String editarCategoria(Categories categories,Model model){
+        log.info("Se va editar el producto: "+categories);
+        categories = categoriesService.searchCategories(categories);
+        model.addAttribute("categoria",categories);
+        return "edit_categorias";
+    }
+
     @PostMapping("/add_categoria")
     public String agregarCategoria(Categories categoria_new){
-        log.info("Información del producto"+categoria_new);
+        log.info("Agregado el producto :"+categoria_new);
+        categoriesService.saveCategories(categoria_new);
+        return "redirect:/categorias";
+    }
+
+    @PostMapping("/save_categoria")
+    public String saveCategoria(Categories categoria_new){
+        log.info("Se ha editado el producto :"+categoria_new);
         categoriesService.saveCategories(categoria_new);
         return "redirect:/categorias";
     }
