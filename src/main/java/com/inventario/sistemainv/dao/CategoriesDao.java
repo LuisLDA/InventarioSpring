@@ -9,4 +9,7 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface CategoriesDao extends CrudRepository<Categories, Long> {
 
+    @Query(value = "SELECT count(*) from categories",nativeQuery = true)
+    public int countCategories();
+
 }

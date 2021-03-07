@@ -9,4 +9,5 @@ public interface CategoriesService {
     public void saveCategories(Categories categories);
     public void deleteCategories(Categories categories);
     public Categories searchCategories(Categories categories);
+    public int countCategories();
 }

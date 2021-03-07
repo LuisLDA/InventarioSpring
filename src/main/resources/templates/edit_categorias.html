@@ -25,7 +25,7 @@
                     </div>
                     <div class="panel-body">
                         <!-- action referencia al archivo editar categoria -->
-                        <form method="post" th:action="@{/add_categoria}" th:object="${categoria}" >
+                        <form method="post" th:action="@{/categorias/add_categoria}" th:object="${categoria}" >
                             <div class="form-group">
                                 <!-- value recupera el valor de la categoria a editar -->
                                 <input type="hidden"  name="id" th:value="*{id}">

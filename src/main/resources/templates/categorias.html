@@ -26,7 +26,7 @@
                     </div>
                     <div class="panel-body">
                         <!-- action hace referencia al archivo categoria -->
-                        <form action="#" th:action="@{/add_categoria}"  method="post">
+                        <form action="#" th:action="@{/categorias/add_categoria}"  method="post">
 
                             <div class="form-group">
                                 <input type="text"
@@ -71,11 +71,11 @@
                                 <td class="text-center">
                                     <div class="btn-group">
                                         <!-- href hace referencia al archivo editar categoria -->
-                                        <a th:href="@{/editar_categoria/} + ${categoria.getId()}" class="btn btn-xs btn-warning" data-toggle="tooltip" title="Editar">
+                                        <a th:href="@{/categorias/editar_categoria/} + ${categoria.getId()}" class="btn btn-xs btn-warning" data-toggle="tooltip" title="Editar">
                                             <span class="glyphicon glyphicon-edit"></span>
                                         </a>
                                         <!-- href hace referencia al archivo eliminar categoria -->
-                                        <a th:href="@{/eliminar_categoria/} + ${categoria.getId()}"
+                                        <a th:href="@{/categorias/eliminar_categoria/} + ${categoria.getId()}"
                                            class="btn btn-xs btn-danger" data-toggle="tooltip" title="Eliminar">
                                             <span class="glyphicon glyphicon-trash"></span>
                                         </a>

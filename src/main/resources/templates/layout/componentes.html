@@ -79,81 +79,6 @@
     </div>
 </div>
 
-<!-- Componente añadir y lista categoria producto -->
-<div th:fragment="add_prod_categ">
-    <div class="row">
-        <div class="col-md-12">
-            <!-- Zona de mensaje aqui -->
-        </div>
-    </div>
-    <div class="row">
-        <!-- Componente de agregar -->
-        <div class="col-md-5">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <strong>
-                        <span class="glyphicon glyphicon-th"></span>
-                        <span>Agregar categoría</span>
-                    </strong>
-                </div>
-                <div class="panel-body">
-                    <!-- action hace referencia al archivo categoria -->
-                    <form method="post" action="">
-                        <div class="form-group">
-                            <input type="text" class="form-control" name="categorie-name" placeholder="Nombre de la categoría" required>
-                        </div>
-                        <button type="submit" name="add_cat" class="btn btn-primary">Agregar categoría</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <!-- Componente de listar categoria -->
-        <div class="col-md-7">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <strong>
-                        <span class="glyphicon glyphicon-th"></span>
-                        <span>Lista de categorías</span>
-                    </strong>
-                </div>
-                <div class="panel-body">
-                    <table class="table table-bordered table-striped table-hover">
-                        <thead>
-                        <tr>
-                            <th class="text-center" style="width: 50px;">#</th>
-                            <th>Categorías</th>
-                            <th class="text-center" style="width: 100px;">Acciones</th>
-                        </tr>
-                        </thead>
-                        <tbody th:if="${categorie != null and !categorie.empty}">
-                        <!-- Carga todas la categorias -->
-                        <tr th:each="categorie : ${categorie}">
-                            <td class="text-center" th:text="${categorie.getId()}">
-                                <!-- Cuenta el ID de la tabla -->
-                            </td>
-                            <td th:text="${categorie.getName()}">
-                                <!-- Se muestra los datos en tabla -->
-                            </td>
-                            <td class="text-center">
-                                <div class="btn-group">
-                                    <!-- href hace referencia al archivo editar categoria -->
-                                    <a href=""  class="btn btn-xs btn-warning" data-toggle="tooltip" title="Editar">
-                                        <span class="glyphicon glyphicon-edit"></span>
-                                    </a>
-                                    <!-- href hace referencia al archivo eliminar categoria -->
-                                    <a href=""  class="btn btn-xs btn-danger" data-toggle="tooltip" title="Eliminar">
-                                        <span class="glyphicon glyphicon-trash"></span>
-                                    </a>
-                                </div>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 <!-- Componente añadir producto -->
 <div th:fragment="add_product">
@@ -578,75 +503,7 @@
                                         </div>
 
                                         <!-- SECCION LISTAR -->
-<!-- Componente de los grupos -->
-<div th:fragment="list_group">
-    <div class="row">
-        <div class="col-md-12">
-            <!-- mennsaje de arvertencia aqui -->
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="panel panel-default">
-                <div class="panel-heading clearfix">
-                    <strong>
-                        <span class="glyphicon glyphicon-th"></span>
-                        <span>Grupos</span>
-                    </strong>
-                    <!-- href al archivo de agregar grupo -->
-                    <a href="" class="btn btn-info pull-right btn-sm">Agregar grupo</a>
-                </div>
-                <div class="panel-body">
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th class="text-center" style="width: 50px;">#</th>
-                                <th>Nombre del grupo</th>
-                                <th class="text-center" style="width: 20%;">Nivel del grupo</th>
-                                <th class="text-center" style="width: 15%;">Estado</th>
-                                <th class="text-center" style="width: 100px;">Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- listar todos los grupos existentes -->
-                            <tr>
-                                <td class="text-center">
-                                    <!-- listar el ID de los grupos existentes -->
-                                </td>
-                                <td>
-                                    <!-- listar los grupos por el nombre -->
-                                </td>
-                                <td class="text-center">
-                                    <!-- listar el nivel del grupo existente -->
-                                </td>
-                                <td class="text-center">
-                                    <span class="label label-success">
-                                        <!-- en caso de que este activo -->
-                                    </span>
-                                    <span class="label label-danger">
-                                        <!-- en caso de que este inactivo -->
-                                    </span>
-                                </td>
-                                <td class="text-center">
-                                    <div class="btn-group">
-                                        <!-- href referencia al archivo de editar grupo por (ID) -->
-                                        <a href="" class="btn btn-xs btn-warning" data-toggle="tooltip" title="Editar">
-                                            <i class="glyphicon glyphicon-pencil"></i>
-                                        </a>
-                                        <!-- href referencia al archivo de borrar grupo por (ID) -->
-                                        <a href="" class="btn btn-xs btn-danger" data-toggle="tooltip" title="Eliminar">
-                                            <i class="glyphicon glyphicon-remove"></i>
-                                        </a>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+
 
 <!-- Componente home -->
 <div th:fragment="list_media">
@@ -747,12 +604,12 @@
                         </thead>
                         <tbody>
                             <!-- se lista todas los productos existentes -->
-                            <div th:if="${products !=null and !products.empty}">
-                                <span th:each="product : ${products} ">
+                            <div >
+                                <span >
                                     <tr>
                                         <td class="text-center">
                                             <!-- recupera el id del producto -->
-                                            <b th:text="${product.getId()}"></b>
+                                            <b></b>
                                         </td>
                                         <td>
                                             <!-- src referencia que no hay imagen -->
@@ -763,7 +620,7 @@
                                         </td>
                                         <td>
                                             <!-- recupera el nombre del producto -->
-                                            <b th:text="${product.getName()}"></b>
+                                            <b ></b>
                                         </td>
                                         <td class="text-center">
                                             <!-- recupera el la descripcion del producto -->
@@ -771,19 +628,19 @@
                                         </td>
                                         <td class="text-center">
                                             <!-- recupera la cantidad del producto -->
-                                            <b th:text="${product.getQuantity()}"></b>
+                                            <b ></b>
                                         </td>
                                         <td class="text-center">
                                             <!-- recupera el precio de compra -->
-                                            <b th:text="${product.getBuy_price()}"></b>
+                                            <b ></b>
                                         </td>
                                         <td class="text-center">
                                             <!-- recupera el precio de venta -->
-                                            <b th:text="${product.getSale_price()}"></b>
+                                            <b ></b>
                                         </td>
                                         <td class="text-center">
                                             <!-- recupera la fecha del producto -->
-                                            <b th:text="${product.getDate()}"></b>
+                                            <b ></b>
                                         </td>
                                         <td class="text-center">
                                             <div class="btn-group">
