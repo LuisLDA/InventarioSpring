@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+                                        <!-- SECCION AÑADIR -->
+<!-- Componente añadir grupo -->
+<div th:fragment="add_grupo">
+    <div class="login-page">
+        <div class="text-center">
+            <h3>Agregar nuevo grupo de usuarios</h3>
+        </div>
+        <!-- Zona de mensaje aqui -->
+        <form method="post" action="" class="clearfix">
+            <div class="form-group">
+                <label  class="control-label">Nombre del grupo</label>
+                <input type="name" class="form-control" name="group-name" required>
+            </div>
+            <div class="form-group">
+                <label  class="control-label">Nivel del grupo</label>
+                <input type="number" class="form-control" name="group-level">
+            </div>
+            <div class="form-group">
+                <label >Estado</label>
+                <select class="form-control" name="status">
+                    <option value="1">Activo</option>
+                    <option value="0">Inactivo</option>
+                </select>
+            </div>
+            <div class="form-group clearfix">
+                <button type="submit" name="add" class="btn btn-info">Guardar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Componente añadir usuario -->
+<div th:fragment="add_user">
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <strong>
+                    <span class="glyphicon glyphicon-th"></span>
+                    <span>Agregar usuario</span>
+                </strong>
+            </div>
+            <div class="panel-body">
+                <div class="col-md-6">
+                    <!-- href hace referencia al archivo anadir usario -->
+                    <form method="post" action="">
+                        <div class="form-group">
+                            <label>Nombre</label>
+                            <input type="text" class="form-control" name="full-name" placeholder="Nombre completo" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Usuario</label>
+                            <input type="text" class="form-control" name="username" placeholder="Nombre de usuario">
+                        </div>
+                        <div class="form-group">
+                            <label>Contraseña</label>
+                            <input type="password" class="form-control" name ="password"  placeholder="Contraseña">
+                        </div>
+                        <div class="form-group">
+                            <label>Rol de usuario</label>
+                            <select class="form-control" name="level">
+                                <option value="<?php echo $group['group_level'];?>">
+                            </select>
+                        </div>
+                        <div class="form-group clearfix">
+                            <button type="submit" name="add_user" class="btn btn-primary">Guardar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Componente añadir producto -->
+<div th:fragment="add_product">
+    <div class="row">
+        <div class="col-md-12">
+            <!-- Zona de mensaje -->
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-9">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <strong>
+                        <span class="glyphicon glyphicon-th"></span>
+                        <span>Agregar producto</span>
+                    </strong>
+                </div>
+                <div class="panel-body">
+                    <div class="col-md-12">
+                        <!-- action hace referencia al archivo anadir producto -->
+                        <form method="post" action="" class="clearfix">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-th-large"></i>
+                                    </span>
+                                    <input type="text" class="form-control" name="product-title" placeholder="Descripción">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <select class="form-control" name="product-categorie">
+                                            <option value="">Selecciona una categoría</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <select class="form-control" name="product-photo">
+                                            <option value="">Selecciona una imagen</option>
+                                            <option value="<?php echo (int)$photo['id'] ?>">
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                            <i class="glyphicon glyphicon-shopping-cart"></i>
+                                            </span>
+                                            <input type="number" class="form-control" name="product-quantity" placeholder="Cantidad">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="glyphicon glyphicon-usd"></i>
+                                            </span>
+                                            <input type="number" class="form-control" name="buying-price" placeholder="Precio de compra">
+                                            <span class="input-group-addon">.00</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="glyphicon glyphicon-usd"></i>
+                                            </span>
+                                            <input type="number" class="form-control" name="saleing-price" placeholder="Precio de venta">
+                                            <span class="input-group-addon">.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" name="add_product" class="btn btn-danger">Agregar producto</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+                                        <!-- SECCION EDIT -->
+<!-- Componente editar cuenta -->
+<div th:fragment="edit_count">
+    <div class="row">
+        <div class="col-md-12">
+            <!-- Mensaje de advertencia -->
+        </div>
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="panel-heading clearfix">
+                        <span class="glyphicon glyphicon-camera"></span>
+                        <span>Cambiar mi foto</span>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <!-- src muestra la foto que tiene el usario -->
+                            <img class="img-circle img-size-2" src="" alt="">
+                        </div>
+                        <div class="col-md-8">
+                            <!-- action llamar al metodo para editar la cuenta -->
+                            <form class="form" action="" method="POST" enctype="multipart/form-data">
+                                <div class="form-group">
+                                    <input type="file" name="file_upload" multiple="multiple" class="btn btn-default btn-file"/>
+                                </div>
+                                <div class="form-group">
+                                    <!-- value el id del usuario -->
+                                    <input type="hidden" name="user_id" value="">
+                                    <button type="submit" name="submit" class="btn btn-warning">Cambiar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading clearfix">
+                    <span class="glyphicon glyphicon-edit"></span>
+                    <span>Editar mi cuenta</span>
+                </div>
+                <div class="panel-body">
+                    <!-- action metodo de editar pasando el ID -->
+                    <form method="post" action="" class="clearfix">
+                        <div class="form-group">
+                            <!-- value captura el nombre del usuario -->
+                            <label class="control-label">Nombres</label>
+                            <input type="name" class="form-control" name="name" value="">
+                        </div>
+                        <div class="form-group">
+                            <!-- value captura el nick del usuario -->
+                            <label class="control-label">Usuario</label>
+                            <input type="text" class="form-control" name="username" value="">
+                        </div>
+                        <div class="form-group clearfix">
+                            <!-- href hace referencia al archivo de cambio de contrasena -->
+                            <a href="" title="change password" class="btn btn-danger pull-right">Cambiar contraseña</a>
+                            <button type="submit" name="update" class="btn btn-info">Actualizar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Componente editar grupo -->
+<div th:fragment="edit_group">
+    <div class="login-page">
+        <div class="text-center">
+            <h3>Editar Grupo</h3>
+        </div>
+        <!-- Mensaje de advertencia aqui -->
+        <!-- action referencia al archivo de editar grupo -->
+        <form method="post" action="" class="clearfix">
+            <div class="form-group">
+                <label class="control-label">Nombre del grupo</label>
+                <!-- value recupera el valor del grupo -->
+                <input type="name" class="form-control" name="group-name" value="">
+            </div>
+            <div class="form-group">
+                <label fclass="control-label">Nivel del grupo</label>
+                <!-- value recupera el nivel del grupo al que pertenece -->
+                <input type="number" class="form-control" name="group-level" value="">
+            </div>
+            <div class="form-group">
+                <label>Estado</label>
+                <select class="form-control" name="status">
+                    <option value="1">Activo</option>
+                    <option value="0">Inactivo</option>
+                </select>
+            </div>
+            <div class="form-group clearfix">
+                <button type="submit" name="update" class="btn btn-info">Actualizar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Componente editar producto -->
+<div th:fragment="edit_product">
+    <div class="row">
+        <div class="col-md-12">
+            <!-- Mensaje de advertencia aqui -->
+        </div>
+    </div>
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <strong>
+                    <span class="glyphicon glyphicon-th"></span>
+                    <span>Editar producto</span>
+                </strong>
+            </div>
+            <div class="panel-body">
+                <div class="col-md-7">
+                    <!-- action referencia al archivo de editar producto -->
+                    <form method="post" action="">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="glyphicon glyphicon-th-large"></i>
+                                </span>
+                                <!-- value recupera el nombre del producto -->
+                                <input type="text" class="form-control" name="product-title" value="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <select class="form-control" name="product-categorie">
+                                        <option value="">Selecciona una categoría</option>
+                                        <!-- muestra todas las categorias existentes -->
+                                        <!- value recupera todas las categorias existentes -->
+                                        <option value=""></option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <select class="form-control" name="product-photo">
+                                        <option value=""> Sin imagen</option>
+                                        <!-- recupera todas las fotos existentes y las lista -->
+                                        <option value=""></option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Cantidad</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="glyphicon glyphicon-shopping-cart"></i>
+                                            </span>
+                                            <!-- value recupera la cantidad del producto -->
+                                            <input type="number" class="form-control" name="product-quantity" value="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Precio de compra</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="glyphicon glyphicon-usd"></i>
+                                            </span>
+                                            <!-- value recupera el precio de compra del producto -->
+                                            <input type="number" class="form-control" name="buying-price" value="">
+                                            <span class="input-group-addon">.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Precio de venta</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="glyphicon glyphicon-usd"></i>
+                                            </span>
+                                            <!-- value recupera el precio de venta del producto -->
+                                            <input type="number" class="form-control" name="saleing-price" value="">
+                                            <span class="input-group-addon">.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" name="product" class="btn btn-danger">Actualizar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Componente editar usuario -->
+<div th:fragment="edit_user">
+    <div class="row">
+        <div class="col-md-12">
+            <!-- Mensaje de advertencia aqui -->
+        </div>
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <strong>
+                        <span class="glyphicon glyphicon-th"></span>
+                        <span>Actualiza cuenta</span>
+                    </strong>
+                </div>
+                <div class="panel-body">
+                    <!-- action referencia al archivo de editar usuario (ID) -->
+                    <form method="post" action="" class="clearfix">
+                        <div class="form-group">
+                            <label class="control-label">Nombres</label>
+                            <!-- value recupera el nombre del usuario -->
+                            <input type="name" class="form-control" name="name" value="">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Usuario</label>
+                            <!-- value recupera el nickname del usuario -->
+                            <input type="text" class="form-control" name="username" value="">
+                        </div>
+                        <div class="form-group">
+                            <label>Rol de usuario</label>
+                            <select class="form-control" name="level">
+                                <!-- value recupera el valor del usuario -->
+                                <!-- option recupera todos los roles de usuario -->
+                                <option value=""></option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Estado</label>
+                            <select class="form-control" name="status">
+                                <option value="1">Activo</option>
+                                <option value="0">Inactivo</option>
+                            </select>
+                        </div>
+                        <div class="form-group clearfix">
+                            <button type="submit" name="update" class="btn btn-info">Actualizar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- Componente de cambio de contrasena -->
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <strong>
+                        <span class="glyphicon glyphicon-th"></span>
+                        <span>Cambiar contraseña</span>
+                    </strong>
+                </div>
+                <div class="panel-body">
+                    <!-- action referencia al archivo de editar usuario por id -->
+                    <form action="" method="post" class="clearfix">
+                        <div class="form-group">
+                            <label class="control-label">Contraseña</label>
+                            <input type="password" class="form-control" name="password" placeholder="Ingresa la nueva contraseña" required>
+                        </div>
+                        <div class="form-group clearfix">
+                            <button type="submit" name="update-pass" class="btn btn-danger pull-right">Cambiar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+                                        <!-- SECCION SISTEMA -->
+<!-- Componente cambiar contraseña -->
+<div th:fragment="change_passw">
+    <div class="login-page">
+        <div class="text-center">
+            <h3>Cambiar contraseña</h3>
+        </div>
+        <!-- Muestra de mensje, agregar accion al form-->
+        <form method="post" action="" class="clearfix">
+            <div class="form-group">
+                <label class="control-label">Nueva contraseña</label>
+                <input type="password" class="form-control" name="new-password" placeholder="Nueva contraseña">
+            </div>
+            <div class="form-group">
+                <label class="control-label">Antigua contraseña</label>
+                <input type="password" class="form-control" name="old-password" placeholder="Antigua contraseña">
+            </div>
+            <div class="form-group clearfix">
+                <!-- Value valida que el usario tiene permisos -->
+                <input type="hidden" name="id" value="">
+                <button type="submit" name="update" class="btn btn-info">Cambiar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Componente perfil -->
+<div th:fragment="profile">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="panel profile">
+                <div class="jumbotron text-center bg-red">
+                    <!-- src recupera la imagen del usuario -->
+                    <img class="img-circle img-size-2" src="" alt="">
+                    <!-- recupera el nombre del usuario -->
+                    <h3>Usuario aqui</h3>
+                </div>
+                <ul class="nav nav-pills nav-stacked">
+                    <!-- href referencia al archivo de editar usuario -->
+                    <li><a href=""> <i class="glyphicon glyphicon-edit"></i> Editar perfil</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Componente home -->
+<div th:fragment="home">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <!-- mensaje de advertencia aqui -->
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="panel">
+                                                        <div class="jumbotron text-center">
+                                                            <h1>El placer de comprar</h1>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- SECCION LISTAR -->
+
+
+<!-- Componente home -->
+<div th:fragment="list_media">
+    <div class="row">
+        <div class="col-md-6">
+            <!-- mensaje de advertencia aqui -->
+        </div>
+
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading clearfix">
+                    <span class="glyphicon glyphicon-camera"></span>
+                    <span>Lista de imagenes</span>
+                    <div class="pull-right">
+                        <!-- action referencia al archivo media -->
+                        <form class="form-inline" action="" method="POST" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-btn">
+                                        <input type="file" name="file_upload" multiple="multiple" class="btn btn-primary btn-file"/>
+                                    </span>
+                                    <button type="submit" name="submit" class="btn btn-default">Subir</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th class="text-center" style="width: 50px;">#</th>
+                                <th class="text-center">Imagen</th>
+                                <th class="text-center">Descripción</th>
+                                <th class="text-center" style="width: 20%;">Tipo</th>
+                                <th class="text-center" style="width: 50px;">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- listar las imagenes que se tenga -->
+                            <tr class="list-inline">
+                                <td class="text-center">
+                                    <!-- listar el ID de las imagenes -->
+                                </td>
+                                <td class="text-center">
+                                    <!-- src recupera todas las fotos almacenadas -->
+                                    <img src="" class="img-thumbnail" alt=""/>
+                                </td>
+                                <td class="text-center">
+                                    <!-- recupera el nombre de la imagen -->
+                                </td>
+                                <td class="text-center">
+                                    <!-- recupera el tipo de imagen -->
+                                </td>
+                                <td class="text-center">
+                                    <!-- href referencia al archivo de eliminar imagenes -->
+                                    <a href="" class="btn btn-danger btn-xs"  title="Eliminar">
+                                        <span class="glyphicon glyphicon-trash"></span>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Componente producto -->
+<div th:fragment="list_product">
+    <div class="row">
+        <div class="col-md-12">
+            <!-- mensaje de advertencia aqui -->
+        </div>
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading clearfix">
+                    <div class="pull-right">
+                        <!-- href hace referencia al archivo anadir producto -->
+                        <a href="" class="btn btn-primary">Agregar producto</a>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th class="text-center" style="width: 50px;">#</th>
+                                <th> Imagen</th>
+                                <th> Descripción </th>
+                                <th class="text-center" style="width: 10%;"> Categoría </th>
+                                <th class="text-center" style="width: 10%;"> Stock </th>
+                                <th class="text-center" style="width: 10%;"> Precio de compra </th>
+                                <th class="text-center" style="width: 10%;"> Precio de venta </th>
+                                <th class="text-center" style="width: 10%;"> Agregado </th>
+                                <th class="text-center" style="width: 100px;"> Acciones </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- se lista todas los productos existentes -->
+                            <div >
+                                <span >
+                                    <tr>
+                                        <td class="text-center">
+                                            <!-- recupera el id del producto -->
+                                            <b></b>
+                                        </td>
+                                        <td>
+                                            <!-- src referencia que no hay imagen -->
+                                            <img class="img-avatar img-circle" src="" alt="">
+                                            <!-- src recupera la imagen del producto -->
+                                            <img class="img-avatar img-circle" src="" alt="">
+                                            <!--<h3 th:text="${product.getMedia_id()}"></h3>-->
+                                        </td>
+                                        <td>
+                                            <!-- recupera el nombre del producto -->
+                                            <b ></b>
+                                        </td>
+                                        <td class="text-center">
+                                            <!-- recupera el la descripcion del producto -->
+
+                                        </td>
+                                        <td class="text-center">
+                                            <!-- recupera la cantidad del producto -->
+                                            <b ></b>
+                                        </td>
+                                        <td class="text-center">
+                                            <!-- recupera el precio de compra -->
+                                            <b ></b>
+                                        </td>
+                                        <td class="text-center">
+                                            <!-- recupera el precio de venta -->
+                                            <b ></b>
+                                        </td>
+                                        <td class="text-center">
+                                            <!-- recupera la fecha del producto -->
+                                            <b ></b>
+                                        </td>
+                                        <td class="text-center">
+                                            <div class="btn-group">
+                                                <!-- href referencia al archivo de edicion de producto -->
+                                                <a href="" class="btn btn-info btn-xs"  title="Editar" data-toggle="tooltip">
+                                                    <span class="glyphicon glyphicon-edit"></span>
+                                                </a>
+                                                <!-- href referencia al archivo de eliminar producto -->
+                                                <a href="" class="btn btn-danger btn-xs"  title="Eliminar" data-toggle="tooltip">
+                                                    <span class="glyphicon glyphicon-trash"></span>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </span>
+                            </div>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Componente usuario -->
+<div th:fragment="list_user">
+    <div class="row">
+        <div class="col-md-12">
+            <!-- mensaje de advertencia aqui -->
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading clearfix">
+                    <strong>
+                        <span class="glyphicon glyphicon-th"></span>
+                        <span>Usuarios</span>
+                    </strong>
+                    <!-- referencia al archivo de agregar usuario -->
+                    <a href="" class="btn btn-info pull-right">Agregar usuario</a>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th class="text-center" style="width: 50px;">#</th>
+                                <th>Nombre </th>
+                                <th>Usuario</th>
+                                <th class="text-center" style="width: 15%;">Rol de usuario</th>
+                                <th class="text-center" style="width: 10%;">Estado</th>
+                                <th style="width: 20%;">Último login</th>
+                                <th class="text-center" style="width: 100px;">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- lista todos los usuarios registrados -->
+                            <tr>
+                                <td class="text-center">
+                                    <!-- lista el ID del producto -->
+                                </td>
+                                <td>
+                                    <!-- lista el nombre del usuario -->
+                                </td>
+                                <td>
+                                    <!-- lista el nickname del usuario -->
+                                </td>
+                                <td class="text-center">
+                                    <!-- lista el nombre del grupo que pertenece -->
+                                </td>
+                                <td class="text-center">
+                                    <span class="label label-success">
+                                        <!-- en caso de que este activo -->
+                                    </span>
+                                    <span class="label label-danger">
+                                        <!-- en caso de que este inactivo -->
+                                    </span>
+                                </td>
+                                <td>
+                                    <!-- lista el ultimo login del usuario -->
+                                </td>
+                                <td class="text-center">
+                                    <div class="btn-group">
+                                        <!-- href referencia al archivo de editar usuario -->
+                                        <a href="" class="btn btn-xs btn-warning" data-toggle="tooltip" title="Editar">
+                                            <i class="glyphicon glyphicon-pencil"></i>
+                                        </a>
+                                        <!-- href referencia al archivo borrar usuario -->
+                                        <a href="" class="btn btn-xs btn-danger" data-toggle="tooltip" title="Eliminar">
+                                            <i class="glyphicon glyphicon-remove"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+                                        <!-- SECCION VENTAS -->
+<!-- Componente de ventas -->
+<div th:fragment="list_ventas">
+    <div class="row">
+        <div class="col-md-6">
+            <!-- mensaje de advertencia aqui -->
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading clearfix">
+                    <strong>
+                        <span class="glyphicon glyphicon-th"></span>
+                        <span>Todas las ventas</span>
+                    </strong>
+                    <div class="pull-right">
+                        <!-- href referenacia al archivo de anadir ventas -->
+                        <a href="" class="btn btn-primary">Agregar venta</a>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th class="text-center" style="width: 50px;">#</th>
+                                <th> Nombre del producto </th>
+                                <th class="text-center" style="width: 15%;"> Cantidad</th>
+                                <th class="text-center" style="width: 15%;"> Total </th>
+                                <th class="text-center" style="width: 15%;"> Fecha </th>
+                                <th class="text-center" style="width: 100px;"> Acciones </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- recupera todas las ventas -->
+                            <tr>
+                                <td class="text-center">
+                                    <!-- recupera el ID del prodcuto -->
+                                </td>
+                                <td>
+                                    <!-- recupera el nombre de la venta -->
+                                </td>
+                                <td class="text-center">
+                                    <!-- recupera la cantidad de la venta -->
+                                </td>
+                                <td class="text-center">
+                                    <!-- recupera el precio de la venta -->
+                                </td>
+                                <td class="text-center">
+                                    <!-- recupera la fecha de la venta -->
+                                </td>
+                                <td class="text-center">
+                                    <div class="btn-group">
+                                        <!-- href referencia al archivo de editar venta -->
+                                        <a href="" class="btn btn-warning btn-xs"  title="Edit" data-toggle="tooltip">
+                                            <span class="glyphicon glyphicon-edit"></span>
+                                        </a>
+                                        <!-- href referencia al archivo de borrar venta -->
+                                        <a href="" class="btn btn-danger btn-xs"  title="Delete" data-toggle="tooltip">
+                                            <span class="glyphicon glyphicon-trash"></span>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
