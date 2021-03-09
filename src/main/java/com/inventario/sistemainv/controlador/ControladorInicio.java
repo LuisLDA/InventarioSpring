@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @Slf4j
-@RequestMapping("/")
+@RequestMapping("/")  //localhost:8080/
 public class ControladorInicio {
 
     @Autowired
