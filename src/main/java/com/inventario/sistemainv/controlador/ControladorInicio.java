@@ -1,6 +1,9 @@
 package com.inventario.sistemainv.controlador;
 
+import com.inventario.sistemainv.dao.ProductsDao;
+import com.inventario.sistemainv.domain.Product;
 import com.inventario.sistemainv.service.CategoriesService;
+import com.inventario.sistemainv.service.ProductService;
 import com.inventario.sistemainv.service.UserGroupService;
 import com.inventario.sistemainv.service.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -10,6 +13,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.ArrayList;
 
 
 //    ___  _   _  ___  ____  ___  ___
@@ -33,6 +38,9 @@ public class ControladorInicio {
     @Autowired
     private UserGroupService userGroupService;
 
+    @Autowired
+    private ProductService productService;
+
     @GetMapping("/")
     public String inicio(Model model) {
         log.info("INICIANDO EL CONTROLADOR...");
@@ -54,16 +62,27 @@ public class ControladorInicio {
         return "accesos_grupos";
     }
 
-    @GetMapping("/productos")
-    public String mostrarProductos(Model model) {
-        return "productos";
-    }
-
     @GetMapping("/categorias")
     public String mostrarCategorias(Model model) {
         var categorias = categoriesService.listCategories();
         model.addAttribute("categorias", categorias);
         return "categorias";
+    }
+
+    @GetMapping("/productos")
+    public String mostrarProductos(Product product, Model model) {
+        log.info("Accediendo a productos");
+        var productos = productService.listProduct();
+
+        for (Product cat: productos){
+            Long id_cat = Long.valueOf(cat.getCategorie_id());
+            cat.setCategorie(productService.categorieProduct(id_cat));
+        }
+        for (Product c: productos){
+            System.out.println("categorias:"+c.getCategorie());
+        }
+        model.addAttribute("productos", productos);
+        return "productos";
     }
 
     @GetMapping("/index")

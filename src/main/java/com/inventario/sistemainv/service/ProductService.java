@@ -8,4 +8,5 @@ public interface ProductService {
     public void saveProduct(Product product);
     public void deleteProduct(Product product);
     public Product searchProduct(Product product);
+    public String categorieProduct(Long identificador);
 }

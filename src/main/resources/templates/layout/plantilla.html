@@ -80,13 +80,13 @@
             </a>
         </li>
         <li>
-            <a href="#" th:href="@{/productos}">
+            <a class="submenu-toggle">
                 <i class="glyphicon glyphicon-th-large"></i>
                 <span>Productos</span>
             </a>
             <ul class="nav submenu">
-                <li><a href="">Administrar productos</a></li>
-                <li><a href="">Agregar productos</a></li>
+                <li><a th:href="@{/productos}">Administrar productos</a></li>
+                <li><a th:href="@{/agregar_productos}">Agregar productos</a></li>
             </ul>
         </li>
         <li>
