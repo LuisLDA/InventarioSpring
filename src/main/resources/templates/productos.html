@@ -39,7 +39,7 @@
                         <!-- se lista todas los productos existentes -->
                             <div>
                                 <span >
-                                    <tr th:each="productos, contador : ${productos}">
+                                    <tr th:each="producto, contador : ${productos}">
                                         <td class="text-center">
                                             <!-- recupera el id del producto -->
                                             <b><span th:text="${contador.count}"/></b>
@@ -53,37 +53,37 @@
                                         </td>
                                         <td>
                                             <!-- recupera la descripcion del producto -->
-                                            <span th:text="${productos.getName()}"/>
+                                            <span th:text="${producto.getName()}"/>
                                         </td>
                                         <td class="text-center">
                                             <!-- recupera la categoría del producto -->
-                                            <span th:text="${productos.getCategorie(productos.getId())}"/>
+                                            <span th:text="${producto.getCategorie()}"/>
                                         </td>
                                         <td class="text-center">
                                             <!-- recupera la cantidad del producto -->
-                                            <span th:text="${productos.getQuantity()}"/>
+                                            <span th:text="${producto.getQuantity()}"/>
                                         </td>
                                         <td class="text-center">
                                             <!-- recupera el precio de compra -->
-                                            <span th:text="${productos.getBuy_price()}"/>
+                                            <span th:text="${producto.getBuy_price()}"/>
                                         </td>
                                         <td class="text-center">
                                             <!-- recupera el precio de venta -->
-                                            <span th:text="${productos.getSale_price()}"/>
+                                            <span th:text="${producto.getSale_price()}"/>
                                         </td>
                                         <td class="text-center">
                                             <!-- recupera la fecha del producto -->
-                                            <span th:text="${productos.getDate()}"/>
+                                            <span th:text="${producto.getDate()}"/>
                                         </td>
                                         <td class="text-center">
                                             <div class="btn-group">
                                                 <!-- href referencia al archivo de edicion de producto -->
 
-                                                <a th:href="@{/productos/editar_producto/} + ${productos.getId()}" class="btn btn-info btn-xs"  title="Editar" data-toggle="tooltip">
+                                                <a th:href="@{/productos/editar_producto/} + ${producto.getId()}" class="btn btn-info btn-xs"  title="Editar" data-toggle="tooltip">
                                                     <span class="glyphicon glyphicon-edit"></span>
                                                 </a>
                                                 <!-- href referencia al archivo de eliminar producto -->
-                                                <a  th:href="@{/productos/eliminar_producto/} + ${productos.getId()}" class="btn btn-danger btn-xs"  title="Eliminar" data-toggle="tooltip">
+                                                <a  th:href="@{/productos/eliminar_producto/} + ${producto.getId()}" class="btn btn-danger btn-xs"  title="Eliminar" data-toggle="tooltip">
                                                     <span class="glyphicon glyphicon-trash"></span>
                                                 </a>
                                             </div>

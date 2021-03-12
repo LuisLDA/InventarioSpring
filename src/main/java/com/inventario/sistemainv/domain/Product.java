@@ -32,12 +32,6 @@ public class Product implements Serializable {
 
     private String categorie;
 
-    public String getCategorie(int id) {
-        return categorie;
-    }
 
-    public Long getId() {
-        return id;
-    }
 
 }
