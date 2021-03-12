@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org">
+<head th:replace="layout/plantilla.html :: head">
+    <title>Inicio</title>
+</head>
+<body>
+<header th:replace="layout/plantilla.html :: header">
+</header>
+<div th:replace="layout/plantilla.html :: div_sidebar"></div>
+<div class="page">
+    <div class="container-fluid">
+        BIENVENIDO AL SISTEMA DE INVENTARIO DE SUPERMAXI
+        <div th:replace="layout/componentes.html :: home"></div>
+    </div>
+</div>
+
+</body>
+</html>

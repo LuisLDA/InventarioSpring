@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/plantilla :: head">
+    <title>Inicio</title>
+    <!--<link rel="stylesheet" href="/static/css/main.css" th:href="@{/css/main.css}"/>-->
+</head>
+<body>
+<header th:replace="layout/plantilla.html :: header">
+</header>
+<div th:replace="layout/plantilla.html :: div_sidebar"></div>
+<div class="page">
+    <div th:fragment="edit_categ">
+        <div class="row">
+            <div class="col-md-12">
+                <!-- Mensaje de advertencia aqui -->
+            </div>
+            <div class="col-md-5">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <strong>
+                            <span class="glyphicon glyphicon-th"></span>
+                            <span>Editando</span>
+                        </strong>
+                    </div>
+                    <div class="panel-body">
+                        <!-- action referencia al archivo editar categoria -->
+                        <form method="post" th:action="@{/categorias/add_categoria}" th:object="${categoria}" >
+                            <div class="form-group">
+                                <!-- value recupera el valor de la categoria a editar -->
+                                <input type="hidden"  name="id" th:value="*{id}">
+                                <input type="text" class="form-control" name="name" th:value="*{name}" required>
+                            </div>
+                            <button type="submit" name="edit_cat" class="btn btn-primary">Actualizar categoría</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

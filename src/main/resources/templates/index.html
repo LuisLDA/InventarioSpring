@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/plantilla :: head">
+</head>
+<script src="https://kit.fontawesome.com/1537daa8e1.js" crossorigin="anonymous"></script>
+<style>
+    .fondo {
+        background-image: url("https://www.webretail.com.ar/v2/wp-content/uploads/2020/02/supermaxi.png");
+        background-size: cover;
+        background-position: bottom;
+        overflow: hidden;;
+        height: 70vh;
+    }
+</style>
+
+<body class="fondo">
+<div class="login-page">
+    <div class="img" align="center">
+        <img src="https://proindusquim.com/wp-content/uploads/2019/05/Supermaxi-logo.png"
+             width="450" height="80">
+    </div>
+
+    <div class="text-center">
+        <h1 style=":bold">Bienvenido al Sistema de Inventario</h1>
+    </div>
+
+    <br>
+    <form method="post" th:action="@{/index}" class="clearfix">
+        <!--ORIGINAL
+        <div class="form-group">
+            <label for="username" class="control-label">Usuario</label>
+            <input type="name" class="form-control" name="username" placeholder="Usuario">
+        </div>
+
+        <div class="form-group">
+            <label for="Password" class="control-label">Contraseña</label>
+            <input type="password" name="password" class="form-control" placeholder="Contraseña">
+        </div>
+        
+        MODIFICADO
+        <div class="input-group input-group-lg">
+            <span class="input-group-addon" id="sizing-addon1">@</span>
+            <input type="text" name="username" class="form-control" placeholder="Usuario" aria-describedby="sizing-addon1">
+        </div>
+
+        <div class="input-group input-group-lg">
+            <span class="input-group-addon" id="sizing-addon1">@</span>
+            <input type="text" name="password" class="form-control" placeholder="Contraseña" aria-describedby="sizing-addon1">
+        </div>-->
+
+        <div th:if="${param.error}" class="alert alert-danger">
+            <a href="#top" class="close" data-dismiss="alert">×</a>
+            Nombre de usuario y/o contraseña incorrecto.
+        </div>
+        <div th:if="${param.logout}" class="alert alert-success">
+            <a href="#top" class="close" data-dismiss="alert">×</a>
+            La sesión ha terminado con éxito.
+        </div>
+        <div class="input-group input-group-lg">
+            <span class="input-group-addon" id="sizing-addon1">
+                <i class="fas fa-user"></i>
+            </span>
+            <input type="text" name="username"
+                   id="username"
+                   class="form-control"
+                   placeholder="Usuario"
+                   aria-describedby="sizing-addon1">
+        </div>
+
+        <div class="input-group input-group-lg">
+            <span class="input-group-addon" id="sizing-addon2">
+                <i class="fas fa-lock"></i>
+            </span>
+            <input type="password" name="password"
+                   id="password"
+                   class="form-control"
+                   placeholder="Contraseña"
+                   aria-describedby="sizing-addon1">
+        </div>
+
+        <!--<div class="form-group">
+            <button type="submit" class="btn btn-info  pull-right">Entrar</button>
+        </div>-->
+        <div class="form-group">
+            <button type="submit" class="btn btn-default btn-lg">Ingresar</button>
+        </div>
+
+
+    </form>
+</div>
+</body>
+<!-- -->
+</html>
