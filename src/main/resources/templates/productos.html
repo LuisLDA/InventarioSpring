@@ -53,27 +53,27 @@
                                         </td>
                                         <td>
                                             <!-- recupera la descripcion del producto -->
-                                            <b><span th:text="${productos.getName()}"/></b>
+                                            <span th:text="${productos.getName()}"/>
                                         </td>
                                         <td class="text-center">
                                             <!-- recupera la categoría del producto -->
-                                            <b><span th:text="${productos.getCategorie(productos.getId())}"/></b>
+                                            <span th:text="${productos.getCategorie(productos.getId())}"/>
                                         </td>
                                         <td class="text-center">
                                             <!-- recupera la cantidad del producto -->
-                                            <b ><span th:text="${productos.getQuantity()}"/></b>
+                                            <span th:text="${productos.getQuantity()}"/>
                                         </td>
                                         <td class="text-center">
                                             <!-- recupera el precio de compra -->
-                                            <b ><span th:text="${productos.getBuy_price()}"/></b>
+                                            <span th:text="${productos.getBuy_price()}"/>
                                         </td>
                                         <td class="text-center">
                                             <!-- recupera el precio de venta -->
-                                            <b ><span th:text="${productos.getSale_price()}"/></b>
+                                            <span th:text="${productos.getSale_price()}"/>
                                         </td>
                                         <td class="text-center">
                                             <!-- recupera la fecha del producto -->
-                                            <b ><span th:text="${productos.getDate()}"/></b>
+                                            <span th:text="${productos.getDate()}"/>
                                         </td>
                                         <td class="text-center">
                                             <div class="btn-group">

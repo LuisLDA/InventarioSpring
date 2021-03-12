@@ -11,17 +11,20 @@
 <script type="text/javascript">
     function selectedCategorieID() {
         /* Para obtener el id de la categoria*/
-        var codC = document.getElementById("cat_id").value;
-        //var c_i = document.getElementById("categorie_id");
-        //c_i.value = codC;
-        document.getElementById("categorie_id").value = codC;
+        var codigoC = document.getElementById("cat_id").value;
+        document.getElementById("categorie_id").value = codigoC;
+    }
+
+    function onSelectCategorieID() {
+        /* Para obtener el id de la categoria*/
+        var codC = document.getElementById("c_i").value;
+        document.getElementById("categorie_id").value = codC.options[codC.selectedIndex];
     }
 
     function selectedMediaID() {
         /* Para obtener el id de la media*/
-        var codM = document.getElementById("med_id").value;
-        //var m_i = document.getElementById("media_id");
-        document.getElementById("media_id").value = codM;
+        var codigoM = document.getElementById("med_id").value;
+        document.getElementById("media_id").value = codigoM;
     }
 </script>
 
@@ -59,20 +62,20 @@
                                     <span>Selecciona una categoría</span>
                                     <select class="form-control" name="cat_id" id="cat_id" onchange="selectedCategorieID()">
                                         <!-- muestra todas las categorias existentes -->
-                                        <option th:each="categoriesE : ${categoriesEdit}" th:value="${categoriesE.getId()}" th:label="${categoriesE.getName()}"></option>
+                                        <option name="c_i" id="c_i" th:each="categoriesE : ${categoriesEdit}" th:value="${categoriesE.getId()}" th:label="${categoriesE.getName()}"></option>
                                     </select>
                                     <!-- recupera el id de la categoria -->
-                                    <input type="hidden" class="form-control" name="categorie_id" id="categorie_id">
+                                    <input type="hidden" class="form-control" name="categorie_id" id="categorie_id" th:value="*{categorie_id}">
                                 </div>
                                 <!--MEDIA-->
                                 <div class="col-md-6" th:if="${mediaEdit != null and !mediaEdit.isEmpty()}">
                                     <span>Sin imagen</span>
-                                    <select class="form-control" name="med_id" id="med_id" onclick="selectedMediaID()">
+                                    <select class="form-control" name="med_id" id="med_id" onchange="selectedMediaID()">
                                         <!-- recupera todas las fotos existentes y las lista -->
                                         <option th:each="mediaE : ${mediaEdit}" th:value="${mediaE.getId()}" th:label="${mediaE.getFile_name()}"></option>
                                     </select>
                                     <!-- recupera el id de media -->
-                                    <input type="hidden" class="form-control" name="media_id" id="media_id" value="1">
+                                    <input type="hidden" class="form-control" name="media_id" id="media_id" th:value="*{media_id}">
                                 </div>
                             </div>
                         </div>

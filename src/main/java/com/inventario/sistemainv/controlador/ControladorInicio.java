@@ -57,6 +57,8 @@ public class ControladorInicio {
         //model.addAttribute("users", usuarios);
         var countCat = categoriesService.countCategories();
         model.addAttribute("countCat", countCat);
+        var countProd = productService.countProducts();
+        model.addAttribute("countProd", countProd);
         return "home";
     }
 
