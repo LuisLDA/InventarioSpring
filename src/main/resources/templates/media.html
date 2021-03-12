@@ -7,8 +7,82 @@
 <body>
 <header th:replace="layout/plantilla.html :: header"></header>
 <div th:replace="layout/plantilla.html :: div_sidebar"></div>
+
 <div class="page">
-    <div th:replace="layout/componentes.html :: list_media"></div>
+    <div>
+        <div class="row">
+            <div class="col-md-10">
+                <div class="alert alert-success" th:if="${success != null}" th:text="${success}"></div>
+                <div class="alert alert-danger" th:if="${error != null}" th:text="${error}"></div>
+                <div class="alert alert-info" th:if="${info != null}" th:text="${info}"></div>
+            </div>
+
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading clearfix">
+                        <span class="glyphicon glyphicon-camera"></span>
+                        <span>Lista de imagenes</span>
+                        <div class="pull-right">
+                            <!-- action referencia al archivo media -->
+                            <form class="form-inline" th:action="@{/media/add_Media}" method="post" enctype="multipart/form-data">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-btn">
+                                            <input type="file" name="file" multiple="multiple" class="btn btn-primary btn-file"/>
+                                        </span>
+                                        <button type="submit" name="submit" class="btn btn-default">Subir</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th class="text-center" style="width: 50px;">#</th>
+                                <th class="text-center">Imagen</th>
+                                <th class="text-center">Descripción</th>
+                                <th class="text-center" style="width: 20%;">Tipo</th>
+                                <th class="text-center" style="width: 50px;">Acciones</th>
+                            </tr>
+                            </thead>
+                            <tbody><!-- th:if="${media != null and !media.isEmpty()}" -->
+                            <!-- listar las imagenes que se tenga -->
+                            <tr class="list-inline" th:each="medias, contador : ${media}">
+                                <td class="text-center">
+                                    <!-- listar el ID de las imagenes -->
+                                    <span th:text="${contador.count}"/>
+                                </td>
+                                <td class="text-center">
+                                    <!-- src recupera todas las fotos almacenadas -->
+                                    <!-- img-thumbnail -->
+                                    <img th:src="@{'/imagenes/' + ${medias.getFile_name()}}"
+                                         class="img-rounded float-left" style="max-width: 50%; max-height: 50%"
+                                         th:alt="${medias.getFile_name()}"/>
+                                </td>
+                                <td class="text-center">
+                                    <!-- recupera el nombre de la imagen -->
+                                    <span th:text="${medias.getFile_name()}"/>
+                                </td>
+                                <td class="text-center">
+                                    <!-- recupera el tipo de imagen -->
+                                    <span th:text="${medias.getFile_type()}"/>
+                                </td>
+                                <td class="text-center">
+                                    <!-- href referencia al archivo de eliminar imagenes -->
+                                    <a th:href="@{'/media/delete_media/' + ${medias.getId()}}" class="btn btn-danger btn-xs"  title="Eliminar">
+                                        <span class="glyphicon glyphicon-trash"></span>
+                                    </a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>

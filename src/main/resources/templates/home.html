@@ -11,9 +11,176 @@
 <div th:replace="layout/plantilla.html :: div_sidebar"></div>
 <div class="page">
     <div class="container-fluid">
-        BIENVENIDO AL SISTEMA DE INVENTARIO DE SUPERMAXI
         <div th:replace="layout/componentes.html :: home"></div>
     </div>
+
+    <div>
+        <div class="row">
+            <div class="col-md-6">
+                <!-- MENSAJE DE ADVERTENCIA -->
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="panel panel-box clearfix">
+                    <div class="panel-icon pull-left bg-green">
+                        <i class="glyphicon glyphicon-user"></i>
+                    </div>
+                    <div class="panel-value pull-right">
+                        <h2 class="margin-top">
+                            <!-- CANTIDAD DE USUARIOS -->
+                        </h2>
+                        <p class="text-muted">Usuarios</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="panel panel-box clearfix">
+                    <div class="panel-icon pull-left bg-red">
+                        <i class="glyphicon glyphicon-list"></i>
+                    </div>
+                    <div class="panel-value pull-right">
+                        <!-- CANTIDAD DE CATEGORIAS -->
+                        <h2 class="margin-top" th:text="${countCat}"></h2>
+                        <p class="text-muted">Categorías</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="panel panel-box clearfix">
+                    <div class="panel-icon pull-left bg-blue">
+                        <i class="glyphicon glyphicon-shopping-cart"></i>
+                    </div>
+                    <div class="panel-value pull-right">
+                        <h2 class="margin-top">
+                            <!-- CANTIDAD DE PRODUCTOS -->
+                        </h2>
+                        <p class="text-muted">Productos</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="panel panel-box clearfix">
+                    <div class="panel-icon pull-left bg-yellow">
+                        <i class="glyphicon glyphicon-usd"></i>
+                    </div>
+                    <div class="panel-value pull-right">
+                        <h2 class="margin-top">
+                            <!-- CANTIDAD DE VENTAS -->
+                        </h2>
+                        <p class="text-muted">Ventas</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <strong>
+                            <span class="glyphicon glyphicon-th"></span>
+                            <span>Productos más vendidos</span>
+                        </strong>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table table-striped table-bordered table-condensed">
+                            <thead>
+                            <tr>
+                                <th>Título</th>
+                                <th>Total vendido</th>
+                                <th>Cantidad total</th>
+                            <tr>
+                            </thead>
+                            <tbody>
+                            <!-- PRODUCOTS MAS VENDIDOS -->
+                            <tr>
+                                <td>
+                                    <!-- NOMBRE DEL PRODUCTO -->
+                                </td>
+                                <td>
+                                    <!-- TOTAL VENDIDO -->
+                                </td>
+                                <td>
+                                    <!-- CANTIDAD VENDIDA -->
+                                </td>
+                            </tr>
+                            <tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <strong>
+                            <span class="glyphicon glyphicon-th"></span>
+                            <span>ÚLTIMAS VENTAS</span>
+                        </strong>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table table-striped table-bordered table-condensed">
+                            <thead>
+                            <tr>
+                                <th class="text-center" style="width: 50px;">#</th>
+                                <th>Producto</th>
+                                <th>Fecha</th>
+                                <th>Venta total</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <!-- VENTAS RECIENTES -->
+                            <tr>
+                                <td class="text-center">
+                                    <!-- ID DE VENTA -->
+                                <td>
+                                    <a href="edit_sale.php?id=<?php echo (int)$recent_sale['id']; ?>">
+                                        <!-- NOMBRE DEL PRODUCTO -->
+                                    </a>
+                                </td>
+                                <td>
+                                    <!-- FECHA DE VENTA -->
+                                </td>
+                                <td>
+                                    <!-- PRECIO DE VENTA -->
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <strong>
+                            <span class="glyphicon glyphicon-th"></span>
+                            <span>Productos recientemente añadidos</span>
+                        </strong>
+                    </div>
+                    <div class="panel-body">
+                        <div class="list-group">
+                            <!-- PRODUCTOS RECIENTES -->
+                            <a class="list-group-item clearfix" href="">
+                                <h4 class="list-group-item-heading">
+                                    <!-- COMPORBACION DE IMAGEN -->
+                                    <!-- SI NO TIENE IMAGEN -->
+                                    <img class="img-avatar img-circle" src="" alt="">
+                                    <!-- SI TIENE IMAGEN -->
+                                    <img class="img-avatar img-circle" src="" alt="" />
+                                    <span class="label label-warning pull-right">
+                                </span>
+                                </h4>
+                                <span class="list-group-item-text pull-right">
+                            </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
 
 </body>
