@@ -4,6 +4,8 @@ import com.inventario.sistemainv.service.CategoriesService;
 import com.inventario.sistemainv.service.MediaService;
 import com.inventario.sistemainv.service.UserGroupService;
 import com.inventario.sistemainv.service.UserService;
+import com.inventario.sistemainv.dao.ProductsDao;
+import com.inventario.sistemainv.domain.Product;
 import lombok.extern.slf4j.Slf4j;
 import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Map;
+import java.util.ArrayList;
 
 
 //    ___  _   _  ___  ____  ___  ___
@@ -39,6 +42,9 @@ public class ControladorInicio {
 
     @Autowired
     private UserGroupService userGroupService;
+
+    @Autowired
+    private ProductService productService;
 
     @Autowired
     private MediaService mediaService;
@@ -75,12 +81,6 @@ public class ControladorInicio {
         return "accesos_grupos";
     }
 
-    @GetMapping("/productos")
-    public String mostrarProductos(Model model) {
-        model.addAttribute("pageTitle","Productos");
-        return "productos";
-    }
-
     @GetMapping("/categorias")
     public String mostrarCategorias(Model model) {
         model.addAttribute("pageTitle","Categorias");
@@ -88,6 +88,24 @@ public class ControladorInicio {
         model.addAttribute("categorias", categorias);
         return "categorias";
     }
+
+    @GetMapping("/productos")
+    public String mostrarProductos(Model model) {
+        model.addAttribute("pageTitle","Productos");
+        log.info("Accediendo a productos");
+        var productos = productService.listProduct();
+
+        for (Product cat: productos){
+            Long id_cat = Long.valueOf(cat.getCategorie_id());
+            cat.setCategorie(productService.categorieProduct(id_cat));
+        }
+        for (Product c: productos){
+            System.out.println("categorias:"+c.getCategorie());
+        }
+        model.addAttribute("productos", productos);
+        return "productos";
+    }
+
 
     @GetMapping("/index")
     public String inicioLogin(Model model) {

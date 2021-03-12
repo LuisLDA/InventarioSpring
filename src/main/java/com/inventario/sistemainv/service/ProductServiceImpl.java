@@ -37,4 +37,17 @@ public class ProductServiceImpl implements ProductService{
     public Product searchProduct(Product product) {
         return productsDao.findById(product.getId()).orElse(null);
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public String categorieProduct(Long identificador) {
+        return productsDao.categorieProduct(identificador);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public int countProducts() {
+        return (int) productsDao.count();
+    }
+
 }
