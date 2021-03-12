@@ -40,6 +40,7 @@ public class ControladorProductos {
         log.info("Accediendo a editar producto");
 
         product = productService.searchProduct(product);
+        log.info("Producto a editar:"+product);
         model.addAttribute("product", product);
 
         var categoriesEdit = categoriesService.listCategories();

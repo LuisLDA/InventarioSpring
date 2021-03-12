@@ -58,11 +58,12 @@
                         <div class="form-group">
                             <div class="row">
                                 <!--CATEGORIAS-->
-                                <div class="col-md-6" th:if="${categoriesEdit != null and !categoriesEdit.isEmpty()}">
+                                <div class="col-md-6" th:if="${categoriesEdit != null and !categoriesEdit.isEmpty()}" >
                                     <span>Selecciona una categoría</span>
-                                    <select class="form-control" name="cat_id" id="cat_id" onchange="selectedCategorieID()">
+                                    <select class="form-control" name="cat_id" id="cat_id" onchange="selectedCategorieID()" >
                                         <!-- muestra todas las categorias existentes -->
-                                        <option name="c_i" id="c_i" th:each="categoriesE : ${categoriesEdit}" th:value="${categoriesE.getId()}" th:label="${categoriesE.getName()}"></option>
+                                        <option name="c_i" id="c_i" th:each="categoriesE : ${categoriesEdit}" th:value="${categoriesE.getId()}" th:label="${categoriesE.getName()}"
+                                        th:selected="${categoriesE.getId()}==*{categorie_id}"></option>
                                     </select>
                                     <!-- recupera el id de la categoria -->
                                     <input type="hidden" class="form-control" name="categorie_id" id="categorie_id" th:value="*{categorie_id}">
