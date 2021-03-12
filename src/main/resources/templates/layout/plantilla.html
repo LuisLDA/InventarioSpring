@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head th:fragment="head">
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title th:text="${pageTitle}">Template Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <link rel="icon" type="image/png" th:href="@{/images/icono.png}" />
     <script type="text/javascript" th:src="@{/webjars/jquery/3.5.1/dist/jquery.min.js}"></script>
-    <script  th:src="@{/webjars/bootstrap/3.3.4/js/bootstrap.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/3.3.4/js/bootstrap.min.js}"></script>
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/3.3.4/css/bootstrap.min.css}">
     <link rel="stylesheet" href="/static/css/main.css" th:href="@{/css/main.css}"/>
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('.submenu-toggle').click(function () {
                 $(this).parent().children('ul.submenu').toggle(10);
             });
@@ -20,21 +22,31 @@
 </head>
 <body>
 <header id="header" th:fragment="header">
+
     <div class="logo pull-left"> Sistema de Inventario</div>
     <div class="header-content">
+        <div class="header-date pull-left">
+            <strong th:text="${#dates.format(#dates.createNow(),'dd/MM/YYYY')}"
+            ></strong>
+        </div>
+
+
         <div class="pull-right clearfix">
             <ul class="info-menu list-inline list-unstyled">
                 <li class="profile">
                     <a href="" data-toggle="dropdown" class="toggle" aria-expanded="false">
                         <img src="https://cdn0.iconfinder.com/data/icons/set-ui-app-android/32/8-512.png" height="15px"
                              alt="user-image" class="img-circle img-inline">
-                        <span>USUARIO ACTIVO</span>
+                        <b>Usuario:
+                            <span sec:authentication="name">USERNAME</span>
+                        </b>
                     </a>
+
                     <ul class="dropdown-menu">
                         <li>
                             <a href="" title="edit account">
-                            <i class="glyphicon glyphicon-user"></i>
-                            Perfil
+                                <i class="glyphicon glyphicon-user"></i>
+                                Perfil
                             </a>
                         </li>
                         <li>
@@ -43,17 +55,24 @@
                                 Configuración
                             </a>
                         </li>
+
                         <li class="last">
-                            <a href="">
+                            <a th:href="@{/index?logout}"
+                            >
                                 <i class="glyphicon glyphicon-off"></i>
                                 Salir
+
                             </a>
                         </li>
+
                     </ul>
+
                 </li>
             </ul>
+
         </div>
     </div>
+
 </header>
 <div class="sidebar" th:fragment="div_sidebar">
     <ul>
@@ -64,7 +83,7 @@
             </a>
         </li>
         <li>
-            <a class="submenu-toggle"  >
+            <a class="submenu-toggle">
                 <i class="glyphicon glyphicon-user"></i>
                 <span>Accesos</span>
             </a>

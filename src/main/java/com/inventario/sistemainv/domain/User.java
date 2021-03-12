@@ -1,9 +1,12 @@
 package com.inventario.sistemainv.domain;
 
+import com.sun.istack.NotNull;
 import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
+import java.util.Set;
 
 @Data
 @Entity
@@ -21,7 +24,9 @@ public class User implements Serializable {
 
     private String password;
 
-    private int user_level;
+    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_level",referencedColumnName = "group_level")
+    private UserGroup userGroup;
 
     private String image;
 

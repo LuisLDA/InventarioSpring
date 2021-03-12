@@ -1,6 +1,8 @@
 package com.inventario.sistemainv.domain;
 
 import lombok.Data;
+import org.hibernate.annotations.NotFound;
+
 import javax.persistence.*;
 import java.io.Serializable;
 

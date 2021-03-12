@@ -29,7 +29,7 @@
                             <div class="form-group">
                                 <!-- value recupera el valor de la categoria a editar -->
                                 <input type="hidden"  name="id" th:value="*{id}">
-                                <input type="text" class="form-control" name="name" th:value="*{name}">
+                                <input type="text" class="form-control" name="name" th:value="*{name}" required>
                             </div>
                             <button type="submit" name="edit_cat" class="btn btn-primary">Actualizar categoría</button>
                         </form>
