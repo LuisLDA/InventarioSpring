@@ -39,4 +39,5 @@ public class Product implements Serializable {
     public Long getId() {
         return id;
     }
+
 }

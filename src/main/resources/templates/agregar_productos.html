@@ -7,8 +7,114 @@
 <body>
 <header th:replace="layout/plantilla.html :: header"></header>
 <div th:replace="layout/plantilla.html :: div_sidebar"></div>
+<script type="text/javascript">
+    function setDate(){
+        var d = new Date();
+        function addZero(i) {
+            if (i < 10) {
+                i = "0" + i;
+            }
+            return i;
+        }
+        var date = addZero(d.getUTCDate());
+        var month = addZero(d.getUTCMonth()+1);
+        var year = addZero(d.getUTCFullYear());
+        var h = addZero(d.getHours());
+        var m = addZero(d.getMinutes());
+        var s = addZero(d.getSeconds());
+
+        var dateStr = year + "-" + month  + "-" + date + " "+ h + ":" + m + ":" + s;
+        /*
+        var momentDate = moment(dateStr);
+        momentDate ().toDate();
+        var inputDate = document.getElementById("date").valu;
+        */
+        document.form1.date.value = dateStr;
+    }
+</script>
 <div class="page">
-    <div th:replace="layout/componentes.html :: add_product"></div>
+    <div class="row">
+        <div class="col-md-12">
+            <!-- Zona de mensaje -->
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-9">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <strong>
+                        <span class="glyphicon glyphicon-th"></span>
+                        <span>Agregar producto</span>
+                    </strong>
+                </div>
+                <div class="panel-body">
+                    <div class="col-md-12">
+                        <!-- action hace referencia al archivo anadir producto -->
+                        <form name="form1" action="#" th:action="@{/productos/agregar_nuevo_producto}" method="post">
+                            <input type="hidden" typeof="date" name="date" id="date">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-th-large"></i>
+                                    </span>
+                                    <input type="text" class="form-control" name="name" placeholder="Descripción" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-6" th:if="${categories != null and !categories.isEmpty()}">
+                                        <span>Selecciona una categoría</span>
+                                        <select class="form-control" id="categorie_id" name="categorie_id">
+                                            <option th:each="categ : ${categories}" th:value="${categ.getId()}" th:label="${categ.getName()}">
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6" th:if="${media != null and !media.isEmpty()}">
+                                            <span>Selecciona una imagen</span>
+                                        <select class="form-control" id="media_id" name="media_id">
+                                            <option th:each="media : ${media}" th:value="${media.getId()}" th:label="${media.getFile_name()}">
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                            <i class="glyphicon glyphicon-shopping-cart"></i>
+                                            </span>
+                                            <input type="number" class="form-control" name="quantity" placeholder="Cantidad" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="glyphicon glyphicon-usd"></i>
+                                            </span>
+                                            <input type="number" class="form-control" name="buy_price" placeholder="Precio de compra" required>
+                                            <span class="input-group-addon">.00</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="glyphicon glyphicon-usd"></i>
+                                            </span>
+                                            <input type="number" class="form-control" name="sale_price" placeholder="Precio de venta" required>
+                                            <span class="input-group-addon">.00</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <button type="submit" name="add_product" class="btn btn-danger" onclick="setDate()">Agregar producto</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 </html>

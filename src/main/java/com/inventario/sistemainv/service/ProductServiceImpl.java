@@ -43,4 +43,11 @@ public class ProductServiceImpl implements ProductService{
     public String categorieProduct(Long identificador) {
         return productsDao.categorieProduct(identificador);
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public int countProducts() {
+        return (int) productsDao.count();
+    }
+
 }

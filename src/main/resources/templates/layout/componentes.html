@@ -80,89 +80,6 @@
 </div>
 
 
-<!-- Componente añadir producto -->
-<div th:fragment="add_product">
-    <div class="row">
-        <div class="col-md-12">
-            <!-- Zona de mensaje -->
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-9">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <strong>
-                        <span class="glyphicon glyphicon-th"></span>
-                        <span>Agregar producto</span>
-                    </strong>
-                </div>
-                <div class="panel-body">
-                    <div class="col-md-12">
-                        <!-- action hace referencia al archivo anadir producto -->
-                        <form method="post" action="" class="clearfix">
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i class="glyphicon glyphicon-th-large"></i>
-                                    </span>
-                                    <input type="text" class="form-control" name="product-title" placeholder="Descripción">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <select class="form-control" name="product-categorie">
-                                            <option value="">Selecciona una categoría</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <select class="form-control" name="product-photo">
-                                            <option value="">Selecciona una imagen</option>
-                                            <option value="<?php echo (int)$photo['id'] ?>">
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                            <i class="glyphicon glyphicon-shopping-cart"></i>
-                                            </span>
-                                            <input type="number" class="form-control" name="product-quantity" placeholder="Cantidad">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-usd"></i>
-                                            </span>
-                                            <input type="number" class="form-control" name="buying-price" placeholder="Precio de compra">
-                                            <span class="input-group-addon">.00</span>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-usd"></i>
-                                            </span>
-                                            <input type="number" class="form-control" name="saleing-price" placeholder="Precio de venta">
-                                            <span class="input-group-addon">.00</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <button type="submit" name="add_product" class="btn btn-danger">Agregar producto</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
                                         <!-- SECCION EDIT -->
 <!-- Componente editar cuenta -->
 <div th:fragment="edit_count">
@@ -390,21 +307,21 @@
 
 <!-- Componente home -->
 <div th:fragment="home">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <!-- mensaje de advertencia aqui -->
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <div class="panel">
-                                                        <div class="jumbotron text-center">
-                                                            <h1>El placer de comprar</h1>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+    <div class="row">
+        <div class="col-md-12">
+            <!-- mensaje de advertencia aqui -->
+        </div>
+        <div class="col-md-12">
+            <div class="panel">
+                <div class="jumbotron text-center">
+                    <h1>El placer de comprar</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-                                        <!-- SECCION LISTAR -->
+<!-- SECCION LISTAR -->
 
 
 <!-- Componente home -->

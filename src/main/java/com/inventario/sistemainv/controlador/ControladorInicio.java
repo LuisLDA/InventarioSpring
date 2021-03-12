@@ -2,10 +2,7 @@ package com.inventario.sistemainv.controlador;
 
 import com.inventario.sistemainv.dao.ProductsDao;
 import com.inventario.sistemainv.domain.Product;
-import com.inventario.sistemainv.service.CategoriesService;
-import com.inventario.sistemainv.service.ProductService;
-import com.inventario.sistemainv.service.UserGroupService;
-import com.inventario.sistemainv.service.UserService;
+import com.inventario.sistemainv.service.*;
 import lombok.extern.slf4j.Slf4j;
 import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +38,9 @@ public class ControladorInicio {
     @Autowired
     private ProductService productService;
 
+    @Autowired
+    private MediaService mediaService;
+
     @GetMapping("/")
     public String inicio(Model model) {
         log.info("INICIANDO EL CONTROLADOR...");
@@ -70,7 +70,7 @@ public class ControladorInicio {
     }
 
     @GetMapping("/productos")
-    public String mostrarProductos(Product product, Model model) {
+    public String mostrarProductos(Model model) {
         log.info("Accediendo a productos");
         var productos = productService.listProduct();
 
@@ -84,6 +84,7 @@ public class ControladorInicio {
         model.addAttribute("productos", productos);
         return "productos";
     }
+
 
     @GetMapping("/index")
     public String inicioLogin(Model model) {

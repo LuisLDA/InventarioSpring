@@ -7,6 +7,24 @@
 <body>
 <header th:replace="layout/plantilla.html :: header"></header>
 <div th:replace="layout/plantilla.html :: div_sidebar"></div>
+
+<script type="text/javascript">
+    function selectedCategorieID() {
+        /* Para obtener el id de la categoria*/
+        var codC = document.getElementById("cat_id").value;
+        //var c_i = document.getElementById("categorie_id");
+        //c_i.value = codC;
+        document.getElementById("categorie_id").value = codC;
+    }
+
+    function selectedMediaID() {
+        /* Para obtener el id de la media*/
+        var codM = document.getElementById("med_id").value;
+        //var m_i = document.getElementById("media_id");
+        document.getElementById("media_id").value = codM;
+    }
+</script>
+
 <div class="page">
     <div class="row">
         <div class="col-md-12">
@@ -24,82 +42,82 @@
             <div class="panel-body">
                 <div class="col-md-7">
                     <!-- action referencia al archivo de editar producto -->
-                    <form method="post" th:action="@{/productos/editar_producto}" th:object="${product}" >
+                    <form method="post" th:action="@{/productos/agregar_nuevo_producto}" th:object="${product}" >
+                        <!-- value recupera el id del producto -->
+                        <input type="hidden"  name="id" th:value="*{id}">
                         <div class="form-group">
                             <div class="input-group">
-                                <span class="input-group-addon">
-                                    <i class="glyphicon glyphicon-th-large"></i>
-                                </span>
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-th-large"></i></span>
                                 <!-- value recupera el nombre del producto -->
-                                <input type="hidden"  name="id" th:value="*{id}">
-                                <input type="text" class="form-control" name="product-title" th:value="*{name}">
+                                <input type="text" class="form-control" name="name" th:value="*{name}">
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="row">
                                 <!--CATEGORIAS-->
-                                <div th:if="${categories !=null and !categories.isEmpty()}" class="col-md-6">
-                                    <option value="">Selecciona una categoría</option>
-                                    <select  class="form-control" name="product-categorie">
+                                <div class="col-md-6" th:if="${categoriesEdit != null and !categoriesEdit.isEmpty()}">
+                                    <span>Selecciona una categoría</span>
+                                    <select class="form-control" name="cat_id" id="cat_id" onchange="selectedCategorieID()">
                                         <!-- muestra todas las categorias existentes -->
-                                        <!-- value recupera todas las categorias existentes -->
-                                        <option th:each="categories : ${categories}" th:value="${categories.getId()}" th:label="${categories.getName()}"></option>
+                                        <option th:each="categoriesE : ${categoriesEdit}" th:value="${categoriesE.getId()}" th:label="${categoriesE.getName()}"></option>
                                     </select>
+                                    <!-- recupera el id de la categoria -->
+                                    <input type="hidden" class="form-control" name="categorie_id" id="categorie_id">
                                 </div>
                                 <!--MEDIA-->
-                                <div class="col-md-6">
-                                    <option value=""> Sin imagen</option>
-                                    <select th:each="product, contador : ${product}" class="form-control" name="product-photo">
+                                <div class="col-md-6" th:if="${mediaEdit != null and !mediaEdit.isEmpty()}">
+                                    <span>Sin imagen</span>
+                                    <select class="form-control" name="med_id" id="med_id" onclick="selectedMediaID()">
                                         <!-- recupera todas las fotos existentes y las lista -->
-                                        <option th:value="*{id}" th:label="${product.getName()}"></option>
+                                        <option th:each="mediaE : ${mediaEdit}" th:value="${mediaE.getId()}" th:label="${mediaE.getFile_name()}"></option>
                                     </select>
+                                    <!-- recupera el id de media -->
+                                    <input type="hidden" class="form-control" name="media_id" id="media_id" value="1">
                                 </div>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <div class="row">
+                                <!-- CANTIDAD -->
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Cantidad</label>
                                         <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-shopping-cart"></i>
-                                            </span>
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-shopping-cart"></i></span>
                                             <!-- value recupera la cantidad del producto -->
-                                            <input type="number" class="form-control" name="product-quantity" th:value="*{quantity}">
+                                            <input type="number" class="form-control" id="quantity" name="quantity" th:value="*{quantity}">
                                         </div>
                                     </div>
                                 </div>
+                                <!-- PRECIO DE COMPRA -->
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Precio de compra</label>
                                         <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-usd"></i>
-                                            </span>
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
                                             <!-- value recupera el precio de compra del producto -->
-                                            <input type="number" class="form-control" name="buying-price" th:value="${buy_price}">
+                                            <input type="number" class="form-control" name="buy_price" th:value="*{buy_price}">
                                             <span class="input-group-addon">.00</span>
                                         </div>
                                     </div>
                                 </div>
+                                <!-- PRECIO DE VENTA -->
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Precio de venta</label>
                                         <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-usd"></i>
-                                            </span>
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
                                             <!-- value recupera el precio de venta del producto -->
-                                            <input type="number" class="form-control" name="saleing-price" th:value="${sale_price}">
+                                            <input type="number" class="form-control" name="sale_price" th:value="*{sale_price}">
                                             <span class="input-group-addon">.00</span>
                                         </div>
                                     </div>
                                 </div>
+                                <div><input type="hidden"  name="date" th:value="*{date}"></div>
                             </div>
                         </div>
-                        <button type="submit" name="product" class="btn btn-danger">Actualizar</button>
+                        <button type="submit" name="agregar_prod" class="btn btn-danger">Actualizar</button>
                     </form>
                 </div>
             </div>
