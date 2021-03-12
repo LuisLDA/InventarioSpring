@@ -44,28 +44,30 @@ public class ControladorMedia {
                 media.setFile_type(".jpg");
                 log.info("Agregado la imagen :" + media);
                 mediaDao.save(media);
-                flash.addAttribute("valido", "Imagen agregada con exito!");
+                flash.addFlashAttribute("success", "Imagen " + filename + " agregada con exito!");
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
+        } else {
+            flash.addFlashAttribute("error", "No se ha seleccionado ninguna imagen");
         }
         return "redirect:/media";
     }
 
     @GetMapping("/delete_media/{id}")
-    public String deleteMedia(@PathVariable(value = "id") Long id, Media media){
+    public String deleteMedia(@PathVariable(value = "id") Long id, Media media, RedirectAttributes flash){
         log.info("INICIANDO CONTROLADOR ELIMINAR MEDIA...");
         Media medias = mediaDao.mediaporid(id);
         log.info("Archivo media a eliminar: " + medias);
 
         if (uploadFileService.delete(medias.getFile_name())){
             log.info("archivo eliminado");
+            flash.addFlashAttribute("info", "La imagen " + medias.getFile_name() + " a sido eliminada.");
         }
 
         log.info("media: " + media);
         mediaDao.delete(media);
-
+        flash.addFlashAttribute("success", "El registro a sido elimado con exito!");
         return "redirect:/media";
     }
 }
