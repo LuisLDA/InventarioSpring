@@ -1,9 +1,6 @@
 package com.inventario.sistemainv.controlador;
 
-import com.inventario.sistemainv.service.CategoriesService;
-import com.inventario.sistemainv.service.MediaService;
-import com.inventario.sistemainv.service.UserGroupService;
-import com.inventario.sistemainv.service.UserService;
+import com.inventario.sistemainv.service.*;
 import com.inventario.sistemainv.dao.ProductsDao;
 import com.inventario.sistemainv.domain.Product;
 import lombok.extern.slf4j.Slf4j;
@@ -51,20 +48,21 @@ public class ControladorInicio {
 
     @GetMapping("/")
     public String inicio(Model model, @AuthenticationPrincipal UserDetails user2auth) {
-        model.addAttribute("pageTitle","Home");
+        model.addAttribute("pageTitle", "Home");
         log.info("INICIANDO EL CONTROLADOR DE INICIO...");
-        log.info("USUARIO LOGEADO: "+user2auth);
-        var user_group =user2auth.getAuthorities();
-        model.addAttribute("user_group",user_group.toString());
-        var usuarios = userService.listUser();
-        model.addAttribute("users", usuarios);
+        log.info("USUARIO LOGEADO: " + user2auth);
+        var user_group = user2auth.getAuthorities();
+        model.addAttribute("user_group", user_group.toString());
+        // var usuarios = userService.listUser();
+        //model.addAttribute("users", usuarios);
         var countCat = categoriesService.countCategories();
         model.addAttribute("countCat", countCat);
+        return "home";
     }
 
     @GetMapping("/media")
-    public String media(Map<String, Object> model) {
-        model.addAttribute("pageTitle","Media");
+    public String media(Map<String, Object> model, Model models) {
+        models.addAttribute("pageTitle", "Media");
         log.info("INICIANDO EL CONTROLADOR MEDIA...");
         var media = mediaService.listMedia();
         log.info("Recuperacion data media: " + media);
@@ -74,16 +72,16 @@ public class ControladorInicio {
 
     @GetMapping("/accesos")
     public String controlAcceso(Model model) {
-        model.addAttribute("pageTitle","Accesos");
+        model.addAttribute("pageTitle", "Accesos");
         log.info("Acceso a grupos");
         var grupos = userGroupService.listGroup();
-        model.addAttribute("groups",grupos);
+        model.addAttribute("groups", grupos);
         return "accesos_grupos";
     }
 
     @GetMapping("/categorias")
     public String mostrarCategorias(Model model) {
-        model.addAttribute("pageTitle","Categorias");
+        model.addAttribute("pageTitle", "Categorias");
         var categorias = categoriesService.listCategories();
         model.addAttribute("categorias", categorias);
         return "categorias";
@@ -91,16 +89,16 @@ public class ControladorInicio {
 
     @GetMapping("/productos")
     public String mostrarProductos(Model model) {
-        model.addAttribute("pageTitle","Productos");
+        model.addAttribute("pageTitle", "Productos");
         log.info("Accediendo a productos");
         var productos = productService.listProduct();
 
-        for (Product cat: productos){
+        for (Product cat : productos) {
             Long id_cat = Long.valueOf(cat.getCategorie_id());
             cat.setCategorie(productService.categorieProduct(id_cat));
         }
-        for (Product c: productos){
-            System.out.println("categorias:"+c.getCategorie());
+        for (Product c : productos) {
+            System.out.println("categorias:" + c.getCategorie());
         }
         model.addAttribute("productos", productos);
         return "productos";
@@ -109,7 +107,7 @@ public class ControladorInicio {
 
     @GetMapping("/index")
     public String inicioLogin(Model model) {
-        model.addAttribute("pageTitle","Login");
+        model.addAttribute("pageTitle", "Login");
         return "index";
     }
 
