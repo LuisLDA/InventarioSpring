@@ -14,6 +14,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
 import java.util.ArrayList;
 
@@ -31,26 +33,30 @@ import java.util.ArrayList;
 @RequestMapping("/")  //localhost:8080/
 public class ControladorInicio {
 
-    @Autowired
-    private UserService userService;
 
     @Autowired
     private CategoriesService categoriesService;
-
-    @Autowired
-    private UserGroupService userGroupService;
-
     @Autowired
     private ProductService productService;
-
     @Autowired
     private MediaService mediaService;
+    @Autowired
+    private UserService userService;
+
 
     @GetMapping("/")
     public String inicio(Model model, @AuthenticationPrincipal UserDetails user2auth) {
         model.addAttribute("pageTitle", "Home");
+        Date date = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd HH:mm:ss");
         log.info("INICIANDO EL CONTROLADOR DE INICIO...");
         log.info("USUARIO LOGEADO: " + user2auth);
+        log.info("LOGIN A LAS:"+formatter.format(date));
+        //Control acceso  y actualización de fecha de login
+        var userLoginupdate=userService.searchbyUserName(user2auth.getUsername());
+        userLoginupdate.setLast_login(formatter.format(date));
+        userService.saveUser(userLoginupdate);
+        //Permisos
         var user_group = user2auth.getAuthorities();
         model.addAttribute("user_group", user_group.toString());
         // var usuarios = userService.listUser();
@@ -72,14 +78,7 @@ public class ControladorInicio {
         return "media";
     }
 
-    @GetMapping("/accesos")
-    public String controlAcceso(Model model) {
-        model.addAttribute("pageTitle", "Accesos");
-        log.info("Acceso a grupos");
-        var grupos = userGroupService.listGroup();
-        model.addAttribute("groups", grupos);
-        return "accesos_grupos";
-    }
+
 
     @GetMapping("/categorias")
     public String mostrarCategorias(Model model) {

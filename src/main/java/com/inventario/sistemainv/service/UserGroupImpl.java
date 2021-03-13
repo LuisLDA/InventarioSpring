@@ -17,7 +17,7 @@ public class UserGroupImpl implements UserGroupService {
     @Override
     @Transactional(readOnly = true)
     public List<UserGroup> listGroup() {
-        return (List<UserGroup>) usersGroupDao.findAll();
+        return usersGroupDao.findAll();
     }
 
     @Override
@@ -29,6 +29,7 @@ public class UserGroupImpl implements UserGroupService {
     @Override
     @Transactional
     public void deleteGroup(UserGroup userGroup) {
+        usersGroupDao.deleteAllByGroup_level(userGroup.getId());
         usersGroupDao.delete(userGroup);
     }
 
