@@ -40,60 +40,8 @@
                                 data-target="#addGrupo">
                             Agregar Grupo
                         </button>
-                        <div id="addGrupo" class="modal fade"
-                             data-backdrop="static" tabindex="-1"
-                             role="dialog" aria-labelledby="staticBackdropLabel"
-                             aria-hidden="true">
 
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="staticBackdropLabel">Agregar Grupo
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </h5>
-                                    </div>
-                                    <!--FORM Y COMPONENTES-->
-                                    <div class="modal-body">
-                                        <form method="post" class="clearfix" th:action="@{/accesos/grupos/add_grupo}">
-                                            <div class="form-group">
-                                                <label class="control-label">Nombre del grupo</label>
-                                                <input type="name" class="form-control" name="group_name"
-                                                       id="group_name" required>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="control-label">Nivel del grupo</label>
-                                                <select class="form-control" name="group_level" id="group_level">
-                                                    <option value="1">Nivel 1</option>
-                                                    <option value="2">Nivel 2</option>
-                                                    <option value="3">Nivel 3</option>
-                                                    <option value="4">Nivel 4</option>
-                                                    <option value="5">Nivel 5</option>
-                                                    <option value="6">Nivel 6</option>
-                                                    <option value="7">Nivel 7</option>
-                                                </select>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Estado</label>
-                                                <select class="form-control" name="group_status" id="group_status">
-                                                    <option value="1">Activo</option>
-                                                    <option value="0">Inactivo</option>
-                                                </select>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <div class="form-group clearfix">
-                                                    <button type="submit" name="add" class="btn btn-info">Guardar
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-
-                                    <!--FIN FORM-->
-                                </div>
-                            </div>
-                        </div>
+                        <div th:include="layout/componentes::add_grupo"/>
 
                     </div>
                     <div class="panel-body">

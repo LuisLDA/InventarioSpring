@@ -6,71 +6,123 @@
     <title>Title</title>
 </head>
 <body>
-                                        <!-- SECCION AÑADIR -->
-<!-- Componente añadir grupo -->
+<!-- SECCION AÑADIR -->
+<!-- Componente añadir grupo MODAL -->
 <div th:fragment="add_grupo">
-    <div class="login-page">
-        <div class="text-center">
-            <h3>Agregar nuevo grupo de usuarios</h3>
+    <div id="addGrupo" class="modal fade"
+         data-backdrop="static" tabindex="-1"
+         role="dialog" aria-labelledby="staticBackdropLabel"
+         aria-hidden="true">
+
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Agregar Grupo
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </h5>
+                </div>
+                <!--FORM Y COMPONENTES-->
+                <div class="modal-body">
+                    <form method="post" class="clearfix" th:action="@{/accesos/grupos/add_grupo}">
+                        <div class="form-group">
+                            <label class="control-label">Nombre del grupo</label>
+                            <input type="name" class="form-control" name="group_name"
+                                   id="group_name" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Nivel del grupo</label>
+                            <select class="form-control" name="group_level" id="group_level">
+                                <option value="1">Nivel 1</option>
+                                <option value="2">Nivel 2</option>
+                                <option value="3">Nivel 3</option>
+                                <option value="4">Nivel 4</option>
+                                <option value="5">Nivel 5</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Estado</label>
+                            <select class="form-control" name="group_status" id="group_status">
+                                <option value="1">Activo</option>
+                                <option value="0">Inactivo</option>
+                            </select>
+                        </div>
+                        <div class="modal-footer">
+                            <div class="form-group clearfix">
+                                <button type="submit" name="add" class="btn btn-info">Guardar
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <!--FIN FORM-->
+            </div>
         </div>
-        <!-- Zona de mensaje aqui -->
-        <form method="post" action="" class="clearfix">
-            <div class="form-group">
-                <label  class="control-label">Nombre del grupo</label>
-                <input type="name" class="form-control" name="group-name" required>
-            </div>
-            <div class="form-group">
-                <label  class="control-label">Nivel del grupo</label>
-                <input type="number" class="form-control" name="group-level">
-            </div>
-            <div class="form-group">
-                <label >Estado</label>
-                <select class="form-control" name="status">
-                    <option value="1">Activo</option>
-                    <option value="0">Inactivo</option>
-                </select>
-            </div>
-            <div class="form-group clearfix">
-                <button type="submit" name="add" class="btn btn-info">Guardar</button>
-            </div>
-        </form>
     </div>
 </div>
 
-<!-- Componente añadir usuario -->
+<!-- Componente añadir usuario MODAL -->
 <div th:fragment="add_user">
-    <div class="row">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <strong>
-                    <span class="glyphicon glyphicon-th"></span>
-                    <span>Agregar usuario</span>
-                </strong>
-            </div>
-            <div class="panel-body">
-                <div class="col-md-6">
-                    <!-- href hace referencia al archivo anadir usario -->
-                    <form method="post" action="">
+    <div id="addUser" class="modal fade"
+         data-backdrop="static" tabindex="-1"
+         role="dialog" aria-labelledby="staticBackdropLabelU"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabelU">
+                        <div class="panel-heading">
+                            <strong>
+                                <span class="glyphicon glyphicon-th"></span>
+                                <span>Agregar usuario</span>
+                            </strong>
+                            <button type="button" class="close" data-dismiss="modal"
+                                    aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+
+                    </h5>
+                </div>
+                <div class="modal-body">
+                    <form method="post" th:action="@{/accesos/usuarios/add_user}">
+
                         <div class="form-group">
                             <label>Nombre</label>
-                            <input type="text" class="form-control" name="full-name" placeholder="Nombre completo" required>
+                            <input type="hidden"  name="status" th:value="1">
+                            <input type="text" class="form-control" name="name"
+                                   placeholder="Nombre completo"
+                                   required>
                         </div>
                         <div class="form-group">
                             <label>Usuario</label>
-                            <input type="text" class="form-control" name="username" placeholder="Nombre de usuario">
+                            <input type="text" class="form-control" name="username"
+                                   placeholder="Nombre de usuario">
                         </div>
                         <div class="form-group">
                             <label>Contraseña</label>
-                            <input type="password" class="form-control" name ="password"  placeholder="Contraseña">
+                            <input type="password" class="form-control" name="password"
+                                   placeholder="Contraseña">
                         </div>
                         <div class="form-group">
                             <label>Rol de usuario</label>
-                            <select class="form-control" name="level">
-                                <option value="<?php echo $group['group_level'];?>">
+                            <select class="form-control" name="user_level">
+
+                                <option
+                                        th:each="grupo : ${grupos} "
+                                        th:value="${grupo.getId()}"
+                                        th:label="${grupo.getGroup_name()}"
+                                >
                             </select>
                         </div>
-                        <div class="form-group clearfix">
-                            <button type="submit" name="add_user" class="btn btn-primary">Guardar</button>
+                        <div class="modal-footer">
+                            <div class="form-group clearfix">
+                                <button type="submit" name="add_user" class="btn btn-primary">
+                                    Guardar
+                                </button>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -80,7 +132,7 @@
 </div>
 
 
-                                        <!-- SECCION EDIT -->
+<!-- SECCION EDIT -->
 <!-- Componente editar cuenta -->
 <div th:fragment="edit_count">
     <div class="row">
@@ -105,7 +157,8 @@
                             <!-- action llamar al metodo para editar la cuenta -->
                             <form class="form" action="" method="POST" enctype="multipart/form-data">
                                 <div class="form-group">
-                                    <input type="file" name="file_upload" multiple="multiple" class="btn btn-default btn-file"/>
+                                    <input type="file" name="file_upload" multiple="multiple"
+                                           class="btn btn-default btn-file"/>
                                 </div>
                                 <div class="form-group">
                                     <!-- value el id del usuario -->
@@ -245,7 +298,8 @@
                     <form action="" method="post" class="clearfix">
                         <div class="form-group">
                             <label class="control-label">Contraseña</label>
-                            <input type="password" class="form-control" name="password" placeholder="Ingresa la nueva contraseña" required>
+                            <input type="password" class="form-control" name="password"
+                                   placeholder="Ingresa la nueva contraseña" required>
                         </div>
                         <div class="form-group clearfix">
                             <button type="submit" name="update-pass" class="btn btn-danger pull-right">Cambiar</button>
@@ -257,7 +311,7 @@
     </div>
 </div>
 
-                                        <!-- SECCION SISTEMA -->
+<!-- SECCION SISTEMA -->
 <!-- Componente cambiar contraseña -->
 <div th:fragment="change_passw">
     <div class="login-page">
@@ -340,7 +394,8 @@
                             <div class="form-group">
                                 <div class="input-group">
                                     <span class="input-group-btn">
-                                        <input type="file" name="file_upload" multiple="multiple" class="btn btn-primary btn-file"/>
+                                        <input type="file" name="file_upload" multiple="multiple"
+                                               class="btn btn-primary btn-file"/>
                                     </span>
                                     <button type="submit" name="submit" class="btn btn-default">Subir</button>
                                 </div>
@@ -351,37 +406,37 @@
                 <div class="panel-body">
                     <table class="table">
                         <thead>
-                            <tr>
-                                <th class="text-center" style="width: 50px;">#</th>
-                                <th class="text-center">Imagen</th>
-                                <th class="text-center">Descripción</th>
-                                <th class="text-center" style="width: 20%;">Tipo</th>
-                                <th class="text-center" style="width: 50px;">Acciones</th>
-                            </tr>
+                        <tr>
+                            <th class="text-center" style="width: 50px;">#</th>
+                            <th class="text-center">Imagen</th>
+                            <th class="text-center">Descripción</th>
+                            <th class="text-center" style="width: 20%;">Tipo</th>
+                            <th class="text-center" style="width: 50px;">Acciones</th>
+                        </tr>
                         </thead>
                         <tbody>
-                            <!-- listar las imagenes que se tenga -->
-                            <tr class="list-inline">
-                                <td class="text-center">
-                                    <!-- listar el ID de las imagenes -->
-                                </td>
-                                <td class="text-center">
-                                    <!-- src recupera todas las fotos almacenadas -->
-                                    <img src="" class="img-thumbnail" alt=""/>
-                                </td>
-                                <td class="text-center">
-                                    <!-- recupera el nombre de la imagen -->
-                                </td>
-                                <td class="text-center">
-                                    <!-- recupera el tipo de imagen -->
-                                </td>
-                                <td class="text-center">
-                                    <!-- href referencia al archivo de eliminar imagenes -->
-                                    <a href="" class="btn btn-danger btn-xs"  title="Eliminar">
-                                        <span class="glyphicon glyphicon-trash"></span>
-                                    </a>
-                                </td>
-                            </tr>
+                        <!-- listar las imagenes que se tenga -->
+                        <tr class="list-inline">
+                            <td class="text-center">
+                                <!-- listar el ID de las imagenes -->
+                            </td>
+                            <td class="text-center">
+                                <!-- src recupera todas las fotos almacenadas -->
+                                <img src="" class="img-thumbnail" alt=""/>
+                            </td>
+                            <td class="text-center">
+                                <!-- recupera el nombre de la imagen -->
+                            </td>
+                            <td class="text-center">
+                                <!-- recupera el tipo de imagen -->
+                            </td>
+                            <td class="text-center">
+                                <!-- href referencia al archivo de eliminar imagenes -->
+                                <a href="" class="btn btn-danger btn-xs" title="Eliminar">
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                </a>
+                            </td>
+                        </tr>
                         </tbody>
                     </table>
                 </div>
@@ -391,9 +446,7 @@
 </div>
 
 
-
-
-                                        <!-- SECCION VENTAS -->
+<!-- SECCION VENTAS -->
 <!-- Componente de ventas -->
 <div th:fragment="list_ventas">
     <div class="row">
@@ -417,46 +470,46 @@
                 <div class="panel-body">
                     <table class="table table-bordered table-striped">
                         <thead>
-                            <tr>
-                                <th class="text-center" style="width: 50px;">#</th>
-                                <th> Nombre del producto </th>
-                                <th class="text-center" style="width: 15%;"> Cantidad</th>
-                                <th class="text-center" style="width: 15%;"> Total </th>
-                                <th class="text-center" style="width: 15%;"> Fecha </th>
-                                <th class="text-center" style="width: 100px;"> Acciones </th>
-                            </tr>
+                        <tr>
+                            <th class="text-center" style="width: 50px;">#</th>
+                            <th> Nombre del producto</th>
+                            <th class="text-center" style="width: 15%;"> Cantidad</th>
+                            <th class="text-center" style="width: 15%;"> Total</th>
+                            <th class="text-center" style="width: 15%;"> Fecha</th>
+                            <th class="text-center" style="width: 100px;"> Acciones</th>
+                        </tr>
                         </thead>
                         <tbody>
-                            <!-- recupera todas las ventas -->
-                            <tr>
-                                <td class="text-center">
-                                    <!-- recupera el ID del prodcuto -->
-                                </td>
-                                <td>
-                                    <!-- recupera el nombre de la venta -->
-                                </td>
-                                <td class="text-center">
-                                    <!-- recupera la cantidad de la venta -->
-                                </td>
-                                <td class="text-center">
-                                    <!-- recupera el precio de la venta -->
-                                </td>
-                                <td class="text-center">
-                                    <!-- recupera la fecha de la venta -->
-                                </td>
-                                <td class="text-center">
-                                    <div class="btn-group">
-                                        <!-- href referencia al archivo de editar venta -->
-                                        <a href="" class="btn btn-warning btn-xs"  title="Edit" data-toggle="tooltip">
-                                            <span class="glyphicon glyphicon-edit"></span>
-                                        </a>
-                                        <!-- href referencia al archivo de borrar venta -->
-                                        <a href="" class="btn btn-danger btn-xs"  title="Delete" data-toggle="tooltip">
-                                            <span class="glyphicon glyphicon-trash"></span>
-                                        </a>
-                                    </div>
-                                </td>
-                            </tr>
+                        <!-- recupera todas las ventas -->
+                        <tr>
+                            <td class="text-center">
+                                <!-- recupera el ID del prodcuto -->
+                            </td>
+                            <td>
+                                <!-- recupera el nombre de la venta -->
+                            </td>
+                            <td class="text-center">
+                                <!-- recupera la cantidad de la venta -->
+                            </td>
+                            <td class="text-center">
+                                <!-- recupera el precio de la venta -->
+                            </td>
+                            <td class="text-center">
+                                <!-- recupera la fecha de la venta -->
+                            </td>
+                            <td class="text-center">
+                                <div class="btn-group">
+                                    <!-- href referencia al archivo de editar venta -->
+                                    <a href="" class="btn btn-warning btn-xs" title="Edit" data-toggle="tooltip">
+                                        <span class="glyphicon glyphicon-edit"></span>
+                                    </a>
+                                    <!-- href referencia al archivo de borrar venta -->
+                                    <a href="" class="btn btn-danger btn-xs" title="Delete" data-toggle="tooltip">
+                                        <span class="glyphicon glyphicon-trash"></span>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
                         </tbody>
                     </table>
                 </div>

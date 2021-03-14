@@ -1,10 +1,12 @@
 package com.inventario.sistemainv.controlador;
 
 
+import com.inventario.sistemainv.domain.User;
 import com.inventario.sistemainv.domain.UserGroup;
 import com.inventario.sistemainv.service.UserGroupService;
 import com.inventario.sistemainv.service.UserDetailService;
 import com.inventario.sistemainv.service.UserService;
+import com.inventario.sistemainv.util.EncryptPass;
 import lombok.extern.slf4j.Slf4j;
 import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,6 +82,23 @@ public class ControladorAccesos {
         log.info("Acceso a usuarios");
         var usuarios = userService.listUser();
         model.addAttribute("usuarios", usuarios);
+        var grupos = userGroupService.listGroup();
+        model.addAttribute("grupos", grupos);
         return "accesos_usuarios";
+    }
+
+    @PostMapping("/usuarios/add_user")
+    public String agregarUsuario(@Validated User user) {
+        log.info("Se agregara :" + user);
+        user.setPassword(EncryptPass.Encriptar(user.getPassword()));
+        try {
+            userService.saveUser(user);
+            log.info("Agregado el usuario :" + user);
+            return "redirect:/accesos/usuarios";
+        }catch (DataIntegrityViolationException e){
+            log.error("ERROR AL AGREGAR O MODIFICAR",e);
+            return "accesos_usuarios";
+        }
+
     }
 }

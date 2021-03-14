@@ -25,8 +25,8 @@ public class User implements Serializable {
     private String password;
 
     @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_level",referencedColumnName = "group_level")
-    private UserGroup userGroup;
+    @JoinColumn(name = "user_level")
+    private UserGroup user_level;
 
     private String image;
 
