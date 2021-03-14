@@ -94,13 +94,14 @@ public class ControladorInicio {
         log.info("Accediendo a productos");
         var productos = productService.listProduct();
 
+/*
         for (Product cat : productos) {
             Long id_cat = Long.valueOf(cat.getCategorie_id());
             cat.setCategorie(productService.categorieProduct(id_cat));
         }
         for (Product c : productos) {
             System.out.println("categorias:" + c.getCategorie());
-        }
+        }*/
         model.addAttribute("productos", productos);
         return "productos";
     }

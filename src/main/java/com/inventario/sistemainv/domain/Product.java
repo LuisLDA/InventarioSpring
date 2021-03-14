@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 @Entity
 @Table(name = "products")
 public class Product implements Serializable {
-    private static final long serialVersionUID =1L;
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,13 +24,14 @@ public class Product implements Serializable {
 
     private BigDecimal sale_price;
 
-    private int categorie_id;
+   // private int categorie_id;
+    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "categorie_id")
+    private Categories categorie_id;
 
     private int media_id;
 
     private String date;
-
-    private String categorie;
 
 
 

@@ -63,10 +63,10 @@
                                     <select class="form-control" name="cat_id" id="cat_id" onchange="selectedCategorieID()" >
                                         <!-- muestra todas las categorias existentes -->
                                         <option name="c_i" id="c_i" th:each="categoriesE : ${categoriesEdit}" th:value="${categoriesE.getId()}" th:label="${categoriesE.getName()}"
-                                        th:selected="${categoriesE.getId()}==*{categorie_id}"></option>
+                                        th:selected="${categoriesE.getId()}==*{categorie_id.getId()}"></option>
                                     </select>
                                     <!-- recupera el id de la categoria -->
-                                    <input type="hidden" class="form-control" name="categorie_id" id="categorie_id" th:value="*{categorie_id}">
+                                    <input type="hidden" class="form-control" name="categorie_id" id="categorie_id" th:value="*{categorie_id.getId()}">
                                 </div>
                                 <!--MEDIA-->
                                 <div class="col-md-6" th:if="${mediaEdit != null and !mediaEdit.isEmpty()}">
