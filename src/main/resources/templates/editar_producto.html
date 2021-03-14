@@ -60,23 +60,24 @@
                                 <!--CATEGORIAS-->
                                 <div class="col-md-6" th:if="${categoriesEdit != null and !categoriesEdit.isEmpty()}" >
                                     <span>Selecciona una categoría</span>
-                                    <select class="form-control" name="cat_id" id="cat_id" onchange="selectedCategorieID()" >
+                                    <select class="form-control" name="categories" id="categories" onchange="selectedCategorieID()">
                                         <!-- muestra todas las categorias existentes -->
-                                        <option name="c_i" id="c_i" th:each="categoriesE : ${categoriesEdit}" th:value="${categoriesE.getId()}" th:label="${categoriesE.getName()}"
-                                        th:selected="${categoriesE.getId()}==*{categorie_id.getId()}"></option>
+                                        <option th:value="*{categories.getId()}" th:label="*{categories.getName()}" selected></option>
+                                        <option name="c_i" id="c_i" th:if="${categoriesE.getId()} != *{categories.getId()}" th:each="categoriesE : ${categoriesEdit}" th:value="${categoriesE.getId()}" th:label="${categoriesE.getName()}"></option>
                                     </select>
-                                    <!-- recupera el id de la categoria -->
-                                    <input type="hidden" class="form-control" name="categorie_id" id="categorie_id" th:value="*{categorie_id.getId()}">
+                                    <!-- recupera el id de la categoria
+                                    <input type="hidden" class="form-control" name="categories" id="categorie" th:value="*{categories.getId()}"> -->
                                 </div>
                                 <!--MEDIA-->
                                 <div class="col-md-6" th:if="${mediaEdit != null and !mediaEdit.isEmpty()}">
-                                    <span>Sin imagen</span>
-                                    <select class="form-control" name="med_id" id="med_id" onchange="selectedMediaID()">
+                                    <span>Selecciona una imágen</span>
+                                    <select class="form-control" name="media_id" id="media_id" onchange="selectedMediaID()">
                                         <!-- recupera todas las fotos existentes y las lista -->
-                                        <option th:each="mediaE : ${mediaEdit}" th:value="${mediaE.getId()}" th:label="${mediaE.getFile_name()}"></option>
+                                        <option th:value="*{media_id.getId()}" th:label="*{media_id.getFile_name()}" selected></option>
+                                        <option name="m_id" id="m_id" th:if="${mediaE.getId()} != *{media_id.getId()}" th:each="mediaE : ${mediaEdit}" th:value="${mediaE.getId()}" th:label="${mediaE.getFile_name()}"></option>
                                     </select>
-                                    <!-- recupera el id de media -->
-                                    <input type="hidden" class="form-control" name="media_id" id="media_id" th:value="*{media_id}">
+                                    <!-- recupera el id de media
+                                    <input type="hidden" class="form-control" name="media_id" id="media_id" th:value="*{media_id}"> -->
                                 </div>
                             </div>
                         </div>

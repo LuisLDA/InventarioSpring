@@ -59,6 +59,7 @@ public class ControladorProductos {
         log.info("Accediendo a producto");
         var categories = categoriesService.listCategories();
         model.addAttribute("categories", categories);
+        log.info("Categorias: " + categories);
         var media = mediaService.listMedia();
         model.addAttribute("media", media);
         return "agregar_productos";
@@ -70,7 +71,7 @@ public class ControladorProductos {
         log.info("Agregando el producto "+ product);
         productService.saveProduct(product);
         log.info("Se ha agregado un nuevo producto");
-        log.info("Contador de productos"+productService.countProducts());
+        log.info("Contador de productos "+productService.countProducts());
         return "redirect:/productos";
     }
 

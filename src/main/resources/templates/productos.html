@@ -21,7 +21,7 @@
                     </div>
                 </div>
                 <div class="panel-body">
-                    <table class="table table-bordered" th:if="${productos !=null and !productos.isEmpty()}">
+                    <table class="table table-bordered">
                         <thead>
                             <tr>
                                 <th class="text-center" style="width: 50px;">#</th>
@@ -35,29 +35,28 @@
                                 <th class="text-center" style="width: 100px;"> Acciones </th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody th:each="producto, contador : ${producto}">
                         <!-- se lista todas los productos existentes -->
                             <div>
                                 <span >
-                                    <tr th:each="producto, contador : ${productos}">
+                                    <tr>
                                         <td class="text-center">
                                             <!-- recupera el id del producto -->
-                                            <b><span th:text="${contador.count}"/></b>
+                                            <b> <span th:text="${contador.count}"/></b>
                                         </td>
-                                        <td>
+                                        <td th:if="${producto.getMedia_id().getId() != 0}">
                                             <!-- src referencia que no hay imagen -->
-                                            <img class="img-avatar img-circle" src="" alt="">
-                                            <!-- src recupera la imagen del producto -->
-                                            <img class="img-avatar img-circle" th:src="${media.}" alt="">
-                                            <!--<h3 th:text="${product.getMedia_id()}"></h3>-->
+                                            <img class="img-avatar img-circle" th:src="@{'/imagenes/' + ${producto.getMedia_id().getFile_name()}}" th:alt="${producto.getMedia_id().getFile_name()}">
+                                            <!-- src recupera la imagen del producto
+                                            <img class="img-avatar img-circle" th:src="" alt=""> -->
                                         </td>
                                         <td>
                                             <!-- recupera la descripcion del producto -->
                                             <span th:text="${producto.getName()}"/>
                                         </td>
                                         <td class="text-center">
-                                            <!-- recupera la categoría del producto -->
-                                            <span th:text="${producto.getCategorie_id().getName()}"/>
+                                            <!-- recupera la categoría del producto  -->
+                                            <span th:text="${producto.getCategories().getName()}"/>
                                         </td>
                                         <td class="text-center">
                                             <!-- recupera la cantidad del producto -->
@@ -78,7 +77,6 @@
                                         <td class="text-center">
                                             <div class="btn-group">
                                                 <!-- href referencia al archivo de edicion de producto -->
-
                                                 <a th:href="@{/productos/editar_producto/} + ${producto.getId()}" class="btn btn-info btn-xs"  title="Editar" data-toggle="tooltip">
                                                     <span class="glyphicon glyphicon-edit"></span>
                                                 </a>

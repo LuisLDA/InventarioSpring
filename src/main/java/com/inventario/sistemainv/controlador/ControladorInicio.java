@@ -92,17 +92,9 @@ public class ControladorInicio {
     public String mostrarProductos(Model model) {
         model.addAttribute("pageTitle", "Productos");
         log.info("Accediendo a productos");
-        var productos = productService.listProduct();
-
-/*
-        for (Product cat : productos) {
-            Long id_cat = Long.valueOf(cat.getCategorie_id());
-            cat.setCategorie(productService.categorieProduct(id_cat));
-        }
-        for (Product c : productos) {
-            System.out.println("categorias:" + c.getCategorie());
-        }*/
-        model.addAttribute("productos", productos);
+        var producto = productService.listProduct();
+        log.info("List product: " + producto);
+        model.addAttribute("producto", producto);
         return "productos";
     }
 

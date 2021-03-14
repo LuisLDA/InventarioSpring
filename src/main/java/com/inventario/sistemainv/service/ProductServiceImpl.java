@@ -50,4 +50,10 @@ public class ProductServiceImpl implements ProductService{
         return (int) productsDao.count();
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public List<String> producto_media() {
+        return (List<String>) productsDao.producto_media();
+    }
+
 }

@@ -10,4 +10,6 @@ public interface ProductService {
     public Product searchProduct(Product product);
     public String categorieProduct(Long identificador);
     public int countProducts();
+
+    public List<String> producto_media();
 }

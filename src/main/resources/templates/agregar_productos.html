@@ -64,14 +64,14 @@
                                 <div class="row">
                                     <div class="col-md-6" th:if="${categories != null and !categories.isEmpty()}">
                                         <span>Selecciona una categoría</span>
-                                        <select class="form-control" id="categorie_id" name="categorie_id">
+                                        <select class="form-control" id="categories" name="categories">
                                             <option th:each="categ : ${categories}" th:value="${categ.getId()}" th:label="${categ.getName()}">
                                         </select>
                                     </div>
                                     <div class="col-md-6" th:if="${media != null and !media.isEmpty()}">
-                                            <span>Selecciona una imagen</span>
+                                        <span>Selecciona una imagen</span>
                                         <select class="form-control" id="media_id" name="media_id">
-                                            <option th:each="media : ${media}" th:value="${media.getId()}" th:label="${media.getFile_name()}">
+                                            <option th:each="media : ${media}" th:value="${media.getId()}" th:label="${media.getFile_name()}"></option>
                                         </select>
                                     </div>
                                 </div>

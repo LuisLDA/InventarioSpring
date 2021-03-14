@@ -24,15 +24,14 @@ public class Product implements Serializable {
 
     private BigDecimal sale_price;
 
-   // private int categorie_id;
-    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "categorie_id")
-    private Categories categorie_id;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "categorie_id", referencedColumnName = "id")
+    private Categories categories;
 
-    private int media_id;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "media_id", referencedColumnName = "id")
+    private Media media_id;
 
     private String date;
-
-
 
 }
