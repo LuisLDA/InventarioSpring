@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Service
 public class MediaServiceImpl implements  MediaService{
@@ -38,5 +40,17 @@ public class MediaServiceImpl implements  MediaService{
     public Media mediaporid(Long id) {
         Media media = mediaDao.mediaporid(id);
         return media;
+    }
+
+    public String extencion(String nombre) {
+
+        Pattern pattern = Pattern.compile(".jpg|.png|.jpeg");
+        Matcher matcher = pattern.matcher(nombre);
+        if (matcher.find()){
+            return matcher.group();
+        } else {
+            return " ";
+        }
+
     }
 }

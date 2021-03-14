@@ -2,6 +2,7 @@ package com.inventario.sistemainv.controlador;
 
 import com.inventario.sistemainv.dao.MediaDao;
 import com.inventario.sistemainv.domain.Media;
+import com.inventario.sistemainv.service.MediaService;
 import com.inventario.sistemainv.service.UploadFileService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,9 @@ public class ControladorMedia {
     @Autowired
     public UploadFileService uploadFileService;
 
+    @Autowired
+    public MediaService mediaService;
+
     @PostMapping("/add_Media")
     public String agregarMedia(Media media, Model model, @RequestParam("file") MultipartFile foto, RedirectAttributes flash){
         log.info("INICIANDO CONTROLADOR AGREGAR MEDIA...");
@@ -41,7 +45,7 @@ public class ControladorMedia {
             try {
                 String filename = uploadFileService.add_media(foto);
                 media.setFile_name(filename);
-                media.setFile_type(".jpg");
+                media.setFile_type(mediaService.extencion(filename));
                 log.info("Agregado la imagen :" + media);
                 mediaDao.save(media);
                 flash.addFlashAttribute("success", "Imagen " + filename + " agregada con exito!");
@@ -62,12 +66,12 @@ public class ControladorMedia {
 
         if (uploadFileService.delete(medias.getFile_name())){
             log.info("archivo eliminado");
-            flash.addFlashAttribute("info", "La imagen " + medias.getFile_name() + " a sido eliminada.");
+            flash.addFlashAttribute("info", "La imagen " + medias.getFile_name() + " ha sido eliminada.");
         }
 
         log.info("media: " + media);
         mediaDao.delete(media);
-        flash.addFlashAttribute("success", "El registro a sido elimado con exito!");
+        flash.addFlashAttribute("success", "El registro ha sido elimado con exito!");
         return "redirect:/media";
     }
 }
