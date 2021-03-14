@@ -58,16 +58,16 @@ public class ControladorAccesos {
         return "edit_accesos_grupos";
     }*/
 
-    @PostMapping("/grupos/add_categoria")
+    @PostMapping("/grupos/add_grupo")
     public String agregarGrupo(@Validated UserGroup userGroup) {
-
+        log.info("Se agregara :" + userGroup);
         try {
             userGroupService.saveGroup(userGroup);
             log.info("Agregado el grupo :" + userGroup);
-            return "redirect:/accesos/";
+            return "redirect:/accesos/grupos";
         }catch (DataIntegrityViolationException e){
             log.error("ERROR AL AGREGAR O MODIFICAR",e);
-            return "redirect:/accesos/grupos";
+            return "accesos_grupos";
         }
 
     }

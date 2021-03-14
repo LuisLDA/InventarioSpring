@@ -28,11 +28,11 @@ public class UserDetailService implements UserDetailsService {
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = usersDao.findByUsername(username);
-        if (user == null) {
+        if (user == null || user.getUserGroup().getGroup_status()==0 || user.getStatus()==0) {
             throw new UsernameNotFoundException(username);
         }
         var roles = new ArrayList<GrantedAuthority>();
-        roles.add(new SimpleGrantedAuthority(user.getUserGroup().getGroup_name()));
+        roles.add(new SimpleGrantedAuthority(""+user.getUserGroup().getGroup_level()));
         log.info("GRUPO DE USUARIO: "+ roles.get(0));
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), roles);
     }
