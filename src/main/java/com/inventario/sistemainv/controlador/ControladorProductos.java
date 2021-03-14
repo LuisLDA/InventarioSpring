@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.Map;
+
 
 //    ____                   _               _
 //   |  _ \  _ __  ___    __| | _   _   ___ | |_  ___   ___
@@ -53,8 +55,8 @@ public class ControladorProductos {
     }
 
     @GetMapping("/agregar_productos")
-    public String mostrarAgregarProductos(Model model) {
-        log.info("Accediendo a agregar productos");
+    public String mostrarAgregarProductos(Model model, Map<String, Object> map) {
+        log.info("Accediendo a producto");
         var categories = categoriesService.listCategories();
         model.addAttribute("categories", categories);
         var media = mediaService.listMedia();
@@ -63,7 +65,8 @@ public class ControladorProductos {
     }
 
     @PostMapping("/agregar_nuevo_producto")
-    public String agregarProductos(Product product) {
+    public String agregarProductos(Product product, Model model) {
+        model.addAttribute("pageTitle", "Productos");
         log.info("Agregando el producto "+ product);
         productService.saveProduct(product);
         log.info("Se ha agregado un nuevo producto");

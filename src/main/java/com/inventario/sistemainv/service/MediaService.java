@@ -11,5 +11,6 @@ public interface MediaService {
     public void addMedia(Media media);
     public void deleteMedia(Media media);
     public Media mediaporid(Long id);
+    public String extencion(String nombre);
 
 }
