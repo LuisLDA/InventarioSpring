@@ -32,6 +32,7 @@ public class MediaServiceImpl implements  MediaService{
     @Override
     @Transactional
     public void deleteMedia(Media media) {
+
         mediaDao.delete(media);
     }
 
@@ -52,5 +53,10 @@ public class MediaServiceImpl implements  MediaService{
             return " ";
         }
 
+    }
+
+    @Override
+    public void actualizarMedia(Long id) {
+        mediaDao.actualizarMedia(id);
     }
 }

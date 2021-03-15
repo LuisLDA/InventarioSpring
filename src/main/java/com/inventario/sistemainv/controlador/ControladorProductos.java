@@ -7,11 +7,13 @@ import com.inventario.sistemainv.service.ProductService;
 import lombok.extern.slf4j.Slf4j;
 import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Map;
 
@@ -42,7 +44,7 @@ public class ControladorProductos {
         log.info("Accediendo a editar producto");
 
         product = productService.searchProduct(product);
-        log.info("Producto a editar:"+product);
+        log.info("Producto a editar:" + product);
         model.addAttribute("product", product);
 
         var categoriesEdit = categoriesService.listCategories();
@@ -66,19 +68,33 @@ public class ControladorProductos {
     }
 
     @PostMapping("/agregar_nuevo_producto")
-    public String agregarProductos(Product product, Model model) {
+    public String agregarProductos(Product product, Model model, RedirectAttributes flash) {
         model.addAttribute("pageTitle", "Productos");
-        log.info("Agregando el producto "+ product);
-        productService.saveProduct(product);
+        log.info("Agregando el producto " + product);
+        var name = productService.searchNameProd(product.getName());
+        try {
+            if (!product.getName().equalsIgnoreCase(name)) {
+                if (product.getId() == null) {
+                    flash.addFlashAttribute("success", "El producto " + product.getName() + " ha sido agregado con éxito.");
+                } else {
+                    flash.addFlashAttribute("success", "El producto se modificó con éxito!.");
+                }
+            }
+            productService.saveProduct(product);
+        } catch (DataIntegrityViolationException e) {
+            flash.addFlashAttribute("error", "El producto ya se encuentra registrado.");
+            return "redirect:/productos";
+        }
         log.info("Se ha agregado un nuevo producto");
-        log.info("Contador de productos "+productService.countProducts());
+        log.info("Contador de productos " + productService.countProducts());
         return "redirect:/productos";
     }
 
     @GetMapping("/eliminar_producto/{id}")
-    public String eliminarProducto(Product product) {
+    public String eliminarProducto(Product product, RedirectAttributes flash) {
         log.info("Se eliminino el producto: " + product);
         productService.deleteProduct(product);
+        flash.addFlashAttribute("success", "El producto se eliminó con éxito!.");
         return "redirect:/productos";
     }
 

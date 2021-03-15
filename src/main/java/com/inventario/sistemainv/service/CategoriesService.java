@@ -10,4 +10,6 @@ public interface CategoriesService {
     public void deleteCategories(Categories categories);
     public Categories searchCategories(Categories categories);
     public int countCategories();
+    public String searchNameCat(String name);
+
 }

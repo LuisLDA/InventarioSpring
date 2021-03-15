@@ -58,7 +58,7 @@
                                     <!-- src recupera todas las fotos almacenadas -->
                                     <!-- img-thumbnail -->
                                     <img th:src="@{'/imagenes/' + ${medias.getFile_name()}}"
-                                         class="img-rounded float-left" style="max-width: 50%; max-height: 50%"
+                                         class="img-rounded float-left img-thumbnail" style="max-width: 100%; max-height: 100%"
                                          th:alt="${medias.getFile_name()}"/>
                                 </td>
                                 <td class="text-center">

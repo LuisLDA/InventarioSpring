@@ -46,5 +46,10 @@ public class CategoriesServiceImpl implements CategoriesService{
         return categoriesDao.countCategories();
     }
 
+    @Override
+    public String searchNameCat(String name) {
+        return categoriesDao.searchNameCat(name);
+    }
+
 
 }

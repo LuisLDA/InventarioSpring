@@ -48,7 +48,7 @@ public class ControladorInicio {
     public String inicio(Model model, @AuthenticationPrincipal UserDetails user2auth) {
         model.addAttribute("pageTitle", "Home");
         Date date = new Date();
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd HH:mm:ss");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         log.info("INICIANDO EL CONTROLADOR DE INICIO...");
         log.info("USUARIO LOGEADO: " + user2auth);
         log.info("LOGIN A LAS:"+formatter.format(date));
@@ -61,10 +61,6 @@ public class ControladorInicio {
         model.addAttribute("user_group", user_group.toString());
         // var usuarios = userService.listUser();
         //model.addAttribute("users", usuarios);
-        var countCat = categoriesService.countCategories();
-        model.addAttribute("countCat", countCat);
-        var countProd = productService.countProducts();
-        model.addAttribute("countProd", countProd);
         return "home";
     }
 
@@ -77,8 +73,6 @@ public class ControladorInicio {
         model.put("media", media);
         return "media";
     }
-
-
 
     @GetMapping("/categorias")
     public String mostrarCategorias(Model model) {
@@ -98,6 +92,15 @@ public class ControladorInicio {
         return "productos";
     }
 
+    @GetMapping("/panel_control")
+    public String panelControl(Model model) {
+        model.addAttribute("pageTitle", "Panel de Control");
+        var countCat = categoriesService.countCategories();
+        model.addAttribute("countCat", countCat);
+        var countProd = productService.countProducts();
+        model.addAttribute("countProd", countProd);
+        return "panel_control";
+    }
 
     @GetMapping("/index")
     public String inicioLogin(Model model) {

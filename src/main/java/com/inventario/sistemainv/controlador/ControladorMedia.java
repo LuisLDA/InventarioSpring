@@ -63,6 +63,7 @@ public class ControladorMedia {
         log.info("INICIANDO CONTROLADOR ELIMINAR MEDIA...");
         Media medias = mediaDao.mediaporid(id);
         log.info("Archivo media a eliminar: " + medias);
+        mediaDao.actualizarMedia(medias.getId());
 
         if (uploadFileService.delete(medias.getFile_name())){
             log.info("archivo eliminado");
@@ -71,7 +72,7 @@ public class ControladorMedia {
 
         log.info("media: " + media);
         mediaDao.delete(media);
-        flash.addFlashAttribute("success", "El registro ha sido elimado con exito!");
+        flash.addFlashAttribute("error", "El registro ha sido elimado con exito!");
         return "redirect:/media";
     }
 }

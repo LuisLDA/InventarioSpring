@@ -13,4 +13,6 @@ public interface MediaService {
     public Media mediaporid(Long id);
     public String extencion(String nombre);
 
+    public void actualizarMedia(Long id);
+
 }

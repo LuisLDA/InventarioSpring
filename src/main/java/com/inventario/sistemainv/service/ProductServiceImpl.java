@@ -40,20 +40,13 @@ public class ProductServiceImpl implements ProductService{
 
     @Override
     @Transactional(readOnly = true)
-    public String categorieProduct(Long identificador) {
-        return productsDao.categorieProduct(identificador);
-    }
-
-    @Override
-    @Transactional(readOnly = true)
     public int countProducts() {
         return (int) productsDao.count();
     }
 
     @Override
-    @Transactional(readOnly = true)
-    public List<String> producto_media() {
-        return (List<String>) productsDao.producto_media();
+    public String searchNameProd(String name) {
+        return productsDao.searchNameProd(name);
     }
 
 }
