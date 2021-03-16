@@ -8,7 +8,9 @@ public interface ProductService {
     public void saveProduct(Product product);
     public void deleteProduct(Product product);
     public Product searchProduct(Product product);
+
     public int countProducts();
     public String searchNameProd(String name);
+    public List<Product> productRecient();
 
 }

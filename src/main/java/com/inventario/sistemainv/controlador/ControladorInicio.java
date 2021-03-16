@@ -99,6 +99,9 @@ public class ControladorInicio {
         model.addAttribute("countCat", countCat);
         var countProd = productService.countProducts();
         model.addAttribute("countProd", countProd);
+        var productRecient = productService.productRecient();
+        model.addAttribute("productRecient", productRecient);
+        log.info("Product recient: " + productRecient);
         return "panel_control";
     }
 

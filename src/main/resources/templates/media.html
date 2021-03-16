@@ -71,7 +71,7 @@
                                 </td>
                                 <td class="text-center">
                                     <!-- href referencia al archivo de eliminar imagenes -->
-                                    <a th:href="@{'/media/delete_media/' + ${medias.getId()}}" class="btn btn-danger btn-xs"  title="Eliminar">
+                                    <a th:if="${contador.count != 1}" th:href="@{'/media/delete_media/' + ${medias.getId()}}" class="btn btn-danger btn-xs"  title="Eliminar">
                                         <span class="glyphicon glyphicon-trash"></span>
                                     </a>
                                 </td>

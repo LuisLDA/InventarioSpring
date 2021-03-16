@@ -129,7 +129,7 @@
                                 <td class="text-center">
                                     <!-- ID DE VENTA -->
                                 <td>
-                                    <a href="edit_sale.php?id=<?php echo (int)$recent_sale['id']; ?>">
+                                    <a href="">
                                         <!-- NOMBRE DEL PRODUCTO -->
                                     </a>
                                 </td>
@@ -156,18 +156,23 @@
                     <div class="panel-body">
                         <div class="list-group">
                             <!-- PRODUCTOS RECIENTES -->
-                            <a class="list-group-item clearfix" href="">
+                            <a class="list-group-item clearfix" th:href="@{/productos}"
+                               th:each="productRecient : ${productRecient}">
                                 <h4 class="list-group-item-heading">
                                     <!-- COMPORBACION DE IMAGEN -->
-                                    <!-- SI NO TIENE IMAGEN -->
-                                    <img class="img-avatar img-circle" src="" alt="">
-                                    <!-- SI TIENE IMAGEN -->
-                                    <img class="img-avatar img-circle" src="" alt="" />
-                                    <span class="label label-warning pull-right">
-                                </span>
+                                    <img class="img-avatar img-circle"
+                                         th:src="@{'/imagenes/' + ${productRecient.getMedia_id().getFile_name()}}"
+                                         th:alt="${productRecient.media_id.getFile_name()}">
+
+                                    <span class="label label-warning pull-right"
+                                          th:text=" 'Precio de compra: ' + ${productRecient.getBuy_price()}"></span>
                                 </h4>
-                                <span class="list-group-item-text pull-right">
-                            </span>
+                                <span class="list-group-item-text pull-left"
+                                      th:text="${productRecient.getName()}">
+                                </span>
+                                <span class="list-group-item-text pull-right"
+                                      th:text="'Categoria: ' + ${productRecient.getCategories().getName()}">
+                                </span>
                             </a>
                         </div>
                     </div>
@@ -176,5 +181,6 @@
         </div>
     </div>
 </div>
+
 </body>
 </html>

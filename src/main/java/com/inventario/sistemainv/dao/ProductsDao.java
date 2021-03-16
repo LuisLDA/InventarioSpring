@@ -12,4 +12,7 @@ public interface ProductsDao extends CrudRepository <Product, Long> {
 
     @Query(value = "SELECT name FROM products p where name= ?1", nativeQuery = true)
     public String searchNameProd(String name);
+
+    @Query(value = "SELECT * FROM products p ORDER BY p.id DESC LIMIT 3", nativeQuery = true)
+    public List<Product> productRecient();
 }
