@@ -6,15 +6,108 @@
     <title>Inicio</title>
 </head>
 <body>
-<header th:replace="layout/plantilla.html :: header">
-</header>
+<header th:replace="layout/plantilla.html :: header"></header>
 <div th:replace="layout/plantilla.html :: div_sidebar"></div>
+
 <div class="page">
 
-    <div class="container-fluid">
-        <div th:replace="layout/componentes.html :: home"></div>
+    <div class="container-slider center-block">
+        <div class="slider" id="slider">
+            <div class="slider__section">
+                <img class="slider__img" th:src="@{/images/super1.jpg}">
+            </div>
+            <div class="slider__section">
+                <img class="slider__img" th:src="@{/images/super2.jpg}">
+            </div>
+            <div class="slider__section">
+                <img class="slider__img" th:src="@{/images/super3.jpg}">
+            </div>
+            <div class="slider__section">
+                <img class="slider__img" th:src="@{/images/super4.jpg}">
+            </div>
+        </div>
+        <script type="text/javascript">
+            const slider = document.querySelector("#slider");
+            let sliderSection = document.querySelectorAll(".slider__section");
+            let sliderSectionLast = sliderSection[sliderSection.length - 1];
+
+            slider.insertAdjacentElement('afterbegin', sliderSectionLast);
+
+            function next() {
+                let sliderSectionFirst = document.querySelectorAll(".slider__section")[0];
+                slider.style.marginLeft = "-200%";
+                slider.style.transition = "all 0.5s";
+                setTimeout(function () {
+                    slider.style.transition = "none";
+                    slider.insertAdjacentElement('beforeend', sliderSectionFirst);
+                    slider.style.marginLeft = "-100%";
+                }, 500);
+            }
+
+            setInterval(function () {
+                next();
+            }, 5000)
+        </script>
     </div>
 
+    <div class="col-md-12">
+        <div style="margin-bottom: 20px">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="content-base">
+                    <div class="content-item">
+                        <h3><strong>Gobierno Corporativo</strong></h3>
+                        <p>La Ecuatoriana tiene una estructura de toma de decisiones transparente y participativa.
+                            Cada una de ellas, sus funciones y atribuciones constan en los estatutos de la compañía y
+                            en sus reglamentos internos.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="content-img">
+                    <img class="img_src" th:src="@{/images/home1.jpg}">
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="content-img">
+                    <img class="img_src" th:src="@{/images/mision.jpg}">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="content-base">
+                    <div class="content-item">
+                        <h3><strong>Misión</strong></h3>
+                        <p>Mejorar la calidad de vida, ofreciendo los mejores productos, servicios y experiencias, de
+                            forma eficiente, sostenible y responsable.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="content-base">
+                    <div class="content-item">
+                        <h3><strong>Visión</strong></h3>
+                        <p>Ser la mejor empresa de América.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="content-img">
+                    <img class="img_src" th:src="@{/images/vision.jpg}">
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <!--<div class="container-fluid">
+        <div th:replace="layout/componentes.html :: home"></div>
+    </div>-->
 </div>
 
 </body>
