@@ -48,12 +48,12 @@ public class ControladorInicio {
     public String inicio(Model model, @AuthenticationPrincipal UserDetails user2auth) {
         model.addAttribute("pageTitle", "Home");
         Date date = new Date();
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd HH:mm:ss");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         log.info("INICIANDO EL CONTROLADOR DE INICIO...");
         log.info("USUARIO LOGEADO: " + user2auth);
-        log.info("LOGIN A LAS:"+formatter.format(date));
+        log.info("LOGIN A LAS:" + formatter.format(date));
         //Control acceso  y actualización de fecha de login
-        var userLoginupdate=userService.searchbyUserName(user2auth.getUsername());
+        var userLoginupdate = userService.searchbyUserName(user2auth.getUsername());
         userLoginupdate.setLast_login(formatter.format(date));
         userService.saveUser(userLoginupdate);
         //Permisos
@@ -79,7 +79,6 @@ public class ControladorInicio {
     }
 
 
-
     @GetMapping("/categorias")
     public String mostrarCategorias(Model model) {
         model.addAttribute("pageTitle", "Categorias");
@@ -103,6 +102,15 @@ public class ControladorInicio {
     public String inicioLogin(Model model) {
         model.addAttribute("pageTitle", "Login");
         return "index";
+    }
+
+    @GetMapping("/perfil")
+    public String perfil(Model model, @AuthenticationPrincipal UserDetails user2auth) {
+        var user = userService.searchbyUserName(user2auth.getUsername());
+        model.addAttribute("pageTitle", "Perfil");
+        log.info("Accediendo a perfil...");
+        model.addAttribute("usuario", user);
+        return "perfil";
     }
 
 }

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/plantilla :: head">
+    <title>Inicio</title>
+    <!--<link rel="stylesheet" href="/static/css/main.css" th:href="@{/css/main.css}"/>-->
+</head>
+<body>
+<header th:replace="layout/plantilla.html :: header">
+</header>
+<div th:replace="layout/plantilla.html :: div_sidebar"></div>
+<div class="page">
+
+        <div class="row">
+            <div class="col-md-12">
+                <!-- Mensaje de advertencia aqui -->
+            </div>
+            <div class="col-md-5">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <strong>
+                            <span class="glyphicon glyphicon-th"></span>
+                            <span>Editando Grupo</span>
+                        </strong>
+                    </div>
+                    <div class="panel-body">
+                        <!-- action referencia al archivo editar categoria -->
+                        <form method="post" th:action="@{/accesos/grupos/add_grupo}" class="clearfix" th:object="${grupo}">
+                            <div class="form-group">
+                                <label class="control-label">Nombre del grupo</label>
+                                <!-- value recupera el valor del grupo -->
+                                <input type="hidden"  name="id" th:value="*{id}">
+                                <input type="name" class="form-control" name="group_name" th:value="*{group_name}">
+                            </div>
+                            <div class="form-group">
+                                <label fclass="control-label">Nivel del grupo</label>
+                                <!-- value recupera el nivel del grupo al que pertenece -->
+                                <select class="form-control" name="group_level" id="group_level" th:value="*{group_level}">
+                                    <option value="1" th:selected="*{group_level}==1">Nivel 1</option>
+                                    <option value="2" th:selected="*{group_level}==2">Nivel 2</option>
+                                    <option value="3" th:selected="*{group_level}==3">Nivel 3</option>
+                                    <option value="4" th:selected="*{group_level}==4">Nivel 4</option>
+                                    <option value="5" th:selected="*{group_level}==5">Nivel 5</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Estado</label>
+                                <select class="form-control" name="group_status" >
+                                    <option value="1" th:selected="*{group_status}==1">Activo</option>
+                                    <option value="0" th:selected="*{group_status}==0">Inactivo</option>
+                                </select>
+                            </div>
+                            <div class="form-group clearfix">
+                                <button type="submit" name="update" class="btn btn-info">Actualizar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+</div>
+</body>
+</html>

@@ -131,6 +131,58 @@
     </div>
 </div>
 
+<!-- SECCION SISTEMA -->
+<!-- Componente cambiar contraseña -->
+<div th:fragment="change_passw">
+    <div id="changePass" class="modal fade"
+         data-backdrop="static" tabindex="-1"
+         role="dialog" aria-labelledby="staticBackdropLabelU"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabelP">
+                        <div class="panel-heading">
+                            <strong>
+                                <span class="glyphicon glyphicon-th"></span>
+                                <span>Cambiar contraseña</span>
+                            </strong>
+                            <button type="button" class="close" data-dismiss="modal"
+                                    aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+
+                    </h5>
+                </div>
+                <div class="modal-body">
+                    <form method="post" th:action="">
+                        <div class="form-group">
+                            <label class="control-label">Nueva contraseña</label>
+                            <input type="password" class="form-control" name="new-password" placeholder="Nueva contraseña">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Antigua contraseña</label>
+                            <input type="password" class="form-control" name="old-password" placeholder="Antigua contraseña">
+                        </div>
+
+                        <div class="modal-footer">
+                            <div class="form-group clearfix">
+                                <!-- Value valida que el usario tiene permisos -->
+                                <input type="hidden" name="id" value="">
+                                <button type="submit" name="update" class="btn btn-info">Cambiar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
 
 <!-- SECCION EDIT -->
 <!-- Componente editar cuenta -->
@@ -151,7 +203,7 @@
                     <div class="row">
                         <div class="col-md-4">
                             <!-- src muestra la foto que tiene el usario -->
-                            <img class="img-circle img-size-2" src="" alt="">
+                            <img class="img-circle img-size-2" th:src="@{'/imagenes/'" alt="">
                         </div>
                         <div class="col-md-8">
                             <!-- action llamar al metodo para editar la cuenta -->
@@ -311,31 +363,6 @@
     </div>
 </div>
 
-<!-- SECCION SISTEMA -->
-<!-- Componente cambiar contraseña -->
-<div th:fragment="change_passw">
-    <div class="login-page">
-        <div class="text-center">
-            <h3>Cambiar contraseña</h3>
-        </div>
-        <!-- Muestra de mensje, agregar accion al form-->
-        <form method="post" action="" class="clearfix">
-            <div class="form-group">
-                <label class="control-label">Nueva contraseña</label>
-                <input type="password" class="form-control" name="new-password" placeholder="Nueva contraseña">
-            </div>
-            <div class="form-group">
-                <label class="control-label">Antigua contraseña</label>
-                <input type="password" class="form-control" name="old-password" placeholder="Antigua contraseña">
-            </div>
-            <div class="form-group clearfix">
-                <!-- Value valida que el usario tiene permisos -->
-                <input type="hidden" name="id" value="">
-                <button type="submit" name="update" class="btn btn-info">Cambiar</button>
-            </div>
-        </form>
-    </div>
-</div>
 
 <!-- Componente perfil -->
 <div th:fragment="profile">

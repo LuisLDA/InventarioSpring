@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/plantilla :: head">
+    <title>Inicio</title>
+    <!--<link rel="stylesheet" href="/static/css/main.css" th:href="@{/css/main.css}"/>-->
+</head>
+<body>
+<header th:replace="layout/plantilla.html :: header">
+</header>
+<div th:replace="layout/plantilla.html :: div_sidebar"></div>
+<div class="page">
+    <div class="row">
+        <div class="col-md-12">
+            <!-- Mensaje de advertencia aqui -->
+        </div>
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <strong>
+                        <span class="glyphicon glyphicon-th"></span>
+                        <span>Actualiza cuenta</span>
+                    </strong>
+                </div>
+                <div class="panel-body">
+                    <!-- action referencia al archivo de editar usuario (ID) -->
+                    <form method="post" th:action="@{/accesos/usuarios/add_user/no_pass}" class="clearfix" th:object="${usuario}">
+                        <div class="form-group">
+                            <label class="control-label">Nombres</label>
+                            <!-- value recupera el nombre del usuario -->
+                            <input type="hidden"  name="id" th:value="*{id}">
+                            <input type="hidden"  name="password" th:value="*{password}">
+                            <input type="hidden"  name="last_login" th:value="*{last_login}">
+                            <input type="name" class="form-control" name="name" th:value="*{name}">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Usuario</label>
+                            <!-- value recupera el nickname del usuario -->
+                            <input type="text" class="form-control" name="username" th:value="*{username}">
+                        </div>
+                        <div class="form-group">
+                            <label>Rol de usuario</label>
+                            <select class="form-control" name="user_level" id="user_level" >
+                                <!-- value recupera el valor del usuario -->
+                                <!-- option recupera todos los roles de usuario -->
+                                <option th:each="grupo : ${grupos}"
+                                                          th:value="${grupo.getId()}"
+                                                          th:label="${grupo.getGroup_name()}"
+                                                          th:selected="${grupo.getId()}==*{user_level.getId()}"></option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Estado</label>
+                            <select class="form-control" name="status">
+                                <option value="1" th:selected="*{status}==1">Activo</option>
+                                <option value="0" th:selected="*{status}==0" >Inactivo</option>
+                            </select>
+                        </div>
+                        <div class="form-group clearfix">
+                            <button type="submit" name="update" class="btn btn-info">Actualizar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- Componente de cambio de contrasena -->
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <strong>
+                        <span class="glyphicon glyphicon-th"></span>
+                        <span>Cambiar contraseña</span>
+                    </strong>
+                </div>
+                <div class="panel-body">
+                    <!-- action referencia al archivo de editar usuario por id -->
+                    <form th:action="@{/accesos/usuarios/add_user/pass}" method="post"
+                          class="clearfix" th:object="${usuario}">
+                        <div class="form-group">
+                            <input type="hidden"  name="id" th:value="*{id}">
+                            <label class="control-label">Contraseña</label>
+                            <input type="password" class="form-control" name="password"
+                                   placeholder="Ingresa la nueva contraseña" required>
+                        </div>
+                        <div class="form-group clearfix">
+                            <button type="submit" name="update-pass" class="btn btn-danger pull-right">Cambiar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

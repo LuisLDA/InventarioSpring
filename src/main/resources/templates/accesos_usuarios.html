@@ -83,11 +83,15 @@
                                 <td class="text-center">
                                     <div class="btn-group">
                                         <!-- href referencia al archivo de editar usuario -->
-                                        <a href="" class="btn btn-xs btn-warning" data-toggle="tooltip" title="Editar">
+                                        <a th:href="@{/accesos/usuarios/edit_user/} + ${usuario.getId()}"
+                                           class="btn btn-xs btn-warning" data-toggle="tooltip" title="Editar">
                                             <i class="glyphicon glyphicon-pencil"></i>
                                         </a>
                                         <!-- href referencia al archivo borrar usuario -->
-                                        <a href="" class="btn btn-xs btn-danger" data-toggle="tooltip" title="Eliminar">
+                                        <a th:href="@{/accesos/usuarios/eliminar_usuario/} + ${usuario.getId()}"
+                                           class="btn btn-xs btn-danger" data-toggle="tooltip" title="Eliminar"
+                                        th:if="${usuario.getUsername()}!=${username_logueado}"
+                                        >
                                             <i class="glyphicon glyphicon-remove"></i>
                                         </a>
                                     </div>

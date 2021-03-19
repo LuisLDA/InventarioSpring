@@ -88,7 +88,8 @@
                                 <td class="text-center">
                                     <div class="btn-group">
                                         <!-- href referencia al archivo de editar grupo por (ID) -->
-                                        <a href="" class="btn btn-xs btn-warning" data-toggle="tooltip" title="Editar">
+                                        <a th:href="@{/accesos/grupos/editar_grupo/} + ${grupo.getId()}"
+                                           class="btn btn-xs btn-warning" data-toggle="tooltip" title="Editar">
                                             <i class="glyphicon glyphicon-pencil"></i>
                                         </a>
                                         <!-- href referencia al archivo de borrar grupo por (ID) -->
