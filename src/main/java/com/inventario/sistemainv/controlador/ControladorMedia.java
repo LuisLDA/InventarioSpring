@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
+import java.nio.file.FileAlreadyExistsException;
 
 
 //    __  __            _  _
@@ -49,6 +50,13 @@ public class ControladorMedia {
                 log.info("Agregado la imagen :" + media);
                 mediaDao.save(media);
                 flash.addFlashAttribute("success", "Imagen " + filename + " agregada con exito!");
+            } catch (FileAlreadyExistsException fileAlreadyExistsException){
+
+                media.setFile_name(foto.getOriginalFilename());
+                media.setFile_type(foto.getOriginalFilename().substring(foto.getOriginalFilename().lastIndexOf(".")));
+                log.info("Imagen Repetida tipo :" + media.getFile_type());
+                mediaDao.save(media);
+                flash.addFlashAttribute("error", "La imagen ya existe");
             } catch (IOException e) {
                 e.printStackTrace();
             }

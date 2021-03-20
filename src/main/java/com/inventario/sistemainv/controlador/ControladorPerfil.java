@@ -37,6 +37,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
+import java.nio.file.FileAlreadyExistsException;
 import java.util.Map;
 
 @Controller
@@ -75,8 +76,11 @@ public class ControladorPerfil {
                 mediaDao.save(media);
                 userService.saveUser(user);
                 // flash.addFlashAttribute("success", "Imagen " + filename + " agregada con exito!");
+            } catch (FileAlreadyExistsException  fileAlreadyExistsException){
+                user.setImage(foto.getOriginalFilename());
+                userService.saveUser(user);
             } catch (IOException e) {
-                log.error("ERROR:" + e.getMessage());
+                log.error("ERROR:", e.getStackTrace().toString());
             }
         } else {
             // flash.addFlashAttribute("error", "No se ha seleccionado ninguna imagen");
@@ -87,10 +91,10 @@ public class ControladorPerfil {
 
     @PostMapping("/edit_user")
     public String editUser(Model model, User user) {
-        var userToEdit =userService.searchUser(user);
+        var userToEdit = userService.searchUser(user);
         log.info("Usuario a editar:" + userToEdit);
         log.info("Se edito el usuario:" + user);
-        if(!user.getName().equals("") || !user.getUsername().equals("")){
+        if (!user.getName().equals("") || !user.getUsername().equals("")) {
             userToEdit.setName(user.getName());
             userToEdit.setUsername(user.getUsername());
             userService.saveUser(userToEdit);
