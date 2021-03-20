@@ -65,7 +65,7 @@ public class ControladorPerfil {
                                @RequestParam("file") MultipartFile foto
             /*,RedirectAttributes flash*/) {
         log.info("Cambiando foto de perfil...");
-        user = userService.searchUser(user);
+        user = userService.searchbyUserName(user.getUsername());
         if (!foto.isEmpty()) {
             try {
                 String filename = uploadFileService.add_media(foto);
