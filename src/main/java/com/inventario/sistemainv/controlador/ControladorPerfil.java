@@ -13,11 +13,19 @@ import com.inventario.sistemainv.domain.User;
 import com.inventario.sistemainv.service.MediaService;
 import com.inventario.sistemainv.service.UploadFileService;
 import com.inventario.sistemainv.service.UserService;
+import com.inventario.sistemainv.util.EncryptPass;
 import lombok.extern.slf4j.Slf4j;
 import lombok.var;
+import org.apache.catalina.Authenticator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
@@ -54,7 +62,7 @@ public class ControladorPerfil {
                                Model model,
                                @Validated User user,
                                @RequestParam("file") MultipartFile foto
-                               /*,RedirectAttributes flash*/) {
+            /*,RedirectAttributes flash*/) {
         log.info("Cambiando foto de perfil...");
         user = userService.searchUser(user);
         if (!foto.isEmpty()) {
@@ -66,27 +74,47 @@ public class ControladorPerfil {
                 log.info("Agregado la imagen :" + media);
                 mediaDao.save(media);
                 userService.saveUser(user);
-               // flash.addFlashAttribute("success", "Imagen " + filename + " agregada con exito!");
+                // flash.addFlashAttribute("success", "Imagen " + filename + " agregada con exito!");
             } catch (IOException e) {
                 log.error("ERROR:" + e.getMessage());
             }
         } else {
-           // flash.addFlashAttribute("error", "No se ha seleccionado ninguna imagen");
+            // flash.addFlashAttribute("error", "No se ha seleccionado ninguna imagen");
         }
         return "redirect:/perfil";
     }
 
 
     @PostMapping("/edit_user")
-    public String editUser(Model model,User user){
-
-
+    public String editUser(Model model, User user) {
+        var userToEdit =userService.searchUser(user);
+        log.info("Usuario a editar:" + userToEdit);
+        log.info("Se edito el usuario:" + user);
+        if(!user.getName().equals("") || !user.getUsername().equals("")){
+            userToEdit.setName(user.getName());
+            userToEdit.setUsername(user.getUsername());
+            userService.saveUser(userToEdit);
+        }
         return "redirect:/perfil";
     }
 
     @PostMapping("/change_pass")
-    public String editPass(Model model,User user){
+    public String editPass(@RequestParam(value = "pass", required = true)
+                                   String old_pass,
+                           Model model, User user) {
+        var autenticado = userService.searchUser(user);
+        log.info("Contra Nueva:" + user.getPassword());
+        log.info("Contra Antigua:" + old_pass);
+        log.info("Contra Actualmente Registrada:" + autenticado.getPassword());
+        BCryptPasswordEncoder b = new BCryptPasswordEncoder();
 
+        if (b.matches(old_pass, autenticado.getPassword())) {
+            log.info("Las contraseñas coinciden");
+            autenticado.setPassword(b.encode(user.getPassword()));
+            userService.saveUser(autenticado);
+        } else {
+            log.error("Las contraseñas no coinciden");
+        }
 
         return "redirect:/perfil";
     }

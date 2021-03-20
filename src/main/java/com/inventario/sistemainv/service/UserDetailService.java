@@ -36,4 +36,7 @@ public class UserDetailService implements UserDetailsService {
         log.info("GRUPO DE USUARIO: "+ roles.get(0));
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), roles);
     }
+
+
+
 }
