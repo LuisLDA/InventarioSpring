@@ -53,4 +53,10 @@ public class MediaServiceImpl implements  MediaService{
         }
 
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Media searchbyFile_name(String file_name) {
+        return mediaDao.findByFile_Name(file_name);
+    }
 }

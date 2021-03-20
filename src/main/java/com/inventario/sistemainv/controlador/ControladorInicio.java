@@ -109,6 +109,12 @@ public class ControladorInicio {
         var user = userService.searchbyUserName(user2auth.getUsername());
         model.addAttribute("pageTitle", "Perfil");
         log.info("Accediendo a perfil...");
+        if(user.getImage()!=null){
+            if(mediaService.searchbyFile_name(user.getImage())==null){
+                user.setImage("no image.jpg");
+            }
+        }
+
         model.addAttribute("usuario", user);
         return "perfil";
     }
