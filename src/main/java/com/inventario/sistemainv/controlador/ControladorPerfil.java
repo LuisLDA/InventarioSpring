@@ -90,7 +90,7 @@ public class ControladorPerfil {
 
 
     @PostMapping("/edit_user")
-    public String editUser(Model model, User user) {
+    public String editUser(Model model, @Validated User user) {
         var userToEdit = userService.searchUser(user);
         log.info("Usuario a editar:" + userToEdit);
         log.info("Se edito el usuario:" + user);
@@ -105,7 +105,7 @@ public class ControladorPerfil {
     @PostMapping("/change_pass")
     public String editPass(@RequestParam(value = "pass", required = true)
                                    String old_pass,
-                           Model model, User user) {
+                           Model model, @Validated User user) {
         var autenticado = userService.searchUser(user);
         log.info("Contra Nueva:" + user.getPassword());
         log.info("Contra Antigua:" + old_pass);
