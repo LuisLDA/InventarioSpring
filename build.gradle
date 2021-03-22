@@ -27,8 +27,6 @@ dependencies {
     compile 'org.webjars.bower:jquery:3.5.1'
     compile 'org.springframework.security:spring-security-core:5.4.2'
     testImplementation 'org.springframework.security:spring-security-test'
-    implementation group: 'org.webjars', name: 'jquery-ui', version: '1.12.0'
-
 
 }
 
