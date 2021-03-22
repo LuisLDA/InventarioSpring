@@ -32,6 +32,7 @@ public class MediaServiceImpl implements  MediaService{
     @Override
     @Transactional
     public void deleteMedia(Media media) {
+
         mediaDao.delete(media);
     }
 
@@ -58,5 +59,9 @@ public class MediaServiceImpl implements  MediaService{
     @Transactional(readOnly = true)
     public Media searchbyFile_name(String file_name) {
         return mediaDao.findByFile_Name(file_name);
+    }
+    
+    public void actualizarMedia(Long id) {
+        mediaDao.actualizarMedia(id);
     }
 }

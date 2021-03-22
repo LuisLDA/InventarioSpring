@@ -14,4 +14,6 @@ public interface MediaService {
     public String extencion(String nombre);
     public Media searchbyFile_name(String file_name);
 
+    public void actualizarMedia(Long id);
+
 }

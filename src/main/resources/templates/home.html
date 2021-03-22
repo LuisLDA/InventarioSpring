@@ -6,181 +6,108 @@
     <title>Inicio</title>
 </head>
 <body>
-<header th:replace="layout/plantilla.html :: header">
-</header>
+<header th:replace="layout/plantilla.html :: header"></header>
 <div th:replace="layout/plantilla.html :: div_sidebar"></div>
+
 <div class="page">
-    <div class="container-fluid">
-        <div th:replace="layout/componentes.html :: home"></div>
+
+    <div class="container-slider center-block">
+        <div class="slider" id="slider">
+            <div class="slider__section">
+                <img class="slider__img" th:src="@{/images/super1.jpg}">
+            </div>
+            <div class="slider__section">
+                <img class="slider__img" th:src="@{/images/super2.jpg}">
+            </div>
+            <div class="slider__section">
+                <img class="slider__img" th:src="@{/images/super3.jpg}">
+            </div>
+            <div class="slider__section">
+                <img class="slider__img" th:src="@{/images/super4.jpg}">
+            </div>
+        </div>
+        <script type="text/javascript">
+            const slider = document.querySelector("#slider");
+            let sliderSection = document.querySelectorAll(".slider__section");
+            let sliderSectionLast = sliderSection[sliderSection.length - 1];
+
+            slider.insertAdjacentElement('afterbegin', sliderSectionLast);
+
+            function next() {
+                let sliderSectionFirst = document.querySelectorAll(".slider__section")[0];
+                slider.style.marginLeft = "-200%";
+                slider.style.transition = "all 0.5s";
+                setTimeout(function () {
+                    slider.style.transition = "none";
+                    slider.insertAdjacentElement('beforeend', sliderSectionFirst);
+                    slider.style.marginLeft = "-100%";
+                }, 500);
+            }
+
+            setInterval(function () {
+                next();
+            }, 5000)
+        </script>
     </div>
 
-    <div>
+    <div class="col-md-12">
+        <div style="margin-bottom: 20px">
         <div class="row">
             <div class="col-md-6">
-                <!-- MENSAJE DE ADVERTENCIA -->
+                <div class="content-base">
+                    <div class="content-item">
+                        <h3><strong>Gobierno Corporativo</strong></h3>
+                        <p>La Ecuatoriana tiene una estructura de toma de decisiones transparente y participativa.
+                            Cada una de ellas, sus funciones y atribuciones constan en los estatutos de la compañía y
+                            en sus reglamentos internos.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="content-img">
+                    <img class="img_src" th:src="@{/images/home1.jpg}">
+                </div>
             </div>
         </div>
+
         <div class="row">
-            <div class="col-md-3">
-                <div class="panel panel-box clearfix">
-                    <div class="panel-icon pull-left bg-green">
-                        <i class="glyphicon glyphicon-user"></i>
-                    </div>
-                    <div class="panel-value pull-right">
-                        <h2 class="margin-top">
-                            <!-- CANTIDAD DE USUARIOS -->
-                        </h2>
-                        <p class="text-muted">Usuarios</p>
-                    </div>
+            <div class="col-md-6">
+                <div class="content-img">
+                    <img class="img_src" th:src="@{/images/mision.jpg}">
                 </div>
             </div>
-            <div class="col-md-3">
-                <div class="panel panel-box clearfix">
-                    <div class="panel-icon pull-left bg-red">
-                        <i class="glyphicon glyphicon-list"></i>
-                    </div>
-                    <div class="panel-value pull-right">
-                        <!-- CANTIDAD DE CATEGORIAS -->
-                        <h2 class="margin-top" th:text="${countCat}"></h2>
-                        <p class="text-muted">Categorías</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="panel panel-box clearfix">
-                    <div class="panel-icon pull-left bg-blue">
-                        <i class="glyphicon glyphicon-shopping-cart"></i>
-                    </div>
-                    <div class="panel-value pull-right">
-                        <h2 class="margin-top" th:text="${countProd}">
-                            <!-- CANTIDAD DE PRODUCTOS -->
-                        </h2>
-                        <p class="text-muted">Productos</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="panel panel-box clearfix">
-                    <div class="panel-icon pull-left bg-yellow">
-                        <i class="glyphicon glyphicon-usd"></i>
-                    </div>
-                    <div class="panel-value pull-right">
-                        <h2 class="margin-top">
-                            <!-- CANTIDAD DE VENTAS -->
-                        </h2>
-                        <p class="text-muted">Ventas</p>
+            <div class="col-md-6">
+                <div class="content-base">
+                    <div class="content-item">
+                        <h3><strong>Misión</strong></h3>
+                        <p>Mejorar la calidad de vida, ofreciendo los mejores productos, servicios y experiencias, de
+                            forma eficiente, sostenible y responsable.</p>
                     </div>
                 </div>
             </div>
         </div>
 
         <div class="row">
-            <div class="col-md-4">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <strong>
-                            <span class="glyphicon glyphicon-th"></span>
-                            <span>Productos más vendidos</span>
-                        </strong>
-                    </div>
-                    <div class="panel-body">
-                        <table class="table table-striped table-bordered table-condensed">
-                            <thead>
-                            <tr>
-                                <th>Título</th>
-                                <th>Total vendido</th>
-                                <th>Cantidad total</th>
-                            <tr>
-                            </thead>
-                            <tbody>
-                            <!-- PRODUCOTS MAS VENDIDOS -->
-                            <tr>
-                                <td>
-                                    <!-- NOMBRE DEL PRODUCTO -->
-                                </td>
-                                <td>
-                                    <!-- TOTAL VENDIDO -->
-                                </td>
-                                <td>
-                                    <!-- CANTIDAD VENDIDA -->
-                                </td>
-                            </tr>
-                            <tbody>
-                        </table>
+            <div class="col-md-6">
+                <div class="content-base">
+                    <div class="content-item">
+                        <h3><strong>Visión</strong></h3>
+                        <p>Ser la mejor empresa de América.</p>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <strong>
-                            <span class="glyphicon glyphicon-th"></span>
-                            <span>ÚLTIMAS VENTAS</span>
-                        </strong>
-                    </div>
-                    <div class="panel-body">
-                        <table class="table table-striped table-bordered table-condensed">
-                            <thead>
-                            <tr>
-                                <th class="text-center" style="width: 50px;">#</th>
-                                <th>Producto</th>
-                                <th>Fecha</th>
-                                <th>Venta total</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <!-- VENTAS RECIENTES -->
-                            <tr>
-                                <td class="text-center">
-                                    <!-- ID DE VENTA -->
-                                <td>
-                                    <a href="">
-                                        <!-- NOMBRE DEL PRODUCTO -->
-                                    </a>
-                                </td>
-                                <td>
-                                    <!-- FECHA DE VENTA -->
-                                </td>
-                                <td>
-                                    <!-- PRECIO DE VENTA -->
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <strong>
-                            <span class="glyphicon glyphicon-th"></span>
-                            <span>Productos recientemente añadidos</span>
-                        </strong>
-                    </div>
-                    <div class="panel-body">
-                        <div class="list-group">
-                            <!-- PRODUCTOS RECIENTES -->
-                            <a class="list-group-item clearfix" href="">
-                                <h4 class="list-group-item-heading">
-                                    <!-- COMPROBACION DE IMAGEN -->
-                                    <!-- SI NO TIENE IMAGEN -->
-                                    <img class="img-avatar img-circle" src="" alt="">
-                                    <!-- SI TIENE IMAGEN -->
-                                    <img class="img-avatar img-circle" src="" alt="" />
-                                    <span class="label label-warning pull-right">
-                                </span>
-                                </h4>
-                                <span class="list-group-item-text pull-right">
-                            </span>
-                            </a>
-                        </div>
-                    </div>
+            <div class="col-md-6">
+                <div class="content-img">
+                    <img class="img_src" th:src="@{/images/vision.jpg}">
                 </div>
             </div>
         </div>
     </div>
+    </div>
 
+    <!--<div class="container-fluid">
+        <div th:replace="layout/componentes.html :: home"></div>
+    </div>-->
 </div>
 
 </body>

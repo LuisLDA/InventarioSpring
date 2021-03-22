@@ -12,4 +12,6 @@ public interface CategoriesDao extends CrudRepository<Categories, Long> {
     @Query(value = "SELECT count(*) from categories",nativeQuery = true)
     public int countCategories();
 
+    @Query(value = "SELECT name FROM categories WHERE name= ?1", nativeQuery = true)
+    public String searchNameCat(String name);
 }

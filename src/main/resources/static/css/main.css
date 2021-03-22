@@ -407,3 +407,58 @@ td img.img-thumbnail{
 .row .col-md-9 .panel.panel-default .panel-heading .pull-right .btn.btn-primary{
     margin-top: -5px;
 }
+/* TEXTO HOME*/
+.content-base {
+    padding: 30px;
+    display: table;
+    height: 200px;
+}
+.content-item {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+/* IMG HOME */
+.content-img {
+    width: 100%;
+    height: 200px;
+}
+.img_src {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* SLIDER */
+.container-slider {
+    width: 100%;
+    max-width: 1200px;
+    overflow: hidden;
+    box-shadow: 0 0 0 4px #f2f2f2, 0 15px 50px;
+    margin-bottom: 30px;
+}
+.slider {
+    display: flex;
+    width: 400%;
+    height: 210px;
+    margin-left: -100%;
+}
+.slider__section {
+    width: 100%;
+}
+.slider__img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* JUMBO HOME */
+.jumbo {
+    padding: 15px;
+    box-shadow: 0 0 0 4px #535252;
+    color: #000000;
+    background-color: #d2d2d2;
+    font-width: 100;
+}

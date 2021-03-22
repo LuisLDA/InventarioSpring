@@ -63,10 +63,6 @@ public class ControladorInicio {
         model.addAttribute("user_group", user_group.toString());
         // var usuarios = userService.listUser();
         //model.addAttribute("users", usuarios);
-        var countCat = categoriesService.countCategories();
-        model.addAttribute("countCat", countCat);
-        var countProd = productService.countProducts();
-        model.addAttribute("countProd", countProd);
         return "home";
     }
 
@@ -99,6 +95,18 @@ public class ControladorInicio {
         return "productos";
     }
 
+    @GetMapping("/panel_control")
+    public String panelControl(Model model) {
+        model.addAttribute("pageTitle", "Panel de Control");
+        var countCat = categoriesService.countCategories();
+        model.addAttribute("countCat", countCat);
+        var countProd = productService.countProducts();
+        model.addAttribute("countProd", countProd);
+        var productRecient = productService.productRecient();
+        model.addAttribute("productRecient", productRecient);
+        log.info("Product recient: " + productRecient);
+        return "panel_control";
+    }
 
     @GetMapping("/ventas")
     public String mostrarVentas(Model model) {

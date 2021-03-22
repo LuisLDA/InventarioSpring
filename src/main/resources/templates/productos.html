@@ -11,6 +11,9 @@
     <div class="row">
         <div class="col-md-12">
             <!-- mensaje de advertencia aqui -->
+            <div class="alert alert-success" th:if="${success != null}" th:text="${success}"></div>
+            <div class="alert alert-danger" th:if="${error != null}" th:text="${error}"></div>
+            <div class="alert alert-info" th:if="${info != null}" th:text="${info}"></div>
         </div>
         <div class="col-md-12">
             <div class="panel panel-default">
@@ -27,22 +30,22 @@
                 <div class="panel-body">
                     <table class="table table-bordered">
                         <thead>
-                            <tr>
-                                <th class="text-center" style="width: 50px;">#</th>
-                                <th> Imagen</th>
-                                <th> Descripción </th>
-                                <th class="text-center" style="width: 10%;"> Categoría </th>
-                                <th class="text-center" style="width: 10%;"> Stock </th>
-                                <th class="text-center" style="width: 10%;"> Precio de compra </th>
-                                <th class="text-center" style="width: 10%;"> Precio de venta </th>
-                                <th class="text-center" style="width: 10%;"> Agregado </th>
-                                <th class="text-center" style="width: 100px;"> Acciones </th>
-                            </tr>
+                        <tr>
+                            <th class="text-center" style="width: 50px;">#</th>
+                            <th> Imagen</th>
+                            <th> Descripción</th>
+                            <th class="text-center" style="width: 10%;"> Categoría</th>
+                            <th class="text-center" style="width: 10%;"> Stock</th>
+                            <th class="text-center" style="width: 10%;"> Precio de compra</th>
+                            <th class="text-center" style="width: 10%;"> Precio de venta</th>
+                            <th class="text-center" style="width: 10%;"> Agregado</th>
+                            <th class="text-center" style="width: 100px;"> Acciones</th>
+                        </tr>
                         </thead>
                         <tbody th:each="producto, contador : ${producto}">
                         <!-- se lista todas los productos existentes -->
                             <div>
-                                <span >
+                                <span>
                                     <tr>
                                         <td class="text-center">
                                             <!-- recupera el id del producto -->
@@ -50,9 +53,9 @@
                                         </td>
                                         <td th:if="${producto.getMedia_id().getId() != 0}">
                                             <!-- src referencia que no hay imagen -->
-                                            <img class="img-avatar img-circle" th:src="@{'/imagenes/' + ${producto.getMedia_id().getFile_name()}}" th:alt="${producto.getMedia_id().getFile_name()}">
-                                            <!-- src recupera la imagen del producto
-                                            <img class="img-avatar img-circle" th:src="" alt=""> -->
+                                            <img class="img-avatar img-circle"
+                                                 th:src="@{'/imagenes/' + ${producto.getMedia_id().getFile_name()}}"
+                                                 th:alt="${producto.getMedia_id().getFile_name()}">
                                         </td>
                                         <td>
                                             <!-- recupera la descripcion del producto -->
@@ -81,11 +84,13 @@
                                         <td class="text-center">
                                             <div class="btn-group">
                                                 <!-- href referencia al archivo de edicion de producto -->
-                                                <a th:href="@{/productos/editar_producto/} + ${producto.getId()}" class="btn btn-info btn-xs"  title="Editar" data-toggle="tooltip">
+                                                <a th:href="@{/productos/editar_producto/} + ${producto.getId()}"
+                                                   class="btn btn-info btn-xs" title="Editar" data-toggle="tooltip">
                                                     <span class="glyphicon glyphicon-edit"></span>
                                                 </a>
                                                 <!-- href referencia al archivo de eliminar producto -->
-                                                <a  th:href="@{/productos/eliminar_producto/} + ${producto.getId()}" class="btn btn-danger btn-xs"  title="Eliminar" data-toggle="tooltip">
+                                                <a th:href="@{/productos/eliminar_producto/} + ${producto.getId()}"
+                                                   class="btn btn-danger btn-xs" title="Eliminar" data-toggle="tooltip">
                                                     <span class="glyphicon glyphicon-trash"></span>
                                                 </a>
                                             </div>
