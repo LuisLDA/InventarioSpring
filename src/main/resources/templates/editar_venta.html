@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/plantilla.html :: head">
+    <title>Editar Ventas</title>
+</head>
+<body>
+<header th:replace="layout/plantilla.html :: header"></header>
+<div th:replace="layout/plantilla.html :: div_sidebar"></div>
+
+<script>
+    $(document).ready(function(){
+        jQuery('#qty').on('keyup mouseup' ,function(){
+            var precio = document.getElementById("price_I").value;
+            var total = jQuery(this).val()*precio;
+            jQuery("#price").val(total);
+        });
+    });
+</script>
+
+<div class="page">
+    <div>
+        <div class="row">
+            <div class="col-md-12">
+                <!-- mensaje de advertencia aqui -->
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel">
+                    <div class="panel-heading clearfix">
+                        <strong>
+                            <span class="glyphicon glyphicon-th"></span>
+                            <span>Editar Venta</span>
+                        </strong>
+                        <div class="pull-right">
+                            <a th:href="@{/ventas}" class="btn btn-primary">Mostrar todas las Ventas</a>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table table-bordered" >
+                            <thead>
+                            <th> Nombre del Producto </th>
+                            <th> Cantidad </th>
+                            <th> Precio </th>
+                            <th> Total </th>
+                            <th> Fecha</th>
+                            <th> Acción</th>
+                            </thead>
+                            <tbody  id="product_info">
+                            <tr>
+                                <form th:action="@{/ventas/guardar_venta}" th:object="${ventas}" method="post">
+                                    <td id="s_name">
+                                        <input type="hidden" name="id" th:value="*{id}">
+                                        <input type="text" class="form-control" id="sug_input" name="name" th:value="*{product_id.getName()}" readonly>
+                                        <input type="hidden" name="product_id" id="product_id" th:value="*{product_id.getId()}">
+                                        <div id="result" class="list-group"></div>
+                                    </td>
+                                    <td id="s_qty">
+                                        <input type="number" class="form-control" name="qty" id="qty" th:value="*{qty}" required min=1 th:max="*{product_id.getQuantity()}" oninput="validity.valid||(value='');">
+                                    </td>
+                                    <td id="s_price">
+                                        <input type="number" class="form-control" name="price_I" id="price_I" readonly min=0 oninput="validity.valid||(value='');" th:value="*{product_id.getSale_price()}">
+                                    </td>
+                                    <td>
+                                        <input type="number" class="form-control" name="price" id="price" th:value="*{price}" readonly min=1 oninput="validity.valid||(value='');">
+                                    </td>
+                                    <td id="s_date">
+                                        <input type="date" class="form-control datepicker" name="date" data-date-format="" th:value="*{date}">
+                                    </td>
+                                    <td>
+                                        <button type="submit" name="update_sale" class="btn btn-primary">Actualizar Venta</button>
+                                    </td>
+                                </form>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

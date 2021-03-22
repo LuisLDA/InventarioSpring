@@ -12,4 +12,7 @@ public interface ProductService {
     public int countProducts();
 
     public List<String> producto_media();
+    public List<String> names_products();
+    public List<String> id_products();
+    public Product saleProduct(String producto);
 }

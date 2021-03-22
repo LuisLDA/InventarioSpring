@@ -326,3 +326,86 @@ input[type=file]{
     width: 60px;
     height: 100%;
          }
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+.wrapper{
+    max-width: 350px;
+}
+
+.wrapper .search-input{
+    background: #fff;
+    width: 100%;
+    position: relative;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.search-input input{
+    height: 35px;
+    width: 100%;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    padding: 0 60px 0 20px;
+    font-size: 15px;
+}
+
+.search-input.active input{
+    border-radius: 5px 5px 0 0;
+}
+
+.search-input .autocom-box{
+    padding: 0;
+    opacity: 0;
+    pointer-events: none;
+    max-height: 280px;
+    overflow-y: auto;
+}
+
+.search-input.active .autocom-box{
+    padding: 10px 8px;
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.autocom-box li{
+    list-style: none;
+    padding: 8px 12px;
+    display: none;
+    width: 100%;
+    cursor: default;
+    border-radius: 3px;
+}
+
+.search-input.active .autocom-box li{
+    display: block;
+}
+.autocom-box li:hover{
+    background: #efefef;
+}
+
+.btn.btn-default.btn-primary{
+    height: 35px;
+    width: 130px;
+    left: 350px;
+    position: absolute;
+    color: #fff;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    font-size: 15px;
+    background-color: #51aded;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    cursor:pointer;
+}
+
+.col-md-11{
+    margin-bottom: 20px;
+    margin-left: -15px;
+}
+
+.row .col-md-9 .panel.panel-default .panel-heading .pull-right .btn.btn-primary{
+    margin-top: -5px;
+}
