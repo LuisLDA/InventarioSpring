@@ -24,11 +24,6 @@
         var s = addZero(d.getSeconds());
 
         var dateStr = year + "-" + month  + "-" + date + " "+ h + ":" + m + ":" + s;
-        /*
-        var momentDate = moment(dateStr);
-        momentDate ().toDate();
-        var inputDate = document.getElementById("date").valu;
-        */
         document.form1.date.value = dateStr;
     }
 </script>
@@ -46,6 +41,9 @@
                         <span class="glyphicon glyphicon-th"></span>
                         <span>Agregar producto</span>
                     </strong>
+                    <div class="pull-right">
+                        <a class="btn btn-primary" th:href="@{/productos}">Regresar</a>
+                    </div>
                 </div>
                 <div class="panel-body">
                     <div class="col-md-12">
@@ -79,20 +77,20 @@
 
                             <div class="form-group">
                                 <div class="row">
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <div class="input-group">
                                             <span class="input-group-addon">
                                             <i class="glyphicon glyphicon-shopping-cart"></i>
                                             </span>
-                                            <input type="number" class="form-control" name="quantity" placeholder="Cantidad" required>
+                                            <input type="number" class="form-control" name="quantity" placeholder="Cantidad" required min=1 oninput="validity.valid||(value='');">
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-5">
                                         <div class="input-group">
                                             <span class="input-group-addon">
                                                 <i class="glyphicon glyphicon-usd"></i>
                                             </span>
-                                            <input type="number" class="form-control" name="buy_price" placeholder="Precio de compra" required>
+                                            <input type="number" class="form-control" name="buy_price" placeholder="Precio de compra" required min=1 oninput="validity.valid||(value='');">
                                             <span class="input-group-addon">.00</span>
                                         </div>
                                     </div>
@@ -101,7 +99,7 @@
                                             <span class="input-group-addon">
                                                 <i class="glyphicon glyphicon-usd"></i>
                                             </span>
-                                            <input type="number" class="form-control" name="sale_price" placeholder="Precio de venta" required>
+                                            <input type="number" class="form-control" name="sale_price" placeholder="Precio de venta" required min=1 oninput="validity.valid||(value='');">
                                             <span class="input-group-addon">.00</span>
                                         </div>
                                     </div>

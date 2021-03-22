@@ -42,6 +42,8 @@ public class ControladorInicio {
     private MediaService mediaService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private VentasService ventasService;
 
 
     @GetMapping("/")
@@ -97,6 +99,16 @@ public class ControladorInicio {
         return "productos";
     }
 
+
+    @GetMapping("/ventas")
+    public String mostrarVentas(Model model) {
+        log.info("Accediendo a ventas");
+        model.addAttribute("pageTitle", "Ventas");
+        var ventas = ventasService.listVentas();
+        log.info("Se han encontrado las siguientes ventas: "+ventas);
+        model.addAttribute("ventas", ventas);
+        return "ventas";
+    }
 
     @GetMapping("/index")
     public String inicioLogin(Model model) {

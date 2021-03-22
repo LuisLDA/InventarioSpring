@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/plantilla.html :: head">
+    <title>Agregar Venta</title>
+    <meta charset="UTF-8">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <link rel="stylesheet" href="/static/css/main.css" th:href="@{/css/main.css}"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.js"></script>
+</head>
+
+<body>
+<header th:replace="layout/plantilla.html :: header"></header>
+<div th:replace="layout/plantilla.html :: div_sidebar"></div>
+
+
+<script>
+    $(document).ready(function(){
+        jQuery('#qty').on('keyup mouseup' ,function(){
+            var precio = document.getElementById("precioI").value;
+            var total = jQuery(this).val()*precio;
+            jQuery("#price").val(total);
+        });
+    });
+</script>
+<script>
+    $(document).ready(function(){
+        var now = new Date();
+        var month = (now.getMonth() + 1);
+        var day = now.getDate();
+        if (month < 10)
+            month = "0" + month;
+        if (day < 10)
+            day = "0" + day;
+        var today = now.getFullYear() + '/' + month + '/' + day;
+        $('#date').val(today);
+    });
+</script>
+
+<div class="page">
+    <input type="hidden" class="listNames" id="listNames" th:value="${namesString}">
+    <input type="hidden" class="idString" id="idString" th:value="${idString}">
+
+    <div class="row">
+        <div class="col-md-12">
+            <!-- Contenedor para mensajes -->
+        </div>
+    </div>
+
+    <!-- Contenedor de la barra de busqueda -->
+    <div class="col-md-11">
+        <div class="wrapper">
+            <form form action="#" method="post" th:action="@{/ventas/agregar_ventas}" autocomplete="off" id="sug-form">
+                <div class="search-input">
+                        <div class="input-group">
+                            <input id="selectedName" type="text" name="name" placeholder="Nombre del Producto" required>
+                            <button type="submit" class="btn btn-default btn-primary" id="btnCargar">Búsqueda</button>
+                        </div>
+                    <div class="autocom-box">
+                        <!-- here list are inserted from javascript -->
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="/static/js/suggestProducts.js" th:src="@{/js/suggestProducts.js}"></script>
+
+
+
+    <!-- Contenedor de lista -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading clearfix">
+                    <strong>
+                        <span class="glyphicon glyphicon-th"></span>
+                        <span>Editar venta</span>
+                    </strong>
+                </div>
+                <div class="panel-body">
+                    <form method="post" action="#" th:action="@{/ventas/guardar_venta}">
+                        <table class="table table-bordered">
+                            <thead>
+                            <th id="t_product"> Producto </th>
+                            <th id="t_precio"> Precio </th>
+                            <th id="t_cantidad"> Cantidad </th>
+                            <th id="t_total"> Total </th>
+                            <th id="t_agregado"> Agregado</th>
+                            <th id="t_acciones"> Acciones</th>
+                            </thead>
+                            <tbody id="product_info" th:if="${productoSale != null}">
+                            <!-- se lista el producto seleccionado -->
+                                <div>
+                                    <span >
+                                        <tr>
+                                            <td>
+                                                <!-- recupera el nombre del producto -->
+                                                <input class="form-control" type="hidden" name="product_id" id="product_id" th:value="${productoSale.getId()}">
+                                                <span th:text="${productoSale.getName()}"/>
+                                            </td>
+                                            <td>
+                                                <!-- recupera el precio del producto -->
+                                                <input class="form-control" type="text" name="precioI" id="precioI" th:value="${productoSale.getSale_price()}" readonly>
+                                            </td>
+                                            <td>
+                                                <!-- recupera la cantidad del producto -->
+                                                <input type="number" class="form-control" name="qty" id="qty" required min=1 th:max="${productoSale.getQuantity()}" oninput="validity.valid||(value='');" th:value="${productoSale.getQuantity()}">
+                                            </td>
+                                            <td class="text-center">
+                                                <!-- total de la venta del producto  -->
+                                                <input type="text" class="form-control" name="price" id="price" required value="0" readonly>
+                                            </td>
+                                            <td class="text-center">
+                                                <!-- fecha en la que fue agregada la venta -->
+                                                <input type="date" class="form-control datepicker" name="date" id="date" > <!-- data-date-format="yyyy-MM-dd"-->
+                                            </td>
+                                            <td class="text-center">
+                                                <!-- accion de agregar el producto -->
+                                                <button type="submit" name="add_sale" class="btn btn-primary">Agregar</button>
+                                            </td>
+                                        </tr>
+                                    </span>
+                                </div>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
