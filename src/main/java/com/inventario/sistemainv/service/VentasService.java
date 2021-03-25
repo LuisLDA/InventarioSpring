@@ -13,6 +13,7 @@ public interface VentasService {
     public void deleteVentas(Ventas ventas);
     public Ventas searchVentas(Ventas ventas);
     public int countVentas();
+    public List<Ventas> searchSalesByDate(String date1, String date2);
 
     //public List<String> producto_media();
 }

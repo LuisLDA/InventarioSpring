@@ -118,6 +118,11 @@ public class ControladorInicio {
         return "ventas";
     }
 
+    @GetMapping("/reportes")
+    public String reporte(Model model) {
+        return "reportes";
+    }
+
     @GetMapping("/index")
     public String inicioLogin(Model model) {
         model.addAttribute("pageTitle", "Login");

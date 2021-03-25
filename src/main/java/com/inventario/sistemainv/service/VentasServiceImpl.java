@@ -44,4 +44,9 @@ public class VentasServiceImpl implements VentasService{
     public int countVentas() {
         return 0;
     }
+
+    @Override
+    public List<Ventas> searchSalesByDate(String date1, String date2) {
+        return ventasDao.searchSalesByDate(date1, date2);
+    }
 }

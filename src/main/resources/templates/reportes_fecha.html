@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/plantilla.html :: head">
+    <title>Title</title>
+</head>
+<body>
+<div id="wrapper">
+    <nav th:replace="layout/plantilla.html :: div_sidebar"/>
+    <div class="d-flex flex-column" id="content-wrapper">
+        <div id="content">
+            <div th:replace="layout/plantilla.html :: header"/>
+            <div class="container-fluid">
+
+                <div class="col-md-12">
+                    <!-- mensaje de advertencia aqui -->
+                    <div class="alert alert-success" th:if="${success != null}" th:text="${success}"></div>
+                    <div class="alert alert-danger" th:if="${error != null}" th:text="${error}"></div>
+                    <div class="alert alert-info" th:if="${info != null}" th:text="${info}"></div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="panel">
+                            <div class="panel-heading"></div>
+                            <div class="panel-body">
+                                <form class="clearfix" method="post" th:action="@{/reportes/reporteFecha}">
+                                    <div class="form-group">
+                                        <label class="form-label">Rango de fechas</label>
+                                        <div class="input-group">
+                                            <input type="date" class="datepicker form-control" name="start-date" placeholder="From">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-menu-right"></i></span>
+                                            <input type="date" class="datepicker form-control" name="end-date" placeholder="To">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="submit" name="submit" class="btn btn-primary">Generar Reporte</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" th:if="${ventasfecha != null and !ventasfecha.isEmpty()}">
+                    <div class="col-md-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading clearfix">
+                                <strong>
+                                    <span class="fa fa-th"></span>
+                                    <span>Ventas en la fecha</span>
+                                </strong>
+                                <div class="pull-right">
+                                    <!-- href referenacia a crear Pdf -->
+                                    <a href="" class="btn btn-primary" th:href="@{/reportes/reportes_fecha(format=pdf)}">Generar PDF</a>
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <table class="table table-bordered table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th class="text-center" style="width: 50px;">#</th>
+                                        <th> Nombre del producto</th>
+                                        <th class="text-center" style="width: 12%;"> Precio por Unidad</th>
+                                        <th class="text-center" style="width: 15%;"> Cantidad</th>
+                                        <th class="text-center" style="width: 15%;"> Total</th>
+                                        <th class="text-center" style="width: 15%;"> Fecha</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <!-- recupera todas las ventas -->
+                                    <tr th:each="vent , contador : ${ventasfecha}">
+                                        <td class="text-center">
+                                            <!-- recupera el ID del prodcuto -->
+                                            <span th:text="${contador.count}"/>
+                                        </td>
+                                        <td>
+                                            <!-- recupera el nombre de la venta -->
+                                            <span th:text="${vent.getProduct_id().getName()}"/>
+                                        </td>
+                                        <td class="text-center">
+                                            <!-- recupera la cantidad de la venta -->
+                                            <span th:text="${vent.getProduct_id().getSale_price()}"/>
+                                        </td>
+                                        <td class="text-center">
+                                            <!-- recupera la cantidad de la venta -->
+                                            <span th:text="${vent.getQty()}"/>
+                                        </td>
+                                        <td class="text-center">
+                                            <!-- recupera el precio de la venta -->
+                                            <span th:text="${vent.getPrice()}"/>
+                                        </td>
+                                        <td class="text-center">
+                                            <!-- recupera la fecha de la venta -->
+                                            <span th:text="${vent.getDate()}"/>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div th:replace="layout/plantilla.html :: footer"></div>
+    </div>
+
+</body>
+</html>
