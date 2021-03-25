@@ -58,7 +58,8 @@
                                         <div id="result" class="list-group"></div>
                                     </td>
                                     <td id="s_qty">
-                                        <input type="number" class="form-control" name="qty" id="qty" th:value="*{qty}" required min=1 th:max="*{product_id.getQuantity()}" oninput="validity.valid||(value='');">
+                                        <input type="number" class="form-control" name="qty" id="qty" th:value="*{qty}" required
+                                               min=1 th:max="*{product_id.getQuantity()}" oninput="validity.valid||(value='');"> <!--th:max="*{product_id.getQuantity()}"-->
                                     </td>
                                     <td id="s_price">
                                         <input type="number" class="form-control" name="price_I" id="price_I" readonly min=0 oninput="validity.valid||(value='');" th:value="*{product_id.getSale_price()}">

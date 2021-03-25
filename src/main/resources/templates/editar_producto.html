@@ -22,6 +22,26 @@
     }
 </script>
 
+<script type="text/javascript">
+    function setModifiedDate(){
+        var d = new Date();
+        function addZero(i) {
+            if (i < 10) {
+                i = "0" + i;
+            }
+            return i;
+        }
+        var date = addZero(d.getUTCDate());
+        var month = addZero(d.getUTCMonth()+1);
+        var year = addZero(d.getUTCFullYear());
+        var h = addZero(d.getHours());
+        var m = addZero(d.getMinutes());
+        var s = addZero(d.getSeconds());
+        var dateStr = year + "-" + month  + "-" + date + " "+ h + ":" + m + ":" + s;
+        document.getElementById("modified_date").value = dateStr;
+    }
+</script>
+
 <div class="page">
     <div class="row">
         <div class="col-md-9">
@@ -118,9 +138,10 @@
                                         </div>
                                     </div>
                                     <div><input type="hidden"  name="date" th:value="*{date}"></div>
+                                    <input type="hidden" typeof="date" name="modified_date" id="modified_date">
                                 </div>
                             </div>
-                            <button type="submit" name="agregar_prod" class="btn btn-danger">Actualizar</button>
+                            <button type="submit" name="agregar_prod" class="btn btn-danger" onclick="setModifiedDate()">Actualizar</button>
                         </form>
                     </div>
                 </div>

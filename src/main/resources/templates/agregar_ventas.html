@@ -17,18 +17,24 @@
 <header th:replace="layout/plantilla.html :: header"></header>
 <div th:replace="layout/plantilla.html :: div_sidebar"></div>
 
-
 <script>
     $(document).ready(function(){
+        var precio = document.getElementById("product_id.sale_price").value;
+        var cantidad = document.getElementById("qty").value;
+        var total = cantidad*precio;
+        jQuery("#price").val(total);
+    });
+    $(document).ready(function(){
         jQuery('#qty').on('keyup mouseup' ,function(){
-            var precio = document.getElementById("precioI").value;
+            var precio = document.getElementById("product_id.sale_price").value;
             var total = jQuery(this).val()*precio;
             jQuery("#price").val(total);
         });
     });
 </script>
-<script>
-    $(document).ready(function(){
+
+<script type="text/javascript">
+    $(document).ready( function() {
         var now = new Date();
         var month = (now.getMonth() + 1);
         var day = now.getDate();
@@ -36,9 +42,21 @@
             month = "0" + month;
         if (day < 10)
             day = "0" + day;
-        var today = now.getFullYear() + '/' + month + '/' + day;
+        var today = now.getFullYear() + '-' + month + '-' + day;
         $('#date').val(today);
     });
+
+    function getMinDate(){
+        var now = new Date();
+        var month = (now.getMonth() + 1);
+        var day = now.getDate();
+        if (month < 10)
+            month = "0" + month;
+        if (day < 10)
+            day = "0" + day;
+        var today = now.getFullYear() + '-' + month + '-' + day;
+        return today;
+    }
 </script>
 
 <div class="page">
@@ -47,14 +65,17 @@
 
     <div class="row">
         <div class="col-md-12">
-            <!-- Contenedor para mensajes -->
+            <!-- Contenedor para mensajes-->
+            <div class="alert alert-success" th:if="${success != null}" th:text="${success}"></div>
+            <div class="alert alert-danger" th:if="${error != null}" th:text="${error}"></div>
+            <div class="alert alert-info" th:if="${info != null}" th:text="${info}"></div>
         </div>
     </div>
 
     <!-- Contenedor de la barra de busqueda -->
     <div class="col-md-11">
         <div class="wrapper">
-            <form form action="#" method="post" th:action="@{/ventas/agregar_ventas}" autocomplete="off" id="sug-form">
+            <form form action="#" method="post" th:action="@{/ventas/buscar_ventas}" autocomplete="off" id="sug-form">
                 <div class="search-input">
                         <div class="input-group">
                             <input id="selectedName" type="text" name="name" placeholder="Nombre del Producto" required>
@@ -70,8 +91,6 @@
 
     <script src="/static/js/suggestProducts.js" th:src="@{/js/suggestProducts.js}"></script>
 
-
-
     <!-- Contenedor de lista -->
     <div class="row">
         <div class="col-md-12">
@@ -79,8 +98,11 @@
                 <div class="panel-heading clearfix">
                     <strong>
                         <span class="glyphicon glyphicon-th"></span>
-                        <span>Editar venta</span>
+                        <span>Agregar venta</span>
                     </strong>
+                    <div class="pull-right">
+                        <a class="btn btn-primary" th:href="@{/ventas}">Regresar</a>
+                    </div>
                 </div>
                 <div class="panel-body">
                     <form method="post" action="#" th:action="@{/ventas/guardar_venta}">
@@ -105,7 +127,7 @@
                                             </td>
                                             <td>
                                                 <!-- recupera el precio del producto -->
-                                                <input class="form-control" type="text" name="precioI" id="precioI" th:value="${productoSale.getSale_price()}" readonly>
+                                                <input class="form-control" type="number" name="product_id.sale_price" id="product_id.sale_price" th:value="${productoSale.getSale_price()}" required>
                                             </td>
                                             <td>
                                                 <!-- recupera la cantidad del producto -->
@@ -117,7 +139,7 @@
                                             </td>
                                             <td class="text-center">
                                                 <!-- fecha en la que fue agregada la venta -->
-                                                <input type="date" class="form-control datepicker" name="date" id="date" > <!-- data-date-format="yyyy-MM-dd"-->
+                                                <input type="date" class="form-control datepicker" name="date" id="date" min="getMinDate" oninput="validity.valid||(value='');"> <!-- data-date-format="yyyy-MM-dd"-->
                                             </td>
                                             <td class="text-center">
                                                 <!-- accion de agregar el producto -->

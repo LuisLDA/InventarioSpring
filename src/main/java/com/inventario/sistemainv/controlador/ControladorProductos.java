@@ -73,14 +73,19 @@ public class ControladorProductos {
         log.info("Agregando el producto " + product);
         var name = productService.searchNameProd(product.getName());
         try {
-            if (!product.getName().equalsIgnoreCase(name)) {
-                if (product.getId() == null) {
+            if(product.getId() == null){ //producto agregado
+                if(!product.getName().equalsIgnoreCase(name)){ //producto nuevo
+                    product.setModified_date(null);
+                    productService.saveProduct(product);
                     flash.addFlashAttribute("success", "El producto " + product.getName() + " ha sido agregado con éxito.");
-                } else {
-                    flash.addFlashAttribute("success", "El producto se modificó con éxito!.");
+                }else{//producto con el nombre repetido
+                    flash.addFlashAttribute("error", "El producto ya se encuentra registrado.");
+                    return "redirect:/productos";
                 }
+            }else{ //producto que ha sido modificado
+                productService.saveProduct(product);
+                flash.addFlashAttribute("success", "El producto se modificó con éxito!.");
             }
-            productService.saveProduct(product);
         } catch (DataIntegrityViolationException e) {
             flash.addFlashAttribute("error", "El producto ya se encuentra registrado.");
             return "redirect:/productos";

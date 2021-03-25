@@ -36,9 +36,10 @@
                             <th> Descripción</th>
                             <th class="text-center" style="width: 10%;"> Categoría</th>
                             <th class="text-center" style="width: 10%;"> Stock</th>
-                            <th class="text-center" style="width: 10%;"> Precio de compra</th>
-                            <th class="text-center" style="width: 10%;"> Precio de venta</th>
+                            <th class="text-center" style="width: 8%;"> Precio de compra</th>
+                            <th class="text-center" style="width: 8%;"> Precio de venta</th>
                             <th class="text-center" style="width: 10%;"> Agregado</th>
+                            <th class="text-center" style="width: 10%;"> Ultima vez Modificado</th>
                             <th class="text-center" style="width: 100px;"> Acciones</th>
                         </tr>
                         </thead>
@@ -67,7 +68,12 @@
                                         </td>
                                         <td class="text-center">
                                             <!-- recupera la cantidad del producto -->
-                                            <span th:text="${producto.getQuantity()}"/>
+                                            <span th:if="${producto.getQuantity() != 0}">
+                                                <span th:text="${producto.getQuantity()}"></span>
+                                            </span>
+                                            <span class="label label-warning" th:if="${producto.getQuantity() == 0}">
+                                                Sin existencias
+                                            </span>
                                         </td>
                                         <td class="text-center">
                                             <!-- recupera el precio de compra -->
@@ -80,6 +86,15 @@
                                         <td class="text-center">
                                             <!-- recupera la fecha del producto -->
                                             <span th:text="${producto.getDate()}"/>
+                                        </td>
+                                        <td class="text-center">
+                                            <!-- recupera la fecha de modificación del producto-->
+                                            <span th:if="${producto.getModified_date() != null}">
+                                                <span th:text="${producto.getModified_date()}"></span>
+                                            </span>
+                                            <span class="label label-success" th:if="${producto.getModified_date() == null}">
+                                                Sin cambios
+                                            </span>
                                         </td>
                                         <td class="text-center">
                                             <div class="btn-group">

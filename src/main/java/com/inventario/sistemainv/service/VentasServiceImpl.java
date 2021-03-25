@@ -34,7 +34,11 @@ public class VentasServiceImpl implements VentasService{
     @Override
     @Transactional(readOnly = true)
     public Ventas searchVentas(Ventas ventas) {
-        return ventasDao.findById(ventas.getId()).orElse(null);
+        if(ventas.getId() != null){
+            return ventasDao.findById(ventas.getId()).orElse(null);
+        }else{
+            return null;
+        }
     }
     @Override
     public int countVentas() {

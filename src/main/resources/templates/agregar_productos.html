@@ -22,9 +22,9 @@
         var h = addZero(d.getHours());
         var m = addZero(d.getMinutes());
         var s = addZero(d.getSeconds());
-
         var dateStr = year + "-" + month  + "-" + date + " "+ h + ":" + m + ":" + s;
         document.form1.date.value = dateStr;
+        document.form1.modified_date.value = dateStr;
     }
 </script>
 <div class="page">
@@ -50,6 +50,8 @@
                         <!-- action hace referencia al archivo anadir producto -->
                         <form name="form1" action="#" th:action="@{/productos/agregar_nuevo_producto}" method="post">
                             <input type="hidden" typeof="date" name="date" id="date">
+                            <input type="hidden" typeof="date" name="modified_date" id="modified_date">
+
                             <div class="form-group">
                                 <div class="input-group">
                                     <span class="input-group-addon">

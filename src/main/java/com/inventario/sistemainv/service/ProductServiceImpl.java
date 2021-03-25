@@ -80,7 +80,7 @@ public class ProductServiceImpl implements ProductService{
     public Product saleProduct(String name){
         productList = (List<Product>) productsDao.findAll();
         for (Product pr: productList) {
-            if(name.equals(pr.getName())){
+            if(name.equalsIgnoreCase(pr.getName())){
                 return pr;
             }
         }

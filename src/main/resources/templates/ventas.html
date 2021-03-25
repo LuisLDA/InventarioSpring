@@ -7,11 +7,20 @@
 <body>
 <header th:replace="layout/plantilla.html :: header"></header>
 <div th:replace="layout/plantilla.html :: div_sidebar"></div>
+<script type="text/javascript">
+    function setPriceUnity(){
+        var total = document.getElementById("total").value;
+        var cantidad = document.getElementById("cantidad").value;
+        var precio = total/cantidad;
+        document.getElementById("precio_unitario").value = total;
+    }
+</script>
 <div class="page">
     <div th:fragment="list_ventas">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <!-- mensaje de advertencia aqui -->
+                <div class="alert alert-success" th:if="${success != null}" th:text="${success}"></div>
             </div>
         </div>
         <div class="row">
@@ -24,7 +33,7 @@
                         </strong>
                         <div class="pull-right">
                             <!-- href referenacia al archivo de anadir ventas -->
-                            <a href="" class="btn btn-primary" th:href="@{/ventas/seleccionar_venta}">Agregar venta</a>
+                            <a href="" class="btn btn-primary" th:href="@{/ventas/agregar_ventas}">Agregar venta</a>
                         </div>
                     </div>
                     <div class="panel-body">
@@ -33,9 +42,10 @@
                             <tr>
                                 <th class="text-center" style="width: 50px;">#</th>
                                 <th> Nombre del producto</th>
-                                <th class="text-center" style="width: 15%;"> Cantidad</th>
-                                <th class="text-center" style="width: 15%;"> Total</th>
-                                <th class="text-center" style="width: 15%;"> Fecha</th>
+                                <th class="text-center" style="width: 12%;"> Precio por Unidad</th>
+                                <th class="text-center" style="width: 12%;"> Cantidad</th>
+                                <th class="text-center" style="width: 12%;"> Total</th>
+                                <th class="text-center" style="width: 12%;"> Fecha</th>
                                 <th class="text-center" style="width: 100px;"> Acciones</th>
                             </tr>
                             </thead>
@@ -45,11 +55,14 @@
                                 <td class="text-center">
                                     <!-- recupera el ID del prodcuto -->
                                     <span th:text="${contador.count}"/>
-
                                 </td>
                                 <td>
                                     <!-- recupera el nombre de la venta -->
                                     <span th:text="${vent.getProduct_id().getName()}"/>
+                                </td>
+                                <td class="text-center">
+                                    <!-- recupera el precio del prodcuto -->
+                                    <span th:text="${vent.getProduct_id().getSale_price()}"/>
                                 </td>
                                 <td class="text-center">
                                     <!-- recupera la cantidad de la venta -->

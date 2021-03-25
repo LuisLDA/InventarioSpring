@@ -34,4 +34,10 @@ public class Product implements Serializable {
 
     private String date;
 
+    private String modified_date;
+
+    public Integer getQuantity() {
+        Integer qty = Integer.valueOf(quantity);
+        return qty;
+    }
 }
