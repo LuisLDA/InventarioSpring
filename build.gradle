@@ -13,7 +13,8 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.webjars:bootstrap:3.3.4'
+    // https://mvnrepository.com/artifact/org.webjars/bootstrap
+    implementation group: 'org.webjars', name: 'bootstrap', version: '4.6.0'
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-security'

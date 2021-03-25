@@ -6,38 +6,47 @@
     <!--<link rel="stylesheet" href="/static/css/main.css" th:href="@{/css/main.css}"/>-->
 </head>
 <body>
-<header th:replace="layout/plantilla.html :: header">
-</header>
-<div th:replace="layout/plantilla.html :: div_sidebar"></div>
-<div class="page">
-    <div th:fragment="edit_categ">
-        <div class="row">
-            <div class="col-md-12">
-                <!-- Mensaje de advertencia aqui -->
-            </div>
-            <div class="col-md-5">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <strong>
-                            <span class="glyphicon glyphicon-th"></span>
-                            <span>Editando</span>
-                        </strong>
-                    </div>
-                    <div class="panel-body">
-                        <!-- action referencia al archivo editar categoria -->
-                        <form method="post" th:action="@{/categorias/add_categoria}" th:object="${categoria}" >
-                            <div class="form-group">
-                                <!-- value recupera el valor de la categoria a editar -->
-                                <input type="hidden"  name="id" th:value="*{id}">
-                                <input type="text" class="form-control" name="name" th:value="*{name}" required>
+<div id="wrapper">
+    <nav th:replace="layout/plantilla.html :: div_sidebar"/>
+    <div class="d-flex flex-column" id="content-wrapper">
+        <div id="content">
+            <div th:replace="layout/plantilla.html :: header"/>
+            <div class="container-fluid">
+                <div>
+                    <div th:fragment="edit_categ">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <!-- Mensaje de advertencia aqui -->
                             </div>
-                            <button type="submit" name="edit_cat" class="btn btn-primary">Actualizar categoría</button>
-                        </form>
+                            <div class="col-md-5">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <strong>
+                                            <span class="glyphicon glyphicon-th"></span>
+                                            <span>Editando</span>
+                                        </strong>
+                                    </div>
+                                    <div class="panel-body">
+                                        <!-- action referencia al archivo editar categoria -->
+                                        <form method="post" th:action="@{/categorias/add_categoria}" th:object="${categoria}" >
+                                            <div class="form-group">
+                                                <!-- value recupera el valor de la categoria a editar -->
+                                                <input type="hidden"  name="id" th:value="*{id}">
+                                                <input type="text" class="form-control" name="name" th:value="*{name}" required>
+                                            </div>
+                                            <button type="submit" name="edit_cat" class="btn btn-primary">Actualizar categoría</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+        <div th:replace="layout/plantilla.html :: footer"></div>
     </div>
 </div>
+
 </body>
 </html>

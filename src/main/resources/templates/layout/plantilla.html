@@ -4,12 +4,25 @@
 <head th:fragment="head">
     <meta charset="UTF-8">
     <title th:text="${pageTitle}">Template Title</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
     <link rel="icon" type="image/png" th:href="@{/images/icono.png}"/>
-    <script type="text/javascript" th:src="@{/webjars/jquery/3.5.1/dist/jquery.min.js}"></script>
-    <script th:src="@{/webjars/bootstrap/3.3.4/js/bootstrap.min.js}"></script>
-    <link rel="stylesheet" th:href="@{/webjars/bootstrap/3.3.4/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/fonts/fontawesome-all.min.css}">
+    <link rel="stylesheet" th:href="@{/fonts/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{/fonts/fontawesome5-overrides.min.css}">
     <link rel="stylesheet" href="/static/css/main.css" th:href="@{/css/main.css}"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
+    <script th:src="@{/js/script.min.js}"></script>
+    <script th:src="@{/js/chart.min.js}"></script>
+    <script th:src="@{/js/jquery.min.js}"></script>
+
+    <!-- bootstrap -->
+    <!--  <script th:src="@{/webjars/bootstrap/4.6.0/js/bootstrap.min.js}"></script>
+      <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.6.0/css/bootstrap.min.css}">-->
+    <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}">
+    <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+
     <script>
         $(document).ready(function () {
             $('.submenu-toggle').click(function () {
@@ -18,122 +31,126 @@
 
         });
     </script>
-
 </head>
-<body>
-<header id="header" th:fragment="header">
-
-    <div class="logo pull-left"> Sistema de Inventario</div>
-    <div class="header-content">
-        <div class="header-date pull-left">
-            <strong th:text="${#dates.format(#dates.createNow(),'dd/MM/YYYY')}"
-            ></strong>
+<body id="page-top">
+<div id="content" th:fragment="header">
+    <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
+        <div class="container-fluid">
+            <button class="btn btn-link d-md-none rounded-circle mr-3" id="sidebarToggleTop" type="button"><i
+                    class="fas fa-bars"></i></button>
+            <div class="header-date pull-left">
+                <strong th:text="${#dates.format(#dates.createNow(),'dd/MM/YYYY')}"
+                ></strong>
+            </div>
+            <ul class="navbar-nav flex-nowrap ml-auto">
+                <div class="d-none d-sm-block topbar-divider"></div>
+                <li class="nav-item dropdown no-arrow">
+                    <div class="nav-item dropdown no-arrow">
+                        <a class="dropdown-toggle nav-link" aria-expanded="false" data-toggle="dropdown"
+                           href="#">
+                            <i class="fa fa-user"></i>
+                            &nbsp;Usuario:&nbsp;
+                                        <span sec:authentication="name" class="d-none d-lg-inline mr-2 text-gray-600 small">
+                                           USERNAME </span></a>
+                        <div class="dropdown-menu shadow dropdown-menu-right animated--grow-in">
+                            <a class="dropdown-item" th:href="@{/perfil}"><i
+                                    class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400">
+                            </i>&nbsp;Configuraciones</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item"th:href="@{/index?logout}">
+                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Cerrar sesión</a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
         </div>
+    </nav>
+</div>
+
+<nav id="sidebar" class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0"
+     th:fragment="div_sidebar">
+
+    <div class="container-fluid d-flex flex-column p-0"><a
+            class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
+        <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-hotel"></i></div>
+        <div class="sidebar-brand-text mx-3"><span>Sistema<br>De Inventario<br></span></div>
+    </a>
+        <hr class="sidebar-divider my-0">
+        <ul class="navbar-nav text-light" id="accordionSidebar">
 
 
-        <div class="pull-right clearfix">
-            <ul class="info-menu list-inline list-unstyled">
-                <li class="profile">
-                    <a href="" data-toggle="dropdown" class="toggle" aria-expanded="false">
-                        <img src="https://cdn0.iconfinder.com/data/icons/set-ui-app-android/32/8-512.png" height="15px"
-                             alt="user-image" class="img-circle img-inline">
-                        <b>Usuario:
-                            <span sec:authentication="name">USERNAME</span>
-                        </b>
-                    </a>
+            <li class="nav-item"><a class="nav-link active" href="" th:href="@{/panel_control}" ><i class="fa fa-home"></i><span>Panel de Control</span></a>
+            </li>
 
-                    <ul class="dropdown-menu">
-                        <!--<li>
-                            <a href="" title="edit account">
-                                <i class="glyphicon glyphicon-user"></i>
-                                Perfil
-                            </a>
-                        </li>-->
-                        <li>
-                            <a th:href="@{/perfil}" title="edit account">
-                                <i class="glyphicon glyphicon-cog"></i>
-                                Configuración
-                            </a>
-                        </li>
-
-                        <li class="last">
-                            <a th:href="@{/index?logout}">
-                                <i class="glyphicon glyphicon-off"></i>
-                                Salir
-                            </a>
-                        </li>
-
-                    </ul>
-
+            <li class="nav-item">
+                <a href="#Accesos" data-toggle="collapse" aria-expanded="false"
+                   class="nav-link dropdown-toggle active">
+                    <i class="fa fa-users"></i><span>Accesos</span></a>
+            </li>
+            <ul class="nav collapse" id="Accesos">
+                <li class="nav-item">
+                    <a th:href="@{/accesos/grupos}" class="nav-link active"><span>Administrar grupos</span></a>
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/accesos/usuarios}" class="nav-link active"><span>Administrar usuarios</span></a>
                 </li>
             </ul>
 
-        </div>
+            <li class="nav-item"><a class="nav-link active" href="" th:href="@{/categorias}"><i class="fa fa-indent"></i><span>Categorías</span></a>
+            </li>
+
+            <li class="nav-item">
+                <a href="#Productos" data-toggle="collapse" aria-expanded="false"
+                   class="nav-link dropdown-toggle active">
+                    <i class="fa fa-th-large"></i><span>Productos</span></a>
+            </li>
+            <ul class="nav collapse" id="Productos">
+                <li class="nav-item">
+                    <a th:href="@{/productos}" class="nav-link active"><span>Administrar Productos</span></a>
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/productos/agregar_productos}" class="nav-link active"><span>Agregar Productos</span></a>
+                </li>
+            </ul>
+
+
+            <li class="nav-item"><a class="nav-link active" th:href="@{/media}"><i
+                    class="fa fa-image"></i><span>Media</span></a></li>
+            <li class="nav-item">
+                <a href="#Ventas" data-toggle="collapse" aria-expanded="false"
+                   class="nav-link dropdown-toggle active">
+                    <i class="fa fa-shopping-cart"></i><span>Ventas</span></a>
+            </li>
+            <ul class="nav collapse" id="Ventas">
+                <li class="nav-item">
+                    <a th:href="@{/ventas}" class="nav-link active"><span>Administrar Ventas</span></a>
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/ventas/seleccionar_venta}" class="nav-link active"><span>Agregar Ventas</span></a>
+                </li>
+            </ul>
+
+            <li class="nav-item">
+                <a class="nav-link active" href="#">
+                    <i class="fa fa-signal"></i><span>Reporte de ventas</span></a>
+            </li>
+        </ul>
+
     </div>
+</nav>
 
-</header>
-
-<div class="sidebar" th:fragment="div_sidebar">
-    <ul>
-        <li>
-            <a href="" th:href="@{/panel_control}">
-                <i class="glyphicon glyphicon-home"></i>
-                <span>Panel de control</span>
-            </a>
-        </li>
-        <li>
-            <a class="submenu-toggle">
-                <i class="glyphicon glyphicon-user"></i>
-                <span>Accesos</span>
-            </a>
-            <ul class="nav submenu">
-                <li><a th:href="@{/accesos/grupos}">Administrar grupos</a></li>
-                <li><a th:href="@{/accesos/usuarios}">Administrar usuarios</a></li>
-            </ul>
-        </li>
-        <li>
-            <a href="#" th:href="@{/categorias}">
-                <i class="glyphicon glyphicon-indent-left"></i>
-                <span>Categorías</span>
-            </a>
-        </li>
-        <li>
-            <a class="submenu-toggle">
-                <i class="glyphicon glyphicon-th-large"></i>
-                <span>Productos</span>
-            </a>
-            <ul class="nav submenu">
-                <li><a th:href="@{/productos}">Administrar productos</a></li>
-                <li><a th:href="@{/productos/agregar_productos}">Agregar productos</a></li>
-            </ul>
-        </li>
-        <li>
-            <a th:href="@{/media}">
-                <i class="glyphicon glyphicon-picture"></i>
-                <span>Media</span>
-            </a>
-        </li>
-        <li>
-            <a href="#" class="submenu-toggle">
-                <i class="glyphicon glyphicon-th-list"></i>
-                <span>Ventas</span>
-            </a>
-            <ul class="nav submenu">
-                <li><a th:href="@{/ventas}">Administrar ventas</a></li>
-                <li><a th:href="@{/ventas/seleccionar_venta}">Agregar venta</a></li>
-            </ul>
-        </li>
-        <li>
-            <a href="#" class="submenu-toggle">
-                <i class="glyphicon glyphicon-signal"></i>
-                <span>Reporte de ventas</span>
-            </a>
-            <ul class="nav submenu">
-                <li><a href="">Ventas por fecha </a></li>
-            </ul>
-        </li>
-    </ul>
+<div th:fragment="footer">
+    <footer class="bg-white sticky-footer">
+        <div class="container my-auto">
+            <div class="text-center my-auto copyright"><span>Copyright © Grupo-3 2021</span></div>
+        </div>
+    </footer>
 </div>
+
+<a th:fragment="topButton" class="border rounded d-inline scroll-to-top" href="#page-top"><i
+        class="fas fa-angle-up"></i></a>
+
+
 
 </body>
 </html>
