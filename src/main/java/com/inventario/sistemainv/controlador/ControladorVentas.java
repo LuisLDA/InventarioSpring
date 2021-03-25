@@ -135,7 +135,7 @@ public class ControladorVentas {
         Integer stock;
         for (var p: producto) {
             if(ventas.getProduct_id().getId().equals(p.getId())){
-                qty = p.getQuantity();
+                qty = p.getQuantityAsInteger();
                 stock = qty-cantidad;
                 p.setQuantity(stock.toString());
                 p.setSale_price(saleP);
@@ -145,7 +145,7 @@ public class ControladorVentas {
     }
 
     public Product validarStock(Product product){
-        Integer qty = product.getQuantity();
+        Integer qty = product.getQuantityAsInteger();
         if(qty > 0){
             return product;
         }else{
