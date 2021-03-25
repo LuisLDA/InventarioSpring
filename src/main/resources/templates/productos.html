@@ -5,47 +5,51 @@
     <title>Productos</title>
 </head>
 <body>
-<header th:replace="layout/plantilla.html :: header"></header>
-<div th:replace="layout/plantilla.html :: div_sidebar"></div>
-<div class="page">
-    <div class="row">
-        <div class="col-md-12">
-            <!-- mensaje de advertencia aqui -->
-            <div class="alert alert-success" th:if="${success != null}" th:text="${success}"></div>
-            <div class="alert alert-danger" th:if="${error != null}" th:text="${error}"></div>
-            <div class="alert alert-info" th:if="${info != null}" th:text="${info}"></div>
-        </div>
-        <div class="col-md-12">
-            <div class="panel panel-default">
-                <div class="panel-heading clearfix">
-                    <strong>
-                        <span class="glyphicon glyphicon-th"></span>
-                        <span>TODOS LOS PRODUCTOS</span>
-                    </strong>
-                    <div class="pull-right">
-                        <!-- href hace referencia al archivo anadir producto -->
-                        <a class="btn btn-primary" th:href="@{/productos/agregar_productos}">Agregar producto</a>
-                    </div>
-                </div>
-                <div class="panel-body">
-                    <table class="table table-bordered">
-                        <thead>
-                        <tr>
-                            <th class="text-center" style="width: 50px;">#</th>
-                            <th> Imagen</th>
-                            <th> Descripción</th>
-                            <th class="text-center" style="width: 10%;"> Categoría</th>
-                            <th class="text-center" style="width: 10%;"> Stock</th>
-                            <th class="text-center" style="width: 8%;"> Precio de compra</th>
-                            <th class="text-center" style="width: 8%;"> Precio de venta</th>
-                            <th class="text-center" style="width: 10%;"> Agregado</th>
-                            <th class="text-center" style="width: 10%;"> Ultima vez Modificado</th>
-                            <th class="text-center" style="width: 100px;"> Acciones</th>
-                        </tr>
-                        </thead>
-                        <tbody th:each="producto, contador : ${producto}">
-                        <!-- se lista todas los productos existentes -->
-                            <div>
+<div id="wrapper">
+    <nav th:replace="layout/plantilla.html :: div_sidebar"/>
+    <div class="d-flex flex-column" id="content-wrapper">
+        <div id="content">
+            <div th:replace="layout/plantilla.html :: header"/>
+            <div class="container-fluid">
+                <div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!-- mensaje de advertencia aqui -->
+                            <div class="alert alert-success" th:if="${success != null}" th:text="${success}"></div>
+                            <div class="alert alert-danger" th:if="${error != null}" th:text="${error}"></div>
+                            <div class="alert alert-info" th:if="${info != null}" th:text="${info}"></div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading clearfix">
+                                    <strong>
+                                        <span class="fa fa-th"></span>
+                                        <span>TODOS LOS PRODUCTOS</span>
+                                    </strong>
+                                    <div class="pull-right">
+                                        <!-- href hace referencia al archivo anadir producto -->
+                                        <a class="btn btn-primary" th:href="@{/productos/agregar_productos}">Agregar producto</a>
+                                    </div>
+                                </div>
+                                <div class="panel-body">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                        <tr>
+                                            <th class="text-center" style="width: 50px;">#</th>
+                                            <th> Imagen</th>
+                                            <th> Descripción</th>
+                                            <th class="text-center" style="width: 10%;"> Categoría</th>
+                                            <th class="text-center" style="width: 10%;"> Stock</th>
+                                            <th class="text-center" style="width: 10%;"> Precio de compra</th>
+                                            <th class="text-center" style="width: 10%;"> Precio de venta</th>
+                                            <th class="text-center" style="width: 10%;"> Agregado</th>
+                                            <th class="text-center" style="width: 10%;"> Ultima vez Modificado</th>
+                                            <th class="text-center" style="width: 100px;"> Acciones</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody th:each="producto, contador : ${producto}">
+                                        <!-- se lista todas los productos existentes -->
+                                        <div>
                                 <span>
                                     <tr>
                                         <td class="text-center">
@@ -101,24 +105,30 @@
                                                 <!-- href referencia al archivo de edicion de producto -->
                                                 <a th:href="@{/productos/editar_producto/} + ${producto.getId()}"
                                                    class="btn btn-info btn-xs" title="Editar" data-toggle="tooltip">
-                                                    <span class="glyphicon glyphicon-edit"></span>
+                                                    <span class="fa fa-edit"></span>
                                                 </a>
                                                 <!-- href referencia al archivo de eliminar producto -->
                                                 <a th:href="@{/productos/eliminar_producto/} + ${producto.getId()}"
                                                    class="btn btn-danger btn-xs" title="Eliminar" data-toggle="tooltip">
-                                                    <span class="glyphicon glyphicon-trash"></span>
+                                                    <span class="fa fa-trash"></span>
                                                 </a>
                                             </div>
                                         </td>
                                     </tr>
                                 </span>
+                                        </div>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
-                        </tbody>
-                    </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+        <div th:replace="layout/plantilla.html :: footer"></div>
     </div>
 </div>
+
 </body>
 </html>

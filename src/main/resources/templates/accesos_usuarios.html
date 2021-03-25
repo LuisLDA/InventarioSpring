@@ -4,106 +4,116 @@
 <head th:replace="layout/plantilla.html :: head">
 </head>
 <body>
-<header th:replace="layout/plantilla.html :: header"></header>
-<div th:replace="layout/plantilla.html :: div_sidebar"></div>
-<div class="page">
-    <!-- Componente usuario -->
-    <div th:fragment="list_user">
-        <div class="row">
-            <div class="col-md-12">
-                <!-- mensaje de advertencia aqui -->
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="panel panel-default">
-                    <div class="panel-heading clearfix">
-                        <strong>
-                            <span class="glyphicon glyphicon-th"></span>
-                            <span>Usuarios</span>
-                        </strong>
-                        <!-- referencia al archivo de agregar usuario -->
-                        <!--<a href="" class="btn btn-info pull-right">Agregar usuario</a>-->
-                        <button type="button" class="btn btn-info pull-right btn-sm" data-toggle="modal"
-                                data-target="#addUser">
-                            Agregar Usuario
-                        </button>
-                        <div th:include="layout/componentes :: add_user"/>
-                    </div>
-                    <div class="panel-body">
-                        <table class="table table-bordered table-striped"
-                               th:if="${usuarios !=null and !usuarios.isEmpty()}"
-                        >
-                            <thead>
-                            <tr>
-                                <th class="text-center" style="width: 50px;">#</th>
-                                <th>Nombre</th>
-                                <th>Usuario</th>
-                                <th class="text-center" style="width: 15%;">Rol de usuario</th>
-                                <th class="text-center" style="width: 10%;">Estado</th>
-                                <th style="width: 20%;">Último login</th>
-                                <th class="text-center" style="width: 100px;">Acciones</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <!-- lista todos los usuarios registrados -->
-                            <tr th:each="usuario,contador : ${usuarios} ">
-                                <td class="text-center">
-                                    <!-- lista el ID del usuario -->
-                                    <span th:text="${contador.count}"/>
-                                </td>
-                                <td>
-                                    <!-- lista el nombre del usuario -->
-                                    <span th:text="${usuario.getName()}"/>
-                                </td>
-                                <td>
-                                    <!-- lista el nickname del usuario -->
-                                    <span th:text="${usuario.getUsername()}"/>
-                                </td>
-                                <td class="text-center">
-                                    <!-- lista el nombre del grupo que pertenece -->
-                                    <span th:text="${usuario.getUser_level().getGroup_name()}"/>
-                                </td>
-                                <td class="text-center">
+<div id="wrapper">
+    <nav th:replace="layout/plantilla.html :: div_sidebar"/>
+    <div class="d-flex flex-column" id="content-wrapper">
+        <div id="content">
+            <div th:replace="layout/plantilla.html :: header"/>
+            <div class="container-fluid">
+                <div>
+                    <!-- Componente usuario -->
+                    <div th:fragment="list_user">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <!-- mensaje de advertencia aqui -->
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading clearfix">
+                                        <strong>
+                                            <span class="fa fa-th"></span>
+                                            <span>Usuarios</span>
+                                        </strong>
+                                        <!-- referencia al archivo de agregar usuario -->
+                                        <!--<a href="" class="btn btn-info pull-right">Agregar usuario</a>-->
+                                        <button type="button" class="btn btn-info pull-right btn-sm" data-toggle="modal"
+                                                data-target="#addUser">
+                                            Agregar Usuario
+                                        </button>
+                                        <div th:include="layout/componentes :: add_user"/>
+                                    </div>
+                                    <div class="panel-body">
+                                        <table class="table table-bordered table-striped"
+                                               th:if="${usuarios !=null and !usuarios.isEmpty()}"
+                                        >
+                                            <thead>
+                                            <tr>
+                                                <th class="text-center" style="width: 50px;">#</th>
+                                                <th>Nombre</th>
+                                                <th>Usuario</th>
+                                                <th class="text-center" style="width: 15%;">Rol de usuario</th>
+                                                <th class="text-center" style="width: 10%;">Estado</th>
+                                                <th style="width: 20%;">Último login</th>
+                                                <th class="text-center" style="width: 100px;">Acciones</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <!-- lista todos los usuarios registrados -->
+                                            <tr th:each="usuario,contador : ${usuarios} ">
+                                                <td class="text-center">
+                                                    <!-- lista el ID del usuario -->
+                                                    <span th:text="${contador.count}"/>
+                                                </td>
+                                                <td>
+                                                    <!-- lista el nombre del usuario -->
+                                                    <span th:text="${usuario.getName()}"/>
+                                                </td>
+                                                <td>
+                                                    <!-- lista el nickname del usuario -->
+                                                    <span th:text="${usuario.getUsername()}"/>
+                                                </td>
+                                                <td class="text-center">
+                                                    <!-- lista el nombre del grupo que pertenece -->
+                                                    <span th:text="${usuario.getUser_level().getGroup_name()}"/>
+                                                </td>
+                                                <td class="text-center">
                                     <span class="label label-success"
                                           th:if="${usuario.getStatus()==1}">
                                         <!-- en caso de que este activo -->
                                         Activo
                                     </span>
-                                    <span class="label label-danger"
-                                          th:if="${usuario.getStatus()==0}">
+                                                    <span class="label label-danger"
+                                                          th:if="${usuario.getStatus()==0}">
                                         <!-- en caso de que este inactivo -->
                                         Inactivo
                                     </span>
-                                </td>
-                                <td>
-                                    <!-- lista el ultimo login del usuario -->
-                                    <span th:text="${usuario.getLast_login()}"/>
-                                </td>
-                                <td class="text-center">
-                                    <div class="btn-group">
-                                        <!-- href referencia al archivo de editar usuario -->
-                                        <a th:href="@{/accesos/usuarios/edit_user/} + ${usuario.getId()}"
-                                           class="btn btn-xs btn-warning" data-toggle="tooltip" title="Editar">
-                                            <i class="glyphicon glyphicon-pencil"></i>
-                                        </a>
-                                        <!-- href referencia al archivo borrar usuario -->
-                                        <a th:href="@{/accesos/usuarios/eliminar_usuario/} + ${usuario.getId()}"
-                                           class="btn btn-xs btn-danger" data-toggle="tooltip" title="Eliminar"
-                                        th:if="${usuario.getUsername()}!=${username_logueado}"
-                                        >
-                                            <i class="glyphicon glyphicon-remove"></i>
-                                        </a>
+                                                </td>
+                                                <td>
+                                                    <!-- lista el ultimo login del usuario -->
+                                                    <span th:text="${usuario.getLast_login()}"/>
+                                                </td>
+                                                <td class="text-center">
+                                                    <div class="btn-group">
+                                                        <!-- href referencia al archivo de editar usuario -->
+                                                        <a th:href="@{/accesos/usuarios/edit_user/} + ${usuario.getId()}"
+                                                           class="btn btn-xs btn-warning" data-toggle="tooltip" title="Editar">
+                                                            <i class="fa fa-edit"></i>
+                                                        </a>
+                                                        <!-- href referencia al archivo borrar usuario -->
+                                                        <a th:href="@{/accesos/usuarios/eliminar_usuario/} + ${usuario.getId()}"
+                                                           class="btn btn-xs btn-danger" data-toggle="tooltip" title="Eliminar"
+                                                           th:if="${usuario.getUsername()}!=${username_logueado}"
+                                                        >
+                                                            <i class="fa fa-trash"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+        <div th:replace="layout/plantilla.html :: footer"></div>
     </div>
 </div>
+
 </body>
 </html>

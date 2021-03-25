@@ -5,108 +5,118 @@
     <title>Title</title>
 </head>
 <body>
-<header th:replace="layout/plantilla.html :: header"></header>
-<div th:replace="layout/plantilla.html :: div_sidebar"></div>
-<div class="page">
-    <!-- Componente de los grupos -->
-    <div th:fragment="list_group">
-        <div class="row">
-            <div class="col-md-12">
-                <!-- mennsaje de arvertencia aqui -->
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="panel panel-default">
-                    <div class="panel-heading clearfix">
-                        <strong>
-                            <span class="glyphicon glyphicon-th"></span>
-                            <span>Grupos</span>
-                        </strong>
-                        <!-- href al archivo de agregar grupo -->
-                        <!--<a href="#" class="btn btn-info pull-right btn-sm" th:text="Agregar">
-                            <div class="modal-dialog modal-lg">
-                                <div class="modal-content">
-                                    <div class="modal-header bg-info text-white">
-                                        <h5 class="modal-title"> AGREGAR</h5>
-                                    </div>
-                                </div>
+<div id="wrapper">
+    <nav th:replace="layout/plantilla.html :: div_sidebar"/>
+    <div class="d-flex flex-column" id="content-wrapper">
+        <div id="content">
+            <div th:replace="layout/plantilla.html :: header"/>
+            <div class="container-fluid">
+                <div >
+                    <!-- Componente de los grupos -->
+                    <div th:fragment="list_group">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <!-- mennsaje de arvertencia aqui -->
                             </div>
-                        </a>-->
-                        <!--<a href="" class="btn btn-info pull-right btn-sm"
-                           data-toggle="modal" data-target="#addGrupo">Agregar  </a>
-                        -->
-                        <button type="button" class="btn btn-info pull-right btn-sm" data-toggle="modal"
-                                data-target="#addGrupo">
-                            Agregar Grupo
-                        </button>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading clearfix">
+                                        <strong>
+                                            <span class="fa fa-th"></span>
+                                            <span>Grupos</span>
+                                        </strong>
+                                        <!-- href al archivo de agregar grupo -->
+                                        <!--<a href="#" class="btn btn-info pull-right btn-sm" th:text="Agregar">
+                                            <div class="modal-dialog modal-lg">
+                                                <div class="modal-content">
+                                                    <div class="modal-header bg-info text-white">
+                                                        <h5 class="modal-title"> AGREGAR</h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>-->
+                                        <!--<a href="" class="btn btn-info pull-right btn-sm"
+                                           data-toggle="modal" data-target="#addGrupo">Agregar  </a>
+                                        -->
+                                        <button type="button" class="btn btn-info pull-right btn-sm" data-toggle="modal"
+                                                data-target="#addGrupo">
+                                            Agregar Grupo
+                                        </button>
 
-                        <div th:include="layout/componentes::add_grupo"/>
+                                        <div th:include="layout/componentes::add_grupo"/>
 
-                    </div>
-                    <div class="panel-body">
-                        <table class="table table-bordered"
-                               th:if="${groups !=null and !groups.isEmpty()}">
-                            <thead>
-                            <tr>
-                                <th class="text-center" style="width: 50px;">#</th>
-                                <th>Nombre del grupo</th>
-                                <th class="text-center" style="width: 20%;">Nivel del grupo</th>
-                                <th class="text-center" style="width: 15%;">Estado</th>
-                                <th class="text-center" style="width: 100px;">Acciones</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <!-- listar todos los grupos existentes -->
-                            <tr th:each="grupo,contador : ${groups} ">
-                                <td class="text-center">
-                                    <!-- listar el ID de los grupos existentes -->
-                                    <span th:text="${contador.count}"/>
-                                </td>
-                                <td>
-                                    <!-- listar los grupos por el nombre -->
-                                    <span th:text="${grupo.getGroup_name()}"/>
-                                </td>
-                                <td class="text-center">
-                                    <!-- listar el nivel del grupo existente -->
-                                    <span th:text="${grupo.getGroup_level()}"/>
-                                </td>
-                                <td class="text-center">
+                                    </div>
+                                    <div class="panel-body">
+                                        <table class="table table-bordered"
+                                               th:if="${groups !=null and !groups.isEmpty()}">
+                                            <thead>
+                                            <tr>
+                                                <th class="text-center" style="width: 50px;">#</th>
+                                                <th>Nombre del grupo</th>
+                                                <th class="text-center" style="width: 20%;">Nivel del grupo</th>
+                                                <th class="text-center" style="width: 15%;">Estado</th>
+                                                <th class="text-center" style="width: 100px;">Acciones</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <!-- listar todos los grupos existentes -->
+                                            <tr th:each="grupo,contador : ${groups} ">
+                                                <td class="text-center">
+                                                    <!-- listar el ID de los grupos existentes -->
+                                                    <span th:text="${contador.count}"/>
+                                                </td>
+                                                <td>
+                                                    <!-- listar los grupos por el nombre -->
+                                                    <span th:text="${grupo.getGroup_name()}"/>
+                                                </td>
+                                                <td class="text-center">
+                                                    <!-- listar el nivel del grupo existente -->
+                                                    <span th:text="${grupo.getGroup_level()}"/>
+                                                </td>
+                                                <td class="text-center">
                                     <span class="label label-success"
                                           th:if="${grupo.getGroup_status()==1}"
                                     >
                                         <!-- en caso de que este activo -->
                                         Activo
                                     </span>
-                                    <span class="label label-danger"
-                                          th:if="${grupo.getGroup_status()==0}"
-                                    >
+                                                    <span class="label label-danger"
+                                                          th:if="${grupo.getGroup_status()==0}"
+                                                    >
                                         <!-- en caso de que este inactivo -->
                                         Inactivo
                                     </span>
-                                </td>
-                                <td class="text-center">
-                                    <div class="btn-group">
-                                        <!-- href referencia al archivo de editar grupo por (ID) -->
-                                        <a th:href="@{/accesos/grupos/editar_grupo/} + ${grupo.getId()}"
-                                           class="btn btn-xs btn-warning" data-toggle="tooltip" title="Editar">
-                                            <i class="glyphicon glyphicon-pencil"></i>
-                                        </a>
-                                        <!-- href referencia al archivo de borrar grupo por (ID) -->
-                                        <a th:href="@{/accesos/grupos/eliminar_grupo/} + ${grupo.getId()}"
-                                           class="btn btn-xs btn-danger" data-toggle="tooltip" title="Eliminar">
-                                            <i class="glyphicon glyphicon-remove"></i>
-                                        </a>
+                                                </td>
+                                                <td class="text-center">
+                                                    <div class="btn-group">
+                                                        <!-- href referencia al archivo de editar grupo por (ID) -->
+                                                        <a th:href="@{/accesos/grupos/editar_grupo/} + ${grupo.getId()}"
+                                                           class="btn btn-xs btn-warning" data-toggle="tooltip" title="Editar">
+                                                            <i class="fa fa-edit"></i>
+                                                        </a>
+                                                        <!-- href referencia al archivo de borrar grupo por (ID) -->
+                                                        <a th:href="@{/accesos/grupos/eliminar_grupo/} + ${grupo.getId()}"
+                                                           class="btn btn-xs btn-danger" data-toggle="tooltip" title="Eliminar">
+                                                            <i class="fa fa-trash"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+        <div th:replace="layout/plantilla.html :: footer"></div>
     </div>
 </div>
+
 </body>
 </html>

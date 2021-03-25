@@ -5,7 +5,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 public class EncryptPass {
     public static void main(String[] args) {
-        var password = "user";
+        var password = "admin";
         System.out.println("PASS:" + password);
         System.out.println("ENCRYPTADO:  " + Encriptar(password));
     }
