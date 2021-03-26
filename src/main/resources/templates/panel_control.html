@@ -13,7 +13,8 @@
             <div class="container-fluid">
                 <div class="d-sm-flex justify-content-between align-items-center mb-4">
                     <h3 class="text-dark mb-0">Dashboard</h3>
-                    <a class="btn btn-primary btn-sm d-none d-sm-inline-block" role="button" th:href="@{/ventas(format=pdf)}">
+                    <a class="btn btn-primary btn-sm d-none d-sm-inline-block" role="button" target="_blank"
+                       th:href="@{/ventas(format=pdf)}">
                         <i class="fas fa-download fa-sm text-white-50"></i>&nbsp;Generar Reporte</a>
                 </div>
                 <div>
@@ -171,16 +172,15 @@
                                                     <img class="img-avatar img-circle"
                                                          th:src="@{'/imagenes/' + ${productRecient.getMedia_id().getFile_name()}}"
                                                          th:alt="${productRecient.media_id.getFile_name()}">
-
                                                     <span class="label label-warning pull-right"
                                                           th:text=" 'Precio de compra: ' + ${productRecient.getBuy_price()}"></span>
                                                 </h4>
                                                 <span class="list-group-item-text pull-left"
                                                       th:text="${productRecient.getName()}">
-                                </span>
+                                                </span>
                                                 <span class="list-group-item-text pull-right"
                                                       th:text="'Categoria: ' + ${productRecient.getCategories().getName()}">
-                                </span>
+                                                </span>
                                             </a>
                                         </div>
                                     </div>

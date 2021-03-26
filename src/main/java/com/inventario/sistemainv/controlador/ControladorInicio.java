@@ -120,6 +120,7 @@ public class ControladorInicio {
 
     @GetMapping("/reportes")
     public String reporte(Model model) {
+        model.addAttribute("pageTitle", "Reportes");
         return "reportes";
     }
 

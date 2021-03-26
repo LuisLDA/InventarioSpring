@@ -80,7 +80,7 @@ public class ControladorMedia {
 
         log.info("media: " + media);
         mediaDao.delete(media);
-        flash.addFlashAttribute("error", "El registro ha sido elimado con exito!");
+        flash.addFlashAttribute("success", "El registro ha sido elimado con exito!");
         return "redirect:/media";
     }
 }

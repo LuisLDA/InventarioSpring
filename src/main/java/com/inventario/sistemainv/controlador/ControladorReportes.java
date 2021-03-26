@@ -31,20 +31,22 @@ public class ControladorReportes {
         fechaFin=date2;
         log.info("fecha inicio: " + fechaInicio);
         log.info("fecha fin: " + fechaFin);
+        var ventasfecha = ventasService.searchSalesByDate(fechaInicio, fechaFin);
+        if (ventasfecha == null || ventasfecha.isEmpty()) {
+            flash.addFlashAttribute("info", "No existen registros para la consulta.");
+        }
         return "redirect:/reportes/reportes_fecha";
     }
 
     @GetMapping("/reportes_fecha")
     public String reporte_fecha(Model model, RedirectAttributes flash) {
+        model.addAttribute("pageTitle", "Reporte por fecha");
         log.info("Rango de fechas: " + fechaInicio + " a " + fechaFin);
-        String error = "No existen registros para la consulta.";
         var ventasfecha = ventasService.searchSalesByDate(fechaInicio, fechaFin);
-        if (ventasfecha != null || !ventasfecha.isEmpty()) {
-            log.info("Ventas: " + ventasfecha);
-            model.addAttribute("ventasfecha", ventasfecha);
-        } else {
-            model.addAttribute("error", error);
-        }
+        log.info("Ventas: " + ventasfecha);
+        model.addAttribute("ventasfecha", ventasfecha);
+        model.addAttribute("fechaInicio", fechaInicio);
+        model.addAttribute("fechaFin", fechaFin);
         return "reportes_fecha";
     }
 }

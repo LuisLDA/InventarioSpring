@@ -14,22 +14,25 @@
 
                 <div class="col-md-12">
                     <!-- mensaje de advertencia aqui -->
-                    <div class="alert alert-success" th:if="${success != null}" th:text="${success}"></div>
-                    <div class="alert alert-danger" th:if="${error != null}" th:text="${error}"></div>
                     <div class="alert alert-info" th:if="${info != null}" th:text="${info}"></div>
                 </div>
 
                 <div class="row">
                     <div class="col-md-6">
-                        <div class="panel">
-                            <div class="panel-heading"></div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <strong>
+                                    <span class="fa fa-calendar-alt"></span>
+                                    <span>Rango de Fechas</span>
+                                </strong>
+                            </div>
                             <div class="panel-body">
                                 <form class="clearfix" method="post" th:action="@{/reportes/reporteFecha}">
                                     <div class="form-group">
-                                        <label class="form-label">Rango de fechas</label>
+                                        <!-- <label class="form-label">Rango de fechas</label> -->
                                         <div class="input-group">
                                             <input type="date" class="datepicker form-control" name="start-date" placeholder="From">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-menu-right"></i></span>
+                                            <span class="input-group-addon"><i class="fas glyphicon-menu-right"></i></span>
                                             <input type="date" class="datepicker form-control" name="end-date" placeholder="To">
                                         </div>
                                     </div>
@@ -48,11 +51,11 @@
                             <div class="panel-heading clearfix">
                                 <strong>
                                     <span class="fa fa-th"></span>
-                                    <span>Ventas en la fecha</span>
+                                    <span th:text="'Ventas del ' + ${fechaInicio} + ' al ' + ${fechaFin}"></span>
                                 </strong>
                                 <div class="pull-right">
                                     <!-- href referenacia a crear Pdf -->
-                                    <a href="" class="btn btn-primary" th:href="@{/reportes/reportes_fecha(format=pdf)}">Generar PDF</a>
+                                    <a target="_blank" class="btn btn-primary" th:href="@{/reportes/reportes_fecha(format=pdf)}">Generar PDF</a>
                                 </div>
                             </div>
                             <div class="panel-body">

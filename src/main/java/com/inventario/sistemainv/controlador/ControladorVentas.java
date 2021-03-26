@@ -37,6 +37,7 @@ public class ControladorVentas {
 
     @GetMapping("/agregar_ventas")
     public String mostrarVentaInicial(Model model, RedirectAttributes flash) {
+        model.addAttribute("pageTitle","Agregar Venta");
         //Lista que recupera unicamente los nombres
         String namesString = convertToString((productService.names_products()).toString());
         model.addAttribute("namesString", namesString);

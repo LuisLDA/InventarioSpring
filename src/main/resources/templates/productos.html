@@ -58,7 +58,7 @@
                                         </td>
                                         <td th:if="${producto.getMedia_id().getId() != 0}">
                                             <!-- src referencia que no hay imagen -->
-                                            <img class="img-avatar img-circle"
+                                            <img class="img-avatar"
                                                  th:src="@{'/imagenes/' + ${producto.getMedia_id().getFile_name()}}"
                                                  th:alt="${producto.getMedia_id().getFile_name()}">
                                         </td>

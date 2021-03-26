@@ -76,10 +76,11 @@ a {
 .panel-default > .panel-heading {
     background-color: #f5f5f5;
     border-bottom: 2px solid #3498DB;
-    font-size: 15px;
+    font-size: 17px;
     text-transform: uppercase;
     letter-spacing: .5px;
-    padding: 15px;
+    padding: 8px;
+    text-align: justify-all;
 }
 
 .panel-box {
@@ -405,7 +406,7 @@ img.img-size-2 {
 /* SLIDER */
 .container-slider {
     width: 100%;
-    max-width: 1200px;
+    max-width: 1250px;
     overflow: hidden;
     box-shadow: 0 0 0 4px #f2f2f2, 0 15px 50px;
     margin-bottom: 30px;

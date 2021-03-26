@@ -58,6 +58,7 @@ public class ControladorProductos {
 
     @GetMapping("/agregar_productos")
     public String mostrarAgregarProductos(Model model, Map<String, Object> map) {
+        model.addAttribute("pageTitle","Agregar Productos");
         log.info("Accediendo a producto");
         var categories = categoriesService.listCategories();
         model.addAttribute("categories", categories);
