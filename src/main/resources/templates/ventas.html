@@ -14,8 +14,11 @@
                 <div>
                     <div th:fragment="list_ventas">
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <!-- mensaje de advertencia aqui -->
+                                <div class="alert alert-success" th:if="${success != null}" th:text="${success}"></div>
+                                <div class="alert alert-danger" th:if="${error != null}" th:text="${error}"></div>
+                                <div class="alert alert-info" th:if="${info != null}" th:text="${info}"></div>
                             </div>
                         </div>
                         <div class="row">
@@ -28,7 +31,7 @@
                                         </strong>
                                         <div class="pull-right">
                                             <!-- href referenacia al archivo de anadir ventas -->
-                                            <a href="" class="btn btn-primary" th:href="@{/ventas/seleccionar_venta}">Agregar venta</a>
+                                            <a href="" class="btn btn-primary" th:href="@{/ventas/agregar_ventas}">Agregar venta</a>
                                         </div>
                                     </div>
                                     <div class="panel-body">
@@ -37,7 +40,7 @@
                                             <tr>
                                                 <th class="text-center" style="width: 50px;">#</th>
                                                 <th> Nombre del producto</th>
-                                                <th class="text-center" style="width: 12%;"> Precio por Unidad</th>
+                                                <th class="text-center" style="width: 15%;"> Precio por Unidad</th>
                                                 <th class="text-center" style="width: 15%;"> Cantidad</th>
                                                 <th class="text-center" style="width: 15%;"> Total</th>
                                                 <th class="text-center" style="width: 15%;"> Fecha</th>
@@ -50,19 +53,22 @@
                                                 <td class="text-center">
                                                     <!-- recupera el ID del prodcuto -->
                                                     <span th:text="${contador.count}"/>
-
                                                 </td>
-                                                <td>
+                                                <td class="text-center">
                                                     <!-- recupera el nombre de la venta -->
                                                     <span th:text="${vent.getProduct_id().getName()}"/>
+                                                </td>
+                                                <td class="text-center">
+                                                    <!-- recupera el precio unitario de la venta -->
+                                                    <span th:text="${'$ '+vent.getProduct_id().getSale_price()}"/>
                                                 </td>
                                                 <td class="text-center">
                                                     <!-- recupera la cantidad de la venta -->
                                                     <span th:text="${vent.getQty()}"/>
                                                 </td>
                                                 <td class="text-center">
-                                                    <!-- recupera el precio de la venta -->
-                                                    <span th:text="${vent.getPrice()}"/>
+                                                    <!-- recupera el precio total de la venta -->
+                                                    <span th:text="${'$ '+vent.getPrice()}"/>
                                                 </td>
                                                 <td class="text-center">
                                                     <!-- recupera la fecha de la venta -->

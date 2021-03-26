@@ -42,17 +42,13 @@ public class ControladorProductos {
     @GetMapping("/editar_producto/{id}")
     public String editarProducto(Product product, Model model) {
         log.info("Accediendo a editar producto");
-
         product = productService.searchProduct(product);
         log.info("Producto a editar:" + product);
         model.addAttribute("product", product);
-
         var categoriesEdit = categoriesService.listCategories();
         model.addAttribute("categoriesEdit", categoriesEdit);
-
         var mediaEdit = mediaService.listMedia();
         model.addAttribute("mediaEdit", mediaEdit);
-
         return "editar_producto";
     }
 
@@ -77,10 +73,11 @@ public class ControladorProductos {
                 if(!product.getName().equalsIgnoreCase(name)){ //producto nuevo
                     product.setModified_date(null);
                     productService.saveProduct(product);
+                    log.info("Se ha agregado un nuevo producto");
+                    log.info("Contador de productos " + productService.countProducts());
                     flash.addFlashAttribute("success", "El producto " + product.getName() + " ha sido agregado con éxito.");
                 }else{//producto con el nombre repetido
                     flash.addFlashAttribute("error", "El producto ya se encuentra registrado.");
-                    return "redirect:/productos";
                 }
             }else{ //producto que ha sido modificado
                 productService.saveProduct(product);
@@ -88,10 +85,7 @@ public class ControladorProductos {
             }
         } catch (DataIntegrityViolationException e) {
             flash.addFlashAttribute("error", "El producto ya se encuentra registrado.");
-            return "redirect:/productos";
         }
-        log.info("Se ha agregado un nuevo producto");
-        log.info("Contador de productos " + productService.countProducts());
         return "redirect:/productos";
     }
 

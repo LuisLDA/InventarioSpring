@@ -170,6 +170,20 @@ table td h6, table tfoot tr td:last-child {
     transition: all .15s ease-out;
 }
 
+.col-md-5 .input-group .form-control.dlrs{
+    width: 40%;
+}
+.col-md-5 .input-group .form-control.ctvs{
+    width: 5%;
+}
+
+.col-md-4 .input-group .form-control.dlrs{
+    width: 40%;
+}
+.col-md-4 .input-group .form-control.ctvs{
+    width: 5%;
+}
+
 .form-control:focus {
     background: #f8f8f8;
     border-color: #3498DB;
@@ -188,8 +202,8 @@ table td h6, table tfoot tr td:last-child {
 
 .btn-primary {
     color: #fff;
-    background-color: #51aded;
-    border-color: #3d8fd8
+    background-color: #335acb;
+    border-color: #335acb;
 }
 
 .btn-primary:hover, .btn-primary:focus, .btn-primary.focus, .btn-primary:active, .btn-primary.active {
@@ -266,7 +280,7 @@ img.img-size-2 {
 .label {
     display: inline;
     padding: .2em .6em .3em;
-    /*font-size: 45%;*/
+    font-size: 80%;
     font-weight: 700;
     line-height: 1;
     color: #fff;
@@ -373,7 +387,7 @@ img.img-size-2 {
     margin-left: -15px;
 }
 
-.row .col-md-9 .btn.btn-primary {
+.row .col-md-12 .btn.btn-primary {
     margin-top: -5px;
 }
 
