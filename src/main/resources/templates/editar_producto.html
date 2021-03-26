@@ -19,6 +19,7 @@
     }
 
     function setModifiedDate(){
+        setSaleBuyPrice();
         var d = new Date();
         function addZero(i) {
             if (i < 10) {
@@ -34,6 +35,23 @@
         var s = addZero(d.getSeconds());
         var dateStr = year + "-" + month  + "-" + date + " "+ h + ":" + m + ":" + s;
         document.getElementById("modified_date").value = dateStr;
+    }
+
+    function setSaleBuyPrice() {
+        var dolarB = document.getElementById("buy_priceD").value;
+        var ctvB = document.getElementById("buy_priceC").value;
+        var dolarS = document.getElementById("sale_priceD").value;
+        var ctvS = document.getElementById("sale_priceC").value;
+        if(ctvB < 10 && ctvB > 1){
+            ctvB = '0'+ctvB;
+        }
+        if(ctvS < 10 && ctvS > 1){
+            ctvS = '0'+ctvS;
+        }
+        var priceB = dolarB+'.'+ctvB;
+        var priceS = dolarS+'.'+ctvS;
+        document.getElementById("buy_price").value = priceB;
+        document.getElementById("sale_price").value = priceS;
     }
 </script>
 

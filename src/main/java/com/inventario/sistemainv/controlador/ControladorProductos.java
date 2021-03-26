@@ -67,21 +67,21 @@ public class ControladorProductos {
     public String agregarProductos(Product product, Model model, RedirectAttributes flash) {
         model.addAttribute("pageTitle", "Productos");
         log.info("Agregando el producto " + product);
-        var name = productService.searchNameProd(product.getName());
         try {
-            if(product.getId() == null){ //producto agregado
-                if(!product.getName().equalsIgnoreCase(name)){ //producto nuevo
+            var name = productService.searchNameProd(product.getName());
+            if(product.getId() != null){ //producto modificado
+                productService.saveProduct(product);
+                flash.addFlashAttribute("success", "El producto se modificó con éxito!.");
+            }else{ //agregar nuevo producto
+                if(!name.equalsIgnoreCase(product.getName())){ //producto nuevo
                     product.setModified_date(null);
                     productService.saveProduct(product);
                     log.info("Se ha agregado un nuevo producto");
                     log.info("Contador de productos " + productService.countProducts());
                     flash.addFlashAttribute("success", "El producto " + product.getName() + " ha sido agregado con éxito.");
-                }else{//producto con el nombre repetido
+                }else{ //producto se encuentra repetido
                     flash.addFlashAttribute("error", "El producto ya se encuentra registrado.");
                 }
-            }else{ //producto que ha sido modificado
-                productService.saveProduct(product);
-                flash.addFlashAttribute("success", "El producto se modificó con éxito!.");
             }
         } catch (DataIntegrityViolationException e) {
             flash.addFlashAttribute("error", "El producto ya se encuentra registrado.");
