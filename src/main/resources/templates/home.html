@@ -5,7 +5,7 @@
 <head th:replace="layout/plantilla.html :: head">
     <title>Inicio</title>
 </head>
-<body>
+<body id="page-top">
 <div id="wrapper">
     <nav th:replace="layout/plantilla.html :: div_sidebar"/>
     <div class="d-flex flex-column" id="content-wrapper">
@@ -111,6 +111,7 @@
         </div>
         <div th:replace="layout/plantilla.html :: footer"></div>
     </div>
+    <a th:replace="layout/plantilla.html :: topButton"></a>
 </div>
 
 </body>
