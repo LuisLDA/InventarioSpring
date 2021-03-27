@@ -18,4 +18,6 @@ public interface ProductService {
     public List<String> id_products();
     public Product saleProduct(String producto);
     public ArrayList<ArrayList<String>> mostSales();
+    public Product stockAvaliable(Product product);
+    public boolean registred(Product product);
 }

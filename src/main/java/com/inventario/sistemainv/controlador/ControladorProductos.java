@@ -68,22 +68,22 @@ public class ControladorProductos {
         model.addAttribute("pageTitle", "Productos");
         log.info("Agregando el producto " + product);
         try {
-            var name = productService.searchNameProd(product.getName());
             if(product.getId() != null){ //producto modificado
                 productService.saveProduct(product);
                 flash.addFlashAttribute("success", "El producto se modificó con éxito!.");
-            }else{ //agregar nuevo producto
-                if(!name.equalsIgnoreCase(product.getName())){ //producto nuevo
-                    product.setModified_date(null);
-                    productService.saveProduct(product);
+            }else { //porducto nuevo
+                var registred = productService.registred(product);
+                if(!registred){
                     log.info("Se ha agregado un nuevo producto");
                     log.info("Contador de productos " + productService.countProducts());
                     flash.addFlashAttribute("success", "El producto " + product.getName() + " ha sido agregado con éxito.");
-                }else{ //producto se encuentra repetido
+                    product.setModified_date(null);
+                    productService.saveProduct(product);
+                }else {
                     flash.addFlashAttribute("error", "El producto ya se encuentra registrado.");
                 }
             }
-        } catch (DataIntegrityViolationException e) {
+        }catch (DataIntegrityViolationException e) {
             flash.addFlashAttribute("error", "El producto ya se encuentra registrado.");
         }
         return "redirect:/productos";
