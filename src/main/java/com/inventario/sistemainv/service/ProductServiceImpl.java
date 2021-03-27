@@ -86,4 +86,10 @@ public class ProductServiceImpl implements ProductService{
         }
         return null;
     }
+
+    @Override
+    public ArrayList<ArrayList<String>> mostSales() {
+        return productsDao.mostSales();
+    }
+
 }

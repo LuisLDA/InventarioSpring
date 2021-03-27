@@ -120,12 +120,20 @@ public class ControladorInicio {
     @GetMapping("/panel_control")
     public String panelControl(Model model) {
         model.addAttribute("pageTitle", "Panel de Control");
+        var countUsers = userService.countUsers();
+        model.addAttribute("countUsers", countUsers);
         var countCat = categoriesService.countCategories();
         model.addAttribute("countCat", countCat);
         var countProd = productService.countProducts();
         model.addAttribute("countProd", countProd);
         var productRecient = productService.productRecient();
         model.addAttribute("productRecient", productRecient);
+        var latestSales = ventasService.latestSales();
+        model.addAttribute("latestSales", latestSales);
+        var ventasCount = ventasService.countVentas();
+        model.addAttribute("ventasCount", ventasCount);
+        var mostSales = productService.mostSales();
+        model.addAttribute("mostSales",mostSales);
         log.info("Product recient: " + productRecient);
         return "panel_control";
     }

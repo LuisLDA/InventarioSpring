@@ -1,6 +1,7 @@
 package com.inventario.sistemainv.service;
 
 import com.inventario.sistemainv.domain.Product;
+import java.util.ArrayList;
 import java.util.List;
 
 public interface ProductService {
@@ -16,4 +17,5 @@ public interface ProductService {
     public List<String> names_products();
     public List<String> id_products();
     public Product saleProduct(String producto);
+    public ArrayList<ArrayList<String>> mostSales();
 }

@@ -26,4 +26,11 @@ public class Ventas implements Serializable {
 
     private String date;
 
+    public String getDateFormat() {
+        String day = date.substring(8);
+        String month = date.substring(5,7);
+        String year = date.substring(2,4);
+        String new_date = day+"/"+month+"/"+year;
+        return new_date;
+    }
 }

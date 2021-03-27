@@ -11,5 +11,5 @@ public interface UserService {
     public void deleteUser(User user);
     public User searchUser(User user);
     public User searchbyUserName(String  username);
-
+    public int countUsers();
 }
