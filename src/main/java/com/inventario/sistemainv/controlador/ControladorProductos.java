@@ -41,6 +41,7 @@ public class ControladorProductos {
 
     @GetMapping("/editar_producto/{id}")
     public String editarProducto(Product product, Model model) {
+        model.addAttribute("pageTitle", "Editar Producto");
         log.info("Accediendo a editar producto");
         product = productService.searchProduct(product);
         log.info("Producto a editar:" + product);
@@ -54,6 +55,7 @@ public class ControladorProductos {
 
     @GetMapping("/agregar_productos")
     public String mostrarAgregarProductos(Model model, Map<String, Object> map) {
+        model.addAttribute("pageTitle", "Agregar Productos");
         log.info("Accediendo a producto");
         var categories = categoriesService.listCategories();
         model.addAttribute("categories", categories);
@@ -65,7 +67,6 @@ public class ControladorProductos {
 
     @PostMapping("/agregar_nuevo_producto")
     public String agregarProductos(Product product, Model model, RedirectAttributes flash) {
-        model.addAttribute("pageTitle", "Productos");
         log.info("Agregando el producto " + product);
         try {
             if(product.getId() != null){ //producto modificado

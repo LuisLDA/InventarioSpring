@@ -37,6 +37,7 @@ public class ControladorVentas {
 
     @GetMapping("/agregar_ventas")
     public String mostrarVentaInicial(Model model, RedirectAttributes flash) {
+        model.addAttribute("pageTitle", "Agregar Venta");
         //Lista que recupera unicamente los nombres
         String namesString = convertToString((productService.names_products()).toString());
         model.addAttribute("namesString", namesString);
@@ -50,6 +51,7 @@ public class ControladorVentas {
 
     @PostMapping("/buscar_ventas")
     public String buscarVenta(@Validated String name, RedirectAttributes flash, Model model){
+        model.addAttribute("pageTitle", "Agregar Venta");
         //Para que se pueda realizar nuevamente la busqueda
         String namesString = convertToString((productService.names_products()).toString());
         model.addAttribute("namesString", namesString);
