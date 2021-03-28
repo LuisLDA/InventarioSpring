@@ -11,9 +11,11 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
@@ -28,7 +30,7 @@ import java.util.ArrayList;
 //
 
 
-@Controller
+@ControllerAdvice
 @Slf4j
 @RequestMapping("/")  //localhost:8080/
 public class ControladorInicio {
@@ -44,6 +46,26 @@ public class ControladorInicio {
     private UserService userService;
     @Autowired
     private VentasService ventasService;
+
+
+    @ModelAttribute("imageAvatar")
+    public String test(@AuthenticationPrincipal UserDetails user2auth) {
+        if (user2auth != null) {
+            var userImg = userService.searchbyUserName(user2auth.getUsername());
+            String imageName = "no image.jpg";
+
+            if (userImg.getImage() != null ) {
+                if(!userImg.getImage().equals("")){
+                    imageName = userImg.getImage();
+                }
+            }
+            log.info("Imagen de usuario:" + imageName);
+
+            return imageName;
+        }
+        return null;
+
+    }
 
 
     @GetMapping("/")
@@ -98,12 +120,20 @@ public class ControladorInicio {
     @GetMapping("/panel_control")
     public String panelControl(Model model) {
         model.addAttribute("pageTitle", "Panel de Control");
+        var countUsers = userService.countUsers();
+        model.addAttribute("countUsers", countUsers);
         var countCat = categoriesService.countCategories();
         model.addAttribute("countCat", countCat);
         var countProd = productService.countProducts();
         model.addAttribute("countProd", countProd);
         var productRecient = productService.productRecient();
         model.addAttribute("productRecient", productRecient);
+        var latestSales = ventasService.latestSales();
+        model.addAttribute("latestSales", latestSales);
+        var ventasCount = ventasService.countVentas();
+        model.addAttribute("ventasCount", ventasCount);
+        var mostSales = productService.mostSales();
+        model.addAttribute("mostSales",mostSales);
         log.info("Product recient: " + productRecient);
         return "panel_control";
     }
@@ -113,7 +143,7 @@ public class ControladorInicio {
         log.info("Accediendo a ventas");
         model.addAttribute("pageTitle", "Ventas");
         var ventas = ventasService.listVentas();
-        log.info("Se han encontrado las siguientes ventas: "+ventas);
+        log.info("Se han encontrado las siguientes ventas: " + ventas);
         model.addAttribute("ventas", ventas);
         return "ventas";
     }
@@ -135,8 +165,8 @@ public class ControladorInicio {
         var user = userService.searchbyUserName(user2auth.getUsername());
         model.addAttribute("pageTitle", "Perfil");
         log.info("Accediendo a perfil...");
-        if(user.getImage()!=null){
-            if(mediaService.searchbyFile_name(user.getImage())==null){
+        if (user.getImage() != null) {
+            if (mediaService.searchbyFile_name(user.getImage()) == null) {
                 user.setImage("no image.jpg");
             }
         }
@@ -144,5 +174,6 @@ public class ControladorInicio {
         model.addAttribute("usuario", user);
         return "perfil";
     }
+
 
 }

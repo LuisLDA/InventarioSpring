@@ -7,13 +7,12 @@ import java.util.List;
 
 public interface MediaService {
 
-    public List<Media> listMedia();
-    public void addMedia(Media media);
-    public void deleteMedia(Media media);
-    public Media mediaporid(Long id);
-    public String extencion(String nombre);
-    public Media searchbyFile_name(String file_name);
-
-    public void actualizarMedia(Long id);
+    List<Media> listMedia();
+    void addMedia(Media media);
+    void deleteMedia(Media media);
+    Media mediaporid(Long id);
+    String extencion(String nombre);
+    Media searchbyFile_name(String file_name);
+    void actualizarMedia(Long id);
 
 }

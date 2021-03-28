@@ -2,7 +2,6 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head th:replace="layout/plantilla.html :: head">
-    <title>Editar Producto</title>
 </head>
 <body>
 <script type="text/javascript">
@@ -17,6 +16,42 @@
         var codigoM = document.getElementById("med_id").value;
         document.getElementById("media_id").value = codigoM;
     }
+
+    function setModifiedDate(){
+        setSaleBuyPrice();
+        var d = new Date();
+        function addZero(i) {
+            if (i < 10) {
+                i = "0" + i;
+            }
+            return i;
+        }
+        var date = addZero(d.getUTCDate()-1);
+        var month = addZero(d.getUTCMonth()+1);
+        var year = addZero(d.getUTCFullYear());
+        var h = addZero(d.getHours());
+        var m = addZero(d.getMinutes());
+        var s = addZero(d.getSeconds());
+        var dateStr = year + "-" + month  + "-" + date + " "+ h + ":" + m + ":" + s;
+        document.getElementById("modified_date").value = dateStr;
+    }
+
+    function setSaleBuyPrice() {
+        var dolarB = document.getElementById("buy_priceD").value;
+        var ctvB = document.getElementById("buy_priceC").value;
+        var dolarS = document.getElementById("sale_priceD").value;
+        var ctvS = document.getElementById("sale_priceC").value;
+        if(ctvB < 10 && ctvB > 1){
+            ctvB = '0'+ctvB;
+        }
+        if(ctvS < 10 && ctvS > 1){
+            ctvS = '0'+ctvS;
+        }
+        var priceB = dolarB+'.'+ctvB;
+        var priceS = dolarS+'.'+ctvS;
+        document.getElementById("buy_price").value = priceB;
+        document.getElementById("sale_price").value = priceS;
+    }
 </script>
 
 <div id="wrapper">
@@ -27,12 +62,12 @@
             <div class="container-fluid">
                 <div>
                     <div class="row">
-                        <div class="col-md-9">
+                        <div class="col-md-12">
                             <!-- Mensaje de advertencia aqui -->
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-9">
+                        <div class="col-md-12">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <strong>
@@ -86,7 +121,7 @@
                                             <div class="form-group">
                                                 <div class="row">
                                                     <!-- CANTIDAD -->
-                                                    <div class="col-md-4">
+                                                    <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label>Cantidad</label>
                                                             <div class="input-group">
@@ -97,14 +132,17 @@
                                                         </div>
                                                     </div>
                                                     <!-- PRECIO DE COMPRA -->
-                                                    <div class="col-md-4">
+                                                    <div class="col-md-5">
                                                         <div class="form-group">
                                                             <label>Precio de compra</label>
                                                             <div class="input-group">
                                                                 <span class="input-group-addon"><i class="fa fa-usd"></i></span>
                                                                 <!-- value recupera el precio de compra del producto -->
-                                                                <input type="number" class="form-control" name="buy_price" th:value="*{buy_price}" min=1 oninput="validity.valid||(value='');" required>
-                                                                <span class="input-group-addon">.00</span>
+                                                                <!--<input type="number" class="form-control" name="buy_price" th:value="*{buy_price}" min=1 oninput="validity.valid||(value='');" required>-->
+                                                                <input type="number" class="form-control dlrs" id="buy_priceD" placeholder="Precio de compra" required th:value="${product.getDolarsBuy()}" step="1" min=0 max=999 maxlength="3" oninput="validity.valid||(value='');">
+                                                                <span class="input-group-addon">.</span>
+                                                                <input type="number" class="form-control ctvs" id="buy_priceC" placeholder="00" required th:value="${product.getCentsBuy()}" step="1" min=0 max=99 maxlength="2" oninput="validity.valid||(value='');">
+                                                                <input type="hidden" name="buy_price" id="buy_price">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -115,8 +153,12 @@
                                                             <div class="input-group">
                                                                 <span class="input-group-addon"><i class="fa fa-usd"></i></span>
                                                                 <!-- value recupera el precio de venta del producto -->
-                                                                <input type="number" class="form-control" name="sale_price" th:value="*{sale_price}" min=1 oninput="validity.valid||(value='');" required>
-                                                                <span class="input-group-addon">.00</span>
+                                                                <!--<input type="number" class="form-control" name="sale_price" th:value="*{sale_price}" min=1 oninput="validity.valid||(value='');" required>-->
+
+                                                                <input type="number" class="form-control dlrs" id="sale_priceD" placeholder="Precio de venta" required th:value="${product.getDolarsSale()}" step="1" min=0 max=999 maxlength="3" oninput="validity.valid||(value='');">
+                                                                <span class="input-group-addon">.</span>
+                                                                <input type="number" class="form-control ctvs" id="sale_priceC"  placeholder="00" required th:value="${product.getCentsSale()}" step="1" min=0 max=99 maxlength="2" oninput="validity.valid||(value='');">
+                                                                <input type="hidden" name="sale_price" id="sale_price">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -125,7 +167,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <button type="submit" name="agregar_prod" class="btn btn-danger">Actualizar</button>
+                                            <button type="submit" name="agregar_prod" class="btn btn-danger" onclick="setModifiedDate()">Actualizar</button>
                                         </form>
                                     </div>
                                 </div>

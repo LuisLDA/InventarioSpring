@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org">
+<head th:replace="layout/plantilla.html :: head">
+    <title>Inicio</title>
+</head>
+<body>
+<div id="wrapper">
+    <nav th:replace="layout/plantilla.html :: div_sidebar"/>
+    <div class="d-flex flex-column" id="content-wrapper">
+        <div id="content">
+            <div th:replace="layout/plantilla.html :: header"/>
+            <div class="container-fluid">
+                <div class="container-fluid">
+                    <div class="text-center mt-5">
+                        <div class="error mx-auto"
+                             th:data-text="${error_status}">
+                            <p class="m-0" th:text="${error_status}">404</p>
+                        </div>
+                        <p class="text-dark mb-5 lead" th:text="${message_status}">Acceso Denegado</p>
+                        <p class="text-black-50 mb-0"  th:text="${response_status}">No tienes permisos para ver esta
+                            página o ejecutar esta acción</p>
+                        <a href="/">← Regresar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div th:replace="layout/plantilla.html :: footer"></div>
+    </div>
+    <a th:replace="layout/plantilla.html :: topButton"></a>
+</div>
+</body>
+</html>

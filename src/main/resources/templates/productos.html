@@ -2,7 +2,7 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head th:replace="layout/plantilla.html :: head">
-    <title>Productos</title>
+    <!--<title>Productos</title>-->
 </head>
 <body>
 <div id="wrapper">
@@ -39,15 +39,15 @@
                                             <th> Imagen</th>
                                             <th> Descripción</th>
                                             <th class="text-center" style="width: 10%;"> Categoría</th>
-                                            <th class="text-center" style="width: 10%;"> Stock</th>
+                                            <th class="text-center" style="width: 8%;"> Stock</th>
                                             <th class="text-center" style="width: 10%;"> Precio de compra</th>
                                             <th class="text-center" style="width: 10%;"> Precio de venta</th>
-                                            <th class="text-center" style="width: 10%;"> Agregado</th>
-                                            <th class="text-center" style="width: 10%;"> Ultima vez Modificado</th>
+                                            <th class="text-center" style="width: 12%;"> Agregado</th>
+                                            <th class="text-center" style="width: 12%;"> Ultima vez Modificado</th>
                                             <th class="text-center" style="width: 100px;"> Acciones</th>
                                         </tr>
                                         </thead>
-                                        <tbody th:each="producto, contador : ${producto}">
+                                        <tbody th:each="prod, contador : ${producto}">
                                         <!-- se lista todas los productos existentes -->
                                         <div>
                                 <span>
@@ -56,59 +56,59 @@
                                             <!-- recupera el id del producto -->
                                             <b> <span th:text="${contador.count}"/></b>
                                         </td>
-                                        <td th:if="${producto.getMedia_id().getId() != 0}">
+                                        <td th:if="${prod.getMedia_id().getId() != 0}">
                                             <!-- src referencia que no hay imagen -->
-                                            <img class="img-avatar"
-                                                 th:src="@{'/imagenes/' + ${producto.getMedia_id().getFile_name()}}"
-                                                 th:alt="${producto.getMedia_id().getFile_name()}">
+                                            <img class="img-avatar img-circle"
+                                                 th:src="@{'/imagenes/' + ${prod.getMedia_id().getFile_name()}}"
+                                                 th:alt="${prod.getMedia_id().getFile_name()}">
                                         </td>
                                         <td>
                                             <!-- recupera la descripcion del producto -->
-                                            <span th:text="${producto.getName()}"/>
+                                            <span th:text="${prod.getName()}"/>
                                         </td>
                                         <td class="text-center">
                                             <!-- recupera la categoría del producto  -->
-                                            <span th:text="${producto.getCategories().getName()}"/>
+                                            <span th:text="${prod.getCategories().getName()}"/>
                                         </td>
                                         <td class="text-center">
                                             <!-- recupera la cantidad del producto -->
-                                            <span th:if="${producto.getQuantity() != 0}">
-                                                <span th:text="${producto.getQuantity()}"></span>
+                                            <span th:if="${prod.getQuantity() != '0'}">
+                                                <span th:text="${prod.getQuantity()}"></span>
                                             </span>
-                                            <span class="label label-warning" th:if="${producto.getQuantity() == 0}">
+                                            <span class="label label-warning" th:if="${prod.getQuantity() == '0'}">
                                                 Sin existencias
                                             </span>
                                         </td>
                                         <td class="text-center">
                                             <!-- recupera el precio de compra -->
-                                            <span th:text="${producto.getBuy_price()}"/>
+                                            <span th:text="${'$ '+prod.getBuy_price()}"/>
                                         </td>
                                         <td class="text-center">
                                             <!-- recupera el precio de venta -->
-                                            <span th:text="${producto.getSale_price()}"/>
+                                            <span th:text="${'$ '+prod.getSale_price()}"/>
                                         </td>
                                         <td class="text-center">
                                             <!-- recupera la fecha del producto -->
-                                            <span th:text="${producto.getDate()}"/>
+                                            <span th:text="${prod.getDate()}"/>
                                         </td>
                                         <td class="text-center">
                                             <!-- recupera la fecha de modificación del producto-->
-                                            <span th:if="${producto.getModified_date() != null}">
-                                                <span th:text="${producto.getModified_date()}"></span>
+                                            <span th:if="${prod.getModified_date() != null}">
+                                                <span th:text="${prod.getModified_date()}"></span>
                                             </span>
-                                            <span class="label label-success" th:if="${producto.getModified_date() == null}">
+                                            <span class="label label-success" th:if="${prod.getModified_date() == null}">
                                                 Sin cambios
                                             </span>
                                         </td>
                                         <td class="text-center">
                                             <div class="btn-group">
                                                 <!-- href referencia al archivo de edicion de producto -->
-                                                <a th:href="@{/productos/editar_producto/} + ${producto.getId()}"
+                                                <a th:href="@{/productos/editar_producto/} + ${prod.getId()}"
                                                    class="btn btn-info btn-xs" title="Editar" data-toggle="tooltip">
                                                     <span class="fa fa-edit"></span>
                                                 </a>
                                                 <!-- href referencia al archivo de eliminar producto -->
-                                                <a th:href="@{/productos/eliminar_producto/} + ${producto.getId()}"
+                                                <a th:href="@{/productos/eliminar_producto/} + ${prod.getId()}"
                                                    class="btn btn-danger btn-xs" title="Eliminar" data-toggle="tooltip">
                                                     <span class="fa fa-trash"></span>
                                                 </a>

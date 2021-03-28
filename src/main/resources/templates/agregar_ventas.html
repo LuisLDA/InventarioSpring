@@ -19,13 +19,13 @@
         var precio = document.getElementById("product_id.sale_price").value;
         var cantidad = document.getElementById("qty").value;
         var total = cantidad*precio;
-        jQuery("#price").val(total);
+        jQuery("#price").val(total.toFixed(2));
     });
     $(document).ready(function(){
         jQuery('#qty').on('keyup mouseup' ,function(){
             var precio = document.getElementById("product_id.sale_price").value;
             var total = jQuery(this).val()*precio;
-            jQuery("#price").val(total);
+            jQuery("#price").val(total.toFixed(2));
         });
     });
 </script>
@@ -70,8 +70,8 @@
                         <div class="col-md-12">
                             <!-- Contenedor para mensajes -->
                             <div class="alert alert-success" th:if="${success != null}" th:text="${success}"></div>
-            <div class="alert alert-danger" th:if="${error != null}" th:text="${error}"></div>
-            <div class="alert alert-info" th:if="${info != null}" th:text="${info}"></div>
+                            <div class="alert alert-danger" th:if="${error != null}" th:text="${error}"></div>
+                            <div class="alert alert-info" th:if="${info != null}" th:text="${info}"></div>
                         </div>
                     </div>
 
@@ -93,8 +93,6 @@
                     </div>
 
                     <script src="/static/js/suggestProducts.js" th:src="@{/js/suggestProducts.js}"></script>
-
-
 
                     <!-- Contenedor de lista -->
                     <div class="row">
@@ -131,8 +129,9 @@
                                                 <span th:text="${productoSale.getName()}"/>
                                             </td>
                                             <td>
-                                                <!-- recupera el precio del producto -->
-                                                <input class="form-control" type="number" name="product_id.sale_price" id="product_id.sale_price" th:value="${productoSale.getSale_price()}" required>
+                                                <!-- recupera el precio del producto
+                                                <input type="number" class="form-control" name="product_id.sale_price" id="product_id.sale_price" required min=1 th:value="${productoSale.getSale_price()}" oninput="validity.valid||(value='');">-->
+                                                <input type="text" class="form-control" name="product_id.sale_price" id="product_id.sale_price" readonly th:value="${productoSale.getSale_price()}">
                                             </td>
                                             <td>
                                                 <!-- recupera la cantidad del producto -->
@@ -140,7 +139,7 @@
                                             </td>
                                             <td class="text-center">
                                                 <!-- total de la venta del producto  -->
-                                                <input type="text" class="form-control" name="price" id="price" required value="0" readonly>
+                                                <input type="text" class="form-control" name="price" id="price" required value="0" maxlength="5" th:maxlength="5" readonly>
                                             </td>
                                             <td class="text-center">
                                                 <!-- fecha en la que fue agregada la venta -->

@@ -40,13 +40,21 @@ public class VentasServiceImpl implements VentasService{
             return null;
         }
     }
+
     @Override
     public int countVentas() {
-        return 0;
+        return (int) ventasDao.count();
     }
 
     @Override
     public List<Ventas> searchSalesByDate(String date1, String date2) {
         return ventasDao.searchSalesByDate(date1, date2);
     }
+    
+    @Transactional(readOnly = true)
+    public List<Ventas> latestSales(){
+        return ventasDao.latestSales();
+    }
+
+
 }

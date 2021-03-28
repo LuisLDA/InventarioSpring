@@ -47,15 +47,15 @@ public class ControladorMedia {
                 String filename = uploadFileService.add_media(foto);
                 media.setFile_name(filename);
                 media.setFile_type(mediaService.extencion(filename));
-                log.info("Agregado la imagen :" + media);
-                mediaDao.save(media);
-                flash.addFlashAttribute("success", "Imagen " + filename + " agregada con exito!");
+                try {
+                    log.info("Agregado la imagen :" + media);
+                    mediaDao.save(media);
+                    flash.addFlashAttribute("success", "Imagen " + filename + " agregada con exito!");
+                }catch (Exception e){
+                    log.error("La imagen no se agrego a la DB porque ya existe");
+                }
             } catch (FileAlreadyExistsException fileAlreadyExistsException){
-
-                media.setFile_name(foto.getOriginalFilename());
-                media.setFile_type(foto.getOriginalFilename().substring(foto.getOriginalFilename().lastIndexOf(".")));
-                log.info("Imagen Repetida tipo :" + media.getFile_type());
-                mediaDao.save(media);
+                log.info("Imagen Repetida" + media.getFile_name());
                 flash.addFlashAttribute("error", "La imagen ya existe");
             } catch (IOException e) {
                 e.printStackTrace();

@@ -44,4 +44,26 @@ public class Product implements Serializable {
     public String getQuantity() {
         return quantity;
     }
+
+    public Integer getDolarsSale(){
+        String str = sale_price.toString();
+        Integer intNumber = Integer.parseInt(str.substring(0, str.indexOf('.')));
+        return  intNumber;
+    }
+    public Integer getCentsSale(){
+        String str = sale_price.toString();
+        Integer decNumberInt = Integer.parseInt(str.substring(str.indexOf('.') + 1));
+        return  decNumberInt;
+    }
+
+    public Integer getDolarsBuy(){
+        String str = buy_price.toString();
+        Integer intNumber = Integer.parseInt(str.substring(0, str.indexOf('.')));
+        return  intNumber;
+    }
+    public Integer getCentsBuy(){
+        String str = buy_price.toString();
+        Integer decNumberInt = Integer.parseInt(str.substring(str.indexOf('.') + 1));
+        return  decNumberInt;
+    }
 }

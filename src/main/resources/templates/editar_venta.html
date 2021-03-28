@@ -13,6 +13,12 @@
             jQuery("#price").val(total);
         });
     });
+    $(document).ready(function(){
+        var noEdit = document.getElementById("noEdit").value;
+        if(noEdit == true || noEdit === true || noEdit == "true" || noEdit === "true"){
+            document.getElementById("qty").setAttribute('readonly', true);
+        }
+    });
 </script>
 <div id="wrapper">
     <nav th:replace="layout/plantilla.html :: div_sidebar"/>
@@ -25,15 +31,16 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <!-- mensaje de advertencia aqui -->
+                                <div class="alert alert-info" th:if="${info != null}" th:text="${info}"></div>
                             </div>
                         </div>
-
+                        <input type="hidden" id="noEdit" name="noEdit" th:value="${noEdit}">
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="panel">
+                                <div class="panel panel-default">
                                     <div class="panel-heading clearfix">
                                         <strong>
-                                            <span class="glyphicon glyphicon-th"></span>
+                                            <span class="fa fa-th"></span>
                                             <span>Editar Venta</span>
                                         </strong>
                                         <div class="pull-right">
@@ -43,12 +50,12 @@
                                     <div class="panel-body">
                                         <table class="table table-bordered" >
                                             <thead>
-                                            <th> Nombre del Producto </th>
-                                            <th> Cantidad </th>
-                                            <th> Precio </th>
-                                            <th> Total </th>
-                                            <th> Fecha</th>
-                                            <th> Acción</th>
+                                            <th class="text-center" style="width: 200px;"> Nombre del Producto </th>
+                                            <th class="text-center" style="width: 12%;"> Cantidad </th>
+                                            <th class="text-center" style="width: 12%;"> Precio </th>
+                                            <th class="text-center" style="width: 12%;"> Total </th>
+                                            <th class="text-center" style="width: 20%;"> Fecha</th>
+                                            <th class="text-center" style="width: 16%;"> Acción</th>
                                             </thead>
                                             <tbody  id="product_info">
                                             <tr>
@@ -60,10 +67,10 @@
                                                         <div id="result" class="list-group"></div>
                                                     </td>
                                                     <td id="s_qty">
-                                                        <input type="number" class="form-control" name="qty" id="qty" th:value="*{qty}" required min=1 th:max="*{product_id.getQuantity()}" oninput="validity.valid||(value='');">
+                                                        <input type="number" class="form-control" name="qty" id="qty" th:value="*{qty}" required th:max=${stockA} min=1 oninput="validity.valid||(value='');">
                                                     </td>
                                                     <td id="s_price">
-                                                        <input type="number" class="form-control" name="price_I" id="price_I" readonly min=0 oninput="validity.valid||(value='');" th:value="*{product_id.getSale_price()}">
+                                                        <input type="text" class="form-control" name="price_I" id="price_I" readonly min=0 oninput="validity.valid||(value='');" th:value="*{product_id.getSale_price()}">
                                                     </td>
                                                     <td>
                                                         <input type="number" class="form-control" name="price" id="price" th:value="*{price}" readonly min=1 oninput="validity.valid||(value='');">
@@ -72,7 +79,7 @@
                                                         <input type="date" class="form-control datepicker" name="date" data-date-format="" th:value="*{date}">
                                                     </td>
                                                     <td>
-                                                        <button type="submit" name="update_sale" class="btn btn-primary">Actualizar Venta</button>
+                                                        <button type="submit" name="update_sale" class="btn btn-primary text-center">Actualizar Venta</button>
                                                     </td>
                                                 </form>
                                             </tr>
@@ -82,46 +89,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="panel-body">
-                        <table class="table table-bordered" >
-                            <thead>
-                            <th> Nombre del Producto </th>
-                            <th> Cantidad </th>
-                            <th> Precio </th>
-                            <th> Total </th>
-                            <th> Fecha</th>
-                            <th> Acción</th>
-                            </thead>
-                            <tbody  id="product_info">
-                            <tr>
-                                <form th:action="@{/ventas/guardar_venta}" th:object="${ventas}" method="post">
-                                    <td id="s_name">
-                                        <input type="hidden" name="id" th:value="*{id}">
-                                        <input type="text" class="form-control" id="sug_input" name="name" th:value="*{product_id.getName()}" readonly>
-                                        <input type="hidden" name="product_id" id="product_id" th:value="*{product_id.getId()}">
-                                        <div id="result" class="list-group"></div>
-                                    </td>
-                                    <td id="s_qty">
-                                        <input type="number" class="form-control" name="qty" id="qty" th:value="*{qty}" required
-                                               min=1 th:max="*{product_id.getQuantity()}" oninput="validity.valid||(value='');"> <!--th:max="*{product_id.getQuantity()}"-->
-                                    </td>
-                                    <td id="s_price">
-                                        <input type="number" class="form-control" name="price_I" id="price_I" readonly min=0 oninput="validity.valid||(value='');" th:value="*{product_id.getSale_price()}">
-                                    </td>
-                                    <td>
-                                        <input type="number" class="form-control" name="price" id="price" th:value="*{price}" readonly min=1 oninput="validity.valid||(value='');">
-                                    </td>
-                                    <td id="s_date">
-                                        <input type="date" class="form-control datepicker" name="date" data-date-format="" th:value="*{date}">
-                                    </td>
-                                    <td>
-                                        <button type="submit" name="update_sale" class="btn btn-primary">Actualizar Venta</button>
-                                    </td>
-                                </form>
-                            </tr>
-                            </tbody>
-                        </table>
                     </div>
                 </div>
             </div>

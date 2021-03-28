@@ -41,24 +41,21 @@ public class ControladorProductos {
 
     @GetMapping("/editar_producto/{id}")
     public String editarProducto(Product product, Model model) {
+        model.addAttribute("pageTitle", "Editar Producto");
         log.info("Accediendo a editar producto");
-
         product = productService.searchProduct(product);
         log.info("Producto a editar:" + product);
         model.addAttribute("product", product);
-
         var categoriesEdit = categoriesService.listCategories();
         model.addAttribute("categoriesEdit", categoriesEdit);
-
         var mediaEdit = mediaService.listMedia();
         model.addAttribute("mediaEdit", mediaEdit);
-
         return "editar_producto";
     }
 
     @GetMapping("/agregar_productos")
     public String mostrarAgregarProductos(Model model, Map<String, Object> map) {
-        model.addAttribute("pageTitle","Agregar Productos");
+        model.addAttribute("pageTitle", "Agregar Productos");
         log.info("Accediendo a producto");
         var categories = categoriesService.listCategories();
         model.addAttribute("categories", categories);
@@ -70,29 +67,26 @@ public class ControladorProductos {
 
     @PostMapping("/agregar_nuevo_producto")
     public String agregarProductos(Product product, Model model, RedirectAttributes flash) {
-        model.addAttribute("pageTitle", "Productos");
         log.info("Agregando el producto " + product);
-        var name = productService.searchNameProd(product.getName());
         try {
-            if(product.getId() == null){ //producto agregado
-                if(!product.getName().equalsIgnoreCase(name)){ //producto nuevo
-                    product.setModified_date(null);
-                    productService.saveProduct(product);
-                    flash.addFlashAttribute("success", "El producto " + product.getName() + " ha sido agregado con éxito.");
-                }else{//producto con el nombre repetido
-                    flash.addFlashAttribute("error", "El producto ya se encuentra registrado.");
-                    return "redirect:/productos";
-                }
-            }else{ //producto que ha sido modificado
+            if(product.getId() != null){ //producto modificado
                 productService.saveProduct(product);
                 flash.addFlashAttribute("success", "El producto se modificó con éxito!.");
+            }else { //porducto nuevo
+                var registred = productService.registred(product);
+                if(!registred){
+                    log.info("Se ha agregado un nuevo producto");
+                    log.info("Contador de productos " + productService.countProducts());
+                    flash.addFlashAttribute("success", "El producto " + product.getName() + " ha sido agregado con éxito.");
+                    product.setModified_date(null);
+                    productService.saveProduct(product);
+                }else {
+                    flash.addFlashAttribute("error", "El producto ya se encuentra registrado.");
+                }
             }
-        } catch (DataIntegrityViolationException e) {
+        }catch (DataIntegrityViolationException e) {
             flash.addFlashAttribute("error", "El producto ya se encuentra registrado.");
-            return "redirect:/productos";
         }
-        log.info("Se ha agregado un nuevo producto");
-        log.info("Contador de productos " + productService.countProducts());
         return "redirect:/productos";
     }
 
