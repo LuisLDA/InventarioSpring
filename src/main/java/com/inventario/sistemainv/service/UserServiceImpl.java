@@ -46,4 +46,9 @@ public class UserServiceImpl implements UserService {
         return usersDao.findByUsername(username);
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public int countUsers (){
+        return (int) usersDao.count();
+    }
 }

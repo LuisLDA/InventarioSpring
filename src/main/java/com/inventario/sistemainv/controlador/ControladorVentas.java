@@ -37,6 +37,7 @@ public class ControladorVentas {
 
     @GetMapping("/agregar_ventas")
     public String mostrarVentaInicial(Model model, RedirectAttributes flash) {
+        model.addAttribute("pageTitle", "Agregar Venta");
         //Lista que recupera unicamente los nombres
         String namesString = convertToString((productService.names_products()).toString());
         model.addAttribute("namesString", namesString);
@@ -50,6 +51,7 @@ public class ControladorVentas {
 
     @PostMapping("/buscar_ventas")
     public String buscarVenta(@Validated String name, RedirectAttributes flash, Model model){
+        model.addAttribute("pageTitle", "Agregar Venta");
         //Para que se pueda realizar nuevamente la busqueda
         String namesString = convertToString((productService.names_products()).toString());
         model.addAttribute("namesString", namesString);
@@ -85,14 +87,16 @@ public class ControladorVentas {
         try {
             var sale = ventasService.searchVentas(new_venta);
             if(sale != null){ //venta editada
+                log.info("Se ha editado una venta");
+                actualizarStockModificado(new_venta);
                 ventasService.saveVentas(new_venta);
-                actualizarStock(new_venta);
                 flash.addFlashAttribute("success", "La venta del producto: "+new_venta.getProduct_id().getName()+" ha sido modificada correctamente.");
                 log.info("Se ha agregado la venta: "+new_venta);
                 return "redirect:/ventas";
             }else{ //nueva venta
-                ventasService.saveVentas(new_venta);
+                log.info("se ha agregado una nueva venta");
                 actualizarStock(new_venta);
+                ventasService.saveVentas(new_venta);
                 flash.addFlashAttribute("success", "La venta del producto: "+new_venta.getProduct_id().getName()+" se ha agregado correctamente.");
                 log.info("Se ha agregado la venta: "+new_venta);
                 return "redirect:/ventas";
@@ -112,12 +116,41 @@ public class ControladorVentas {
     }
 
     @GetMapping("/editar_venta/{id}")
-    public String editarVenta(@Validated Ventas ventas, Model model){
+    public String editarVenta(@Validated Ventas ventas, Model model, RedirectAttributes flash){
         model.addAttribute("pageTitle","Editar Venta");
         ventas = ventasService.searchVentas(ventas);
-        model.addAttribute("ventas", ventas);
-        log.info("Se va editar la venta: " + ventas);
-        return "editar_venta";
+        try {
+            Product avaliable = productService.stockAvaliable(ventas.getProduct_id());
+            if(avaliable != null){
+                log.info("Puede agregar mas productos a la venta");
+                boolean noEdit = false;
+                model.addAttribute("noEdit",noEdit);
+
+                Product p = productService.searchProduct(ventas.getProduct_id());
+                Integer stockP = p.getQuantityAsInteger();
+                Integer stockS = ventas.getQty();
+                Integer stockA = stockP + stockS;
+                model.addAttribute("stockA",stockA);
+
+                log.info("Se va editar la venta: " + ventas);
+                model.addAttribute("ventas", ventas);
+                return "editar_venta";
+            }else {
+                log.info("No puede agregar mas productos a la venta");
+                flash.addFlashAttribute("info", "No puede agregar mas cantidad a esta venta. Verifique el stock del producto.");
+                boolean noEdit = true;
+                Integer stockA = ventas.getQty();
+                model.addAttribute("stockA",stockA);
+                model.addAttribute("noEdit",noEdit);
+                model.addAttribute("ventas", ventas);
+                return "editar_venta";
+            }
+        }catch (DataIntegrityViolationException e){
+            log.error("ERROR AL AGREGAR O MODIFICAR",e);
+            return "redirect:/ventas/agregar_ventas";
+        }
+
+
     }
 
     public String convertToString(String cadena){
@@ -127,8 +160,6 @@ public class ControladorVentas {
 
     public void actualizarStock(Ventas ventas){
         Integer cantidad = ventas.getQty();
-        BigDecimal saleP = ventas.getProduct_id().getSale_price();
-        log.info("El precio del producto unitario es: "+saleP);
         log.info("la cantidad ingresada es: "+cantidad);
         var producto = productService.listProduct();
         Integer qty;
@@ -138,8 +169,39 @@ public class ControladorVentas {
                 qty = p.getQuantityAsInteger();
                 stock = qty-cantidad;
                 p.setQuantity(stock.toString());
-                p.setSale_price(saleP);
                 productService.saveProduct(p);
+            }
+        }
+    }
+
+    public void actualizarStockModificado(Ventas ventas){
+        var v = ventasService.searchVentas(ventas);
+        Integer cantidadA = v.getQty();
+        Integer cantidadN = ventas.getQty();
+        log.info("Cantidad antigua de la venta: "+cantidadA);
+        log.info("Cantidad nueva de la venta: "+cantidadN);
+        var producto = productService.listProduct();
+        Integer stock;
+        Integer stockFinal;
+        for (var p: producto) {
+            if(ventas.getProduct_id().getId().equals(p.getId())){
+                if (!cantidadA.equals(cantidadN)){
+                    if(cantidadA > cantidadN){//Se han devuelto productos a inventario
+                        log.info("Se han devuelto productos de la venta");
+                        Integer aux = cantidadA-cantidadN;
+                        stock = p.getQuantityAsInteger();
+                        stockFinal = stock+aux;
+                        p.setQuantity(stockFinal.toString());
+                        productService.saveProduct(p);
+                    }else{// Se han agregado mas productos a la venta
+                        log.info("Se han agregado mas productos a la venta");
+                        Integer aux = cantidadN-cantidadA;
+                        stock = p.getQuantityAsInteger();
+                        stockFinal = stock-aux;
+                        p.setQuantity(stockFinal.toString());
+                        productService.saveProduct(p);
+                    }
+                }
             }
         }
     }

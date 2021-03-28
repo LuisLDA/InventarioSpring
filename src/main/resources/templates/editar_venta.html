@@ -13,6 +13,12 @@
             jQuery("#price").val(total);
         });
     });
+    $(document).ready(function(){
+        var noEdit = document.getElementById("noEdit").value;
+        if(noEdit == true || noEdit === true || noEdit == "true" || noEdit === "true"){
+            document.getElementById("qty").setAttribute('readonly', true);
+        }
+    });
 </script>
 <div id="wrapper">
     <nav th:replace="layout/plantilla.html :: div_sidebar"/>
@@ -25,9 +31,10 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <!-- mensaje de advertencia aqui -->
+                                <div class="alert alert-info" th:if="${info != null}" th:text="${info}"></div>
                             </div>
                         </div>
-
+                        <input type="hidden" id="noEdit" name="noEdit" th:value="${noEdit}">
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="panel panel-default">
@@ -60,7 +67,7 @@
                                                         <div id="result" class="list-group"></div>
                                                     </td>
                                                     <td id="s_qty">
-                                                        <input type="number" class="form-control" name="qty" id="qty" th:value="*{qty}" required> <!-- min=1 th:max="*{product_id.getQuantity()}" oninput="validity.valid||(value='');">-->
+                                                        <input type="number" class="form-control" name="qty" id="qty" th:value="*{qty}" required th:max=${stockA} min=1 oninput="validity.valid||(value='');">
                                                     </td>
                                                     <td id="s_price">
                                                         <input type="text" class="form-control" name="price_I" id="price_I" readonly min=0 oninput="validity.valid||(value='');" th:value="*{product_id.getSale_price()}">

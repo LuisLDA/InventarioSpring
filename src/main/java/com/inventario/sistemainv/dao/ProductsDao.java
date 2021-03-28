@@ -1,11 +1,10 @@
 package com.inventario.sistemainv.dao;
 
 import com.inventario.sistemainv.domain.Product;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public interface ProductsDao extends CrudRepository <Product, Long> {
@@ -15,4 +14,7 @@ public interface ProductsDao extends CrudRepository <Product, Long> {
 
     @Query(value = "SELECT * FROM products p ORDER BY p.id DESC LIMIT 3", nativeQuery = true)
     public List<Product> productRecient();
+
+    @Query(value = "SELECT p.name, COUNT(s.product_id) AS totalSold, SUM(s.qty) AS totalQty FROM sales s LEFT JOIN products p ON p.id = s.product_id GROUP BY s.product_id ORDER BY SUM(s.qty) DESC LIMIT 10;", nativeQuery = true)
+    public ArrayList<ArrayList<String>> mostSales();
 }
