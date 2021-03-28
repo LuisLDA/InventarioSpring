@@ -38,6 +38,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
 import java.nio.file.FileAlreadyExistsException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.Map;
 
 @Controller
@@ -72,9 +73,14 @@ public class ControladorPerfil {
                 user.setImage(filename);
                 media.setFile_name(filename);
                 media.setFile_type(mediaService.extencion(filename));
-                log.info("Agregado la imagen :" + media);
-                mediaDao.save(media);
-                userService.saveUser(user);
+                try {
+                    log.info("Agregado la imagen :" + media);
+                    mediaDao.save(media);
+                    userService.saveUser(user);
+                }catch (Exception e){
+                    userService.saveUser(user);
+                    log.error("La imagen no se agrego a la DB porque ya existe");
+                }
                 // flash.addFlashAttribute("success", "Imagen " + filename + " agregada con exito!");
             } catch (FileAlreadyExistsException  fileAlreadyExistsException){
                 user.setImage(foto.getOriginalFilename());
