@@ -26,6 +26,8 @@ public class ventasPdfView extends AbstractPdfView {
     @Override
     protected void buildPdfDocument(Map<String, Object> model, Document document, PdfWriter writer, HttpServletRequest request, HttpServletResponse response) throws Exception {
 
+        document.addTitle("Reporte General de Ventas");
+
         List<Ventas> ventasList = (List<Ventas>) model.get("ventas");
         PdfPCell cell = null;
 
@@ -75,7 +77,7 @@ public class ventasPdfView extends AbstractPdfView {
             total = total.add(ventas.getPrice());
         }
 
-        cell = new PdfPCell(new Phrase("Total"));
+        cell = new PdfPCell(new Phrase("Total:"));
         cell.setColspan(5);
         cell.setPadding(5);
         cell.setHorizontalAlignment(PdfPCell.ALIGN_RIGHT);

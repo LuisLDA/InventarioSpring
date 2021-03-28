@@ -31,6 +31,8 @@ public class ventasFechaPdfView extends AbstractPdfView {
     @Override
     protected void buildPdfDocument(Map<String, Object> model, Document document, PdfWriter writer, HttpServletRequest request, HttpServletResponse response) throws Exception {
 
+        document.addTitle("Reporte Generado por fecha");
+
         List<Ventas> ventasList = (List<Ventas>) model.get("ventasfecha");
         String fechaInicio = (String) model.get("fechaInicio");
         String fechaFin = (String) model.get("fechaFin");
