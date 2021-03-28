@@ -6,10 +6,10 @@ import com.inventario.sistemainv.domain.User;
 import java.util.List;
 
 public interface UserService {
-    public List<User> listUser();
-    public void saveUser(User user);
-    public void deleteUser(User user);
-    public User searchUser(User user);
-    public User searchbyUserName(String  username);
+    List<User> listUser();
+    void saveUser(User user);
+    void deleteUser(User user);
+    User searchUser(User user);
+    User searchbyUserName(String username);
 
 }

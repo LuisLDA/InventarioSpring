@@ -8,11 +8,11 @@ import java.util.List;
 
 
 public interface VentasService {
-    public List<Ventas> listVentas();
-    public void saveVentas(Ventas ventas);
-    public void deleteVentas(Ventas ventas);
-    public Ventas searchVentas(Ventas ventas);
-    public int countVentas();
+    List<Ventas> listVentas();
+    void saveVentas(Ventas ventas);
+    void deleteVentas(Ventas ventas);
+    Ventas searchVentas(Ventas ventas);
+    int countVentas();
 
     //public List<String> producto_media();
 }

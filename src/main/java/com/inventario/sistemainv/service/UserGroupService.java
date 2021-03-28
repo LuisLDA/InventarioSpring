@@ -7,8 +7,8 @@ import java.util.List;
 
 public interface UserGroupService {
 
-    public List<UserGroup> listGroup();
-    public void saveGroup(UserGroup userGroup);
-    public void deleteGroup(UserGroup userGroup);
-    public UserGroup searchGroup(UserGroup userGroup);
+    List<UserGroup> listGroup();
+    void saveGroup(UserGroup userGroup);
+    void deleteGroup(UserGroup userGroup);
+    UserGroup searchGroup(UserGroup userGroup);
 }

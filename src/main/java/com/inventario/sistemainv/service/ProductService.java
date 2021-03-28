@@ -4,16 +4,14 @@ import com.inventario.sistemainv.domain.Product;
 import java.util.List;
 
 public interface ProductService {
-    public List<Product> listProduct();
-    public void saveProduct(Product product);
-    public void deleteProduct(Product product);
-    public Product searchProduct(Product product);
-
-    public int countProducts();
-    public String searchNameProd(String name);
-    public List<Product> productRecient();
-
-    public List<String> names_products();
-    public List<String> id_products();
-    public Product saleProduct(String producto);
+    List<Product> listProduct();
+    void saveProduct(Product product);
+    void deleteProduct(Product product);
+    Product searchProduct(Product product);
+    int countProducts();
+    String searchNameProd(String name);
+    List<Product> productRecient();
+    List<String> names_products();
+    List<String> id_products();
+    Product saleProduct(String producto);
 }
