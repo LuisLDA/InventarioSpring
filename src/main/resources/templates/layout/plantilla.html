@@ -84,7 +84,7 @@
             <li class="nav-item"><a class="nav-link active" href="" th:href="@{/panel_control}" ><i class="fa fa-home"></i><span>Panel de Control</span></a>
             </li>
 
-            <li class="nav-item">
+            <li class="nav-item" sec:authorize="hasAuthority('1')">
                 <a href="#Accesos" data-toggle="collapse" aria-expanded="false"
                    class="nav-link dropdown-toggle active">
                     <i class="fa fa-users"></i><span>Accesos</span></a>
@@ -98,7 +98,7 @@
                 </li>
             </ul>
 
-            <li class="nav-item"><a class="nav-link active" href="" th:href="@{/categorias}"><i class="fa fa-indent"></i><span>Categorías</span></a>
+            <li class="nav-item" sec:authorize="hasAnyAuthority('1','2')"><a class="nav-link active" href="" th:href="@{/categorias}"><i class="fa fa-indent"></i><span>Categorías</span></a>
             </li>
 
             <li class="nav-item">
@@ -116,7 +116,7 @@
             </ul>
 
 
-            <li class="nav-item"><a class="nav-link active" th:href="@{/media}"><i
+            <li class="nav-item"><a class="nav-link active" th:href="@{/media}" sec:authorize="hasAuthority('1')"><i
                     class="fa fa-image"></i><span>Media</span></a></li>
             <li class="nav-item">
                 <a href="#Ventas" data-toggle="collapse" aria-expanded="false"
