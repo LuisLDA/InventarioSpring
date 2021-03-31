@@ -43,6 +43,17 @@ public class MediaServiceImpl implements  MediaService{
         return media;
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public Media searchbyFile_name(String file_name) {
+        return mediaDao.findByFile_Name(file_name);
+    }
+    
+    public void actualizarMedia(Long id) {
+        mediaDao.actualizarMedia(id);
+    }
+
+
     public String extencion(String nombre) {
 
         Pattern pattern = Pattern.compile(".jpg|.png|.jpeg");
@@ -53,15 +64,5 @@ public class MediaServiceImpl implements  MediaService{
             return " ";
         }
 
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public Media searchbyFile_name(String file_name) {
-        return mediaDao.findByFile_Name(file_name);
-    }
-    
-    public void actualizarMedia(Long id) {
-        mediaDao.actualizarMedia(id);
     }
 }
