@@ -31,10 +31,12 @@ public class ventasPdfView extends AbstractPdfView {
         List<Ventas> ventasList = (List<Ventas>) model.get("ventas");
         PdfPCell cell = null;
 
-        PdfPTable encabezado = new PdfPTable(3);
+        PdfPTable encabezado = new PdfPTable(4);
         encabezado.setWidthPercentage(100);
         encabezado.setSpacingAfter(20);
         encabezado.setHorizontalAlignment(PdfPTable.ALIGN_LEFT);
+        encabezado.setWidths(new float[] {0.7f, 1.7f, 1.5f, 1.5f});
+        encabezado.addCell(espacio());
         encabezado.addCell(img(IMAGEN));
         encabezado.addCell(encabezadoText("LA ECUATORIANA S.A."));
         encabezado.addCell(textinfo("Versalles N22-87 y Ramirez Dávalos Esq."));
@@ -86,6 +88,13 @@ public class ventasPdfView extends AbstractPdfView {
 
         document.add(ventasTable);
 
+    }
+
+    public PdfPCell espacio() {
+        PdfPCell cell = new PdfPCell();
+        cell.setRowspan(4);
+        cell.setBorderWidth(0);
+        return cell;
     }
 
     public PdfPCell img(String path) {
