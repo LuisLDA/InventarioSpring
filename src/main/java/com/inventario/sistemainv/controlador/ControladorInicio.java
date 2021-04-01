@@ -111,6 +111,9 @@ public class ControladorInicio {
     public String mostrarProductos(Model model) {
         model.addAttribute("pageTitle", "Productos");
         log.info("Accediendo a productos");
+        //var deleteProd = productService.searchRelatedSales();
+        var relatedSales = ventasService.RelatedSales();
+        model.addAttribute("relatedSales", relatedSales);
         var producto = productService.listProduct();
         log.info("List product: " + producto);
         model.addAttribute("producto", producto);

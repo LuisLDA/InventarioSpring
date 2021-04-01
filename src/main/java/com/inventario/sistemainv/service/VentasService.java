@@ -2,6 +2,7 @@ package com.inventario.sistemainv.service;
 
 import com.inventario.sistemainv.domain.Ventas;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -15,7 +16,7 @@ public interface VentasService {
     int countVentas();
     List<Ventas> latestSales();
     List<Ventas> searchSalesByDate(String date1, String date2);
-
+    ArrayList<Long> RelatedSales();
 
     //public List<String> producto_media();
 }
