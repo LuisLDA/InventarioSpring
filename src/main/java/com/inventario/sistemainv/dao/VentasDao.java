@@ -10,9 +10,9 @@ import java.util.List;
 
 public interface VentasDao extends CrudRepository<Ventas,Long> {
     @Query(value = "SELECT * FROM sales s ORDER BY s.id DESC LIMIT 5", nativeQuery = true)
-    public List<Ventas> latestSales();
+    List<Ventas> latestSales();
     
     @Query(value = "SELECT * FROM sales s WHERE s.date between ?1 and ?2", nativeQuery = true)
-    public List<Ventas> searchSalesByDate(String date1, String date2);
+    List<Ventas> searchSalesByDate(String date1, String date2);
 
 }
