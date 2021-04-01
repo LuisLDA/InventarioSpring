@@ -19,6 +19,7 @@
 
     function setModifiedDate(){
         setSaleBuyPrice();
+        /*
         var d = new Date();
         function addZero(i) {
             if (i < 10) {
@@ -34,6 +35,8 @@
         var s = addZero(d.getSeconds());
         var dateStr = year + "-" + month  + "-" + date + " "+ h + ":" + m + ":" + s;
         document.getElementById("modified_date").value = dateStr;
+
+         */
     }
 
     function setSaleBuyPrice() {
@@ -163,7 +166,7 @@
                                                         </div>
                                                     </div>
                                                     <div><input type="hidden"  name="date" th:value="*{date}">
-                                                        <input type="hidden" typeof="date" name="modified_date" id="modified_date">
+                                                        <input type="hidden" typeof="date" name="modified_date" id="modified_date" th:value="${#dates.format(#dates.createNow(),'YYYY-MM-dd HH:mm:ss')}">
                                                     </div>
                                                 </div>
                                             </div>

@@ -8,6 +8,7 @@
 <script type="text/javascript">
     function setDate(){
         setSaleBuyPrice();
+        /*
         var d = new Date();
         function addZero(i) {
             if (i < 10) {
@@ -24,6 +25,8 @@
         var dateStr = year + "-" + month  + "-" + date + " "+ h + ":" + m + ":" + s;
         document.form1.date.value = dateStr;
         document.form1.modified_date.value = dateStr;
+
+         */
     }
     
     function setSaleBuyPrice() {
@@ -72,7 +75,8 @@
                                     <div class="col-md-12" style="padding-bottom: .75rem;padding-top: .75rem">
                                         <!-- action hace referencia al archivo anadir producto -->
                                         <form name="form1" action="#" th:action="@{/productos/agregar_nuevo_producto}" method="post">
-                                            <input type="hidden" typeof="date" name="date" id="date">
+                                            <input type="hidden" typeof="date" name="date" id="date" th:value="${#dates.format(#dates.createNow(),'YYYY-MM-dd HH:mm:ss')}">
+                                            <input type="hidden" typeof="date" name="modified_date" id="modified_date" th:value="${#dates.format(#dates.createNow(),'YYYY-MM-dd HH:mm:ss')}">
                                             <div class="form-group">
                                                 <div class="input-group">
                                     <span class="input-group-addon">
