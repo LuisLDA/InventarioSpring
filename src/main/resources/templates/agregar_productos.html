@@ -25,6 +25,13 @@
         document.form1.date.value = dateStr;
         document.form1.modified_date.value = dateStr;
     }
+
+    function setDate2(){
+        setSaleBuyPrice();
+        var d = new Date().toLocaleString('es-CL', { timeZone: 'America/Bogota' })
+        document.form1.date.value = d;
+        document.form1.modified_date.value = f;
+    }
     
     function setSaleBuyPrice() {
         var dolarB = document.getElementById("buy_priceD").value;
@@ -127,7 +134,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <button type="submit" name="add_product" class="btn btn-danger" onclick="setDate()">Agregar producto</button>
+                                            <button type="submit" name="add_product" class="btn btn-danger" onclick="setDate2()">Agregar producto</button>
                                         </form>
                                     </div>
                                 </div>
