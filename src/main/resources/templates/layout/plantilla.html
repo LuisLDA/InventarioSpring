@@ -51,7 +51,7 @@
                             &nbsp;Usuario:&nbsp;
                                         <span sec:authentication="name" class="d-none d-lg-inline mr-2 text-gray-600 small">
                                            USERNAME </span>
-                            <img class="border rounded-circle img-profile" th:src="@{'/imagenes/'+${imageAvatar}}" />
+                            <img class="border rounded-circle img-profile"   th:src="@{'/imagenes/'+${imageAvatar}}" onerror="this.src='/imagenes/no image.jpg'" />
 
                         </a>
                         <div class="dropdown-menu shadow dropdown-menu-right animated--grow-in">

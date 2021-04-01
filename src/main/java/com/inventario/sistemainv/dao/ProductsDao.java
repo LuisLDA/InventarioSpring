@@ -10,11 +10,11 @@ import java.util.List;
 public interface ProductsDao extends CrudRepository <Product, Long> {
 
     @Query(value = "SELECT name FROM products p where name= ?1", nativeQuery = true)
-    public String searchNameProd(String name);
+    String searchNameProd(String name);
 
     @Query(value = "SELECT * FROM products p ORDER BY p.id DESC LIMIT 3", nativeQuery = true)
-    public List<Product> productRecient();
+    List<Product> productRecient();
 
     @Query(value = "SELECT p.name, COUNT(s.product_id) AS totalSold, SUM(s.qty) AS totalQty FROM sales s LEFT JOIN products p ON p.id = s.product_id GROUP BY s.product_id ORDER BY SUM(s.qty) DESC LIMIT 10;", nativeQuery = true)
-    public ArrayList<ArrayList<String>> mostSales();
+    ArrayList<ArrayList<String>> mostSales();
 }

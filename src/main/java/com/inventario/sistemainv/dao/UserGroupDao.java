@@ -13,5 +13,5 @@ public interface UserGroupDao extends JpaRepository<UserGroup,Long> {
     @Modifying
     @Transactional
     @Query(value = "DELETE FROM users where user_level=:id",nativeQuery = true)
-    public void deleteAllByGroup_level(@Param("id") Long ID);
+    void deleteAllByGroup_level(@Param("id") Long ID);
 }
